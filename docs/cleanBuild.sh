@@ -1,0 +1,1 @@
+rm -rf node_modules yarn.lock .docusaurus .cache package-lock.json

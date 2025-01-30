@@ -1,0 +1,133 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+ @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@100;400;700&display=swap");
+ @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+ html,
+ body, h1, h2, h3, h4, h5, h6 {
+  font-family: "Onest", "Rubik", "Nunito", sans-serif !important;
+ }
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #21a1dc;
+  --ifm-color-primary-dark: #106f9b;
+  --ifm-color-primary-darker: #134156;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: rgb(32, 180, 200);
+  --ifm-color-primary-lighter: #21a1dc;
+  --ifm-color-primary-lightest: #51b3e0d5;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #21a1dc;
+  --ifm-color-primary-dark: #106f9b;
+  --ifm-color-primary-darker: #134156;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: rgb(32, 180, 200);
+  --ifm-color-primary-lighter: #21a1dc;
+  --ifm-color-primary-lightest: #51b3e0d5;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.footer {
+  background-color: black;
+  color: var(--ifm-footer-color);
+  padding: var(--ifm-footer-padding-vertical) var(--ifm-footer-padding-horizontal);
+}
+
+/* Sidebar Method labels
+https://docusaurus-openapi.tryingpan.dev/customization/styling
+*/
+
+/* Reduzir o texto dos subtópicos da sidebar */
+.menu__list .menu__link {
+  font-size: 14px; /* Menor para subníveis */
+}
+/* API Menu Items */
+.api-method > .menu__link,
+.schema > .menu__link {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.api-method > .menu__link::before,
+.schema > .menu__link::before {
+  width: 50px; /* Ajuste para o tamanho desejado */
+  height: 20px;
+  font-size: 10px; /* Tamanho do texto */
+  line-height: 20px; /* Altura da linha */
+  text-transform: uppercase;
+  font-weight: 700; /* Texto em negrito */
+  border-radius: 4px; /* Cantos arredondados */
+  margin-right: var(--ifm-spacing-horizontal); /* Espaçamento */
+  text-align: center;
+  flex-shrink: 0; /* Impedir que encolha */
+  background-color: transparent; /* Fundo transparente */
+  border: 1px solid; /* Define largura da borda */
+  box-shadow: none; /* Removendo sombra */
+}
+
+/* Estilização das bordas coloridas para cada método */
+.get > .menu__link::before {
+  content: "GET";
+  border-color: #45bef7; /* Azul */
+  color: #45bef7;
+}
+
+.post > .menu__link::before {
+  content: "POST";
+  border-color: #4caf50; /* Verde */
+  color: #4caf50;
+}
+
+.delete > .menu__link::before {
+  content: "DELETE";
+  border-color: #f44336; /* Vermelho */
+  color: #f44336
+}
+
+.put > .menu__link::before {
+  content: "PUT";
+  border-color: #2159f3; /* Azul */
+  color: #2159f3
+}
+
+.patch > .menu__link::before {
+  content: "PATCH";
+  border-color: #ff9800; /* Laranja */
+  color: #ff9800
+}
+
+.head > .menu__link::before {
+  content: "HEAD";
+  border-color: #673ab7; /* Roxo */
+  color: #673ab7
+}
+
+.event > .menu__link::before {
+  content: "EVENT";
+  border-color: #9c27b0; /* Roxo escuro */
+  color: #9c27b0
+}
+
+.schema > .menu__link::before {
+  content: "SCHEMA";
+  border-color: #69a6c4; /* Cinza */
+  color: #69a6c4
+}
+
+/* Hover com transição suave */
+.api-method > .menu__link:hover::before,
+.schema > .menu__link:hover::before {
+  filter: brightness(1.1); /* Realce de cor */
+  transform: scale(1.05); /* Leve aumento no tamanho */
+  transition: all 0.2s ease-in-out;
+}
