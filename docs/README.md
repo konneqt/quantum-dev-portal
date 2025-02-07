@@ -47,9 +47,17 @@ $ npm install
 
 ## Run CLI
 
+To run the project's CLI, use the following command:
+
+
 ```
 $ node ./cli/index.js
 ```
+
+This command initializes the project's command line interface, allowing you to generate your documentation dynamically. The main features include:
+- Generate documentation from OpenAPI files available within the `apis` folder.
+- Generate documentation from a URI entered by the user.
+- Generate documentation from the OpenAPI files available in `Quantum Api Platform - QAP`, where you must first configure your access to the system.
 
 ## Running the Development Server
 
@@ -80,7 +88,7 @@ This will open the documentation at http://localhost:3000/.
 3. Add the following content to the file:
 
 
-- **Create your first MArkdown Page**
+- **Create your first Markdown Page**
 
 ```
 ---
