@@ -317,7 +317,6 @@ const configureAccessInfo = async () => {
     SCOPE: "openid",
   };
 
-  console.log(envVars)
 
   saveEnv(envVars);
   console.log(chalk.green("Access info saved successfully."));
@@ -432,7 +431,6 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
 
     const apiSpecs = apiResponse.data.apiInformations;
     apiSpecs.forEach((apiSpec, index) => {
-      console.log(`swaggerFile content:`, apiSpec.swaggerFile);
 
       // Verificar se swaggerFile é válido
       if (typeof apiSpec.swaggerFile !== "string" || apiSpec.swaggerFile.startsWith("http")) {
@@ -461,8 +459,6 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
       fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
       console.log(chalk.green(`✅ API spec saved: ${filePath}`));
     });
-
-    console.log(apiSpecs);
 
   } catch (error) {
     console.error(chalk.red("Error fetching or saving API specs:"), error);

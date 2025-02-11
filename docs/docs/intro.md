@@ -1,21 +1,25 @@
 ---
 sidebar_position: 1
+title: "Introduction"
+description: "Introduction"
 ---
 
-# Quantum API Platform
+# 🚀 Welcome to the Quantum API Dev-Portal!
 
-Creating a practical, rich and great **API Dev Portal**.
+This is a project to create a practical, robust and customizable **API Dev Portal**.
 
-## Getting Started
+# 📌 About this page  
+This page is just an introduction to the structure of the Quantum API Dev Portal. **You can delete it if it is not needed in your project**.
 
-Clone this repository, and take a look into this project structure:
+# 🛠 Project structure  
+
+Below is a summary of the directory structure to help you understand where each part of the project is located:
 
 ```
 .
 ├── README.md
 ├── api.mustache
 ├── apis (where your apis are - oas.yaml )
-├── blog (blog posts )
 ├── docs (docs and generated apis docs )
 ├── docusaurus.config.ts
 ├── package.json
@@ -26,4 +30,6 @@ Clone this repository, and take a look into this project structure:
 ├── tsconfig.json
 └── yarn.lock
 ```
+
+If you have any questions, consult the documentation or explore the project files. 🚀  
 

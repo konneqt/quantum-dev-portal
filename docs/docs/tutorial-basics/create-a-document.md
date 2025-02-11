@@ -1,18 +1,21 @@
 ---
 sidebar_position: 2
+title: "Create a Document"
+description: "Introduction"
 ---
+# 📌 Create a Document
 
-# Create a Document
+Docusaurus allows you to structure your documentation using Markdown files, which can be connected through:
 
-Documents are **groups of pages** connected through:
+- A **sidebar** for navigation
+- **Previous/Next navigation** for a guided reading experience
+- **Versioning** to maintain documentation for different software releases
 
-- a **sidebar**
-- **previous/next navigation**
-- **versioning**
+This guide will walk you through the steps of creating, organizing, and customizing your documentation in Docusaurus.
 
-## Create your first Doc
+# 🚀 Create your first Doc
 
-Create a Markdown file at `docs/hello.md`:
+To create a new document, add a Markdown file inside the docs directory. For example:
 
 ```md title="docs/hello.md"
 # Hello
@@ -22,24 +25,24 @@ This is my **first Docusaurus document**!
 
 A new document is now available at [http://localhost:3000/docs/hello](http://localhost:3000/docs/hello).
 
-## Configure the Sidebar
+# 🛠 Configure the Sidebar
 
-Docusaurus automatically **creates a sidebar** from the `docs` folder.
+Docusaurus automatically **generates a sidebar** from the docs directory. However, you can customize it by adding metadata to your Markdown file.
 
-Add metadata to customize the sidebar label and position:
+Example of setting a sidebar label and position:
 
 ```md title="docs/hello.md" {1-4}
 ---
-sidebar_label: 'Hi!'
-sidebar_position: 3
+sidebar_label: 'Introduction'
+sidebar_position: 1
 ---
 
-# Hello
+# Getting Started
 
-This is my **first Docusaurus document**!
+Welcome to my **first Docusaurus document**!
 ```
 
-It is also possible to create your sidebar explicitly in `sidebars.js`:
+You can also explicitly define the sidebar structure in `sidebars.ts`:
 
 ```js title="sidebars.js"
 export default {
@@ -55,3 +58,15 @@ export default {
   ],
 };
 ```
+
+# 🛠 Organizing Your Documentation
+
+To maintain a well-structured documentation system, follow these best practices:
+
+* Group related documents inside categories.
+
+* Use meaningful filenames to make it easier to manage content.
+
+* Leverage front matter (--- at the top of Markdown files) to control positioning and labels.
+
+* Enable versioning for managing different software versions.

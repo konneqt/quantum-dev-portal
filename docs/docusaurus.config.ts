@@ -75,7 +75,6 @@ const config: Config = {
           position: "left",
           label: "Docs",
         },
-        { to: "/blog", label: "Blog", position: "left" },
         {
           to: "/quantum-dev-portal/docs/",
           label: "Quantum Dev Portal",

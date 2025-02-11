@@ -46,7 +46,29 @@
 https://docusaurus-openapi.tryingpan.dev/customization/styling
 */
 
-/* Reduzir o texto dos subtópicos da sidebar */
+
+.markdown h1 {
+  font-size: 1.5rem; 
+  font-weight: 600;
+  white-space: normal !important; 
+
+}
+
+.markdown h2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.markdown h3 {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+
+.markdown p {
+  font-size: 1rem; 
+  line-height: 1.6; 
+}
 
 
 .menu__link--active {
@@ -61,10 +83,10 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 
 
 .menu__list-item {
-  white-space: normal !important; /* Permite quebras de linha */
-  word-break: break-word; /* Garante que palavras longas quebrem corretamente */
-  overflow-wrap: break-word; /* Alternativa para quebras dentro de palavras longas */
-  font-size: 14px !important; /* Define um tamanho menor */
+  white-space: normal !important; 
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  font-size: 14px !important; 
   line-height: 1.2;
   justify-content: start;
   font-weight: 400;
