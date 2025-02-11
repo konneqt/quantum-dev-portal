@@ -25,6 +25,7 @@
         "axios": "^1.7.9",
         "chalk-animation": "^2.0.3",
         "clear": "^0.1.0",
+        "cli-progress": "^3.12.0",
         "clsx": "^2.0.0",
         "docusaurus-plugin-openapi-docs": "^4.3.2",
         "docusaurus-theme-openapi-docs": "^4.3.2",

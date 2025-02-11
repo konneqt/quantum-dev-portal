@@ -96,39 +96,57 @@ const generateDocsFromFiles = async () => {
     return;
   }
 
-  files.forEach((file) => {
+  const processedFiles = [];
+  const skippedFiles = [];
+
+  files.forEach((file, index) => {
     const filePath = path.join(defaultFolder, file);
 
     try {
-      // Carregar o conteúdo do arquivo
+      // Load file content
       const fileContent = fs.readFileSync(filePath, "utf-8");
       const apiData = JSON.parse(fileContent);
 
-      // Verificar e adicionar 'summary' aos métodos em 'paths'
+      // Check and add 'summary' to methods in 'paths'
       let summaryAdded = false;
       for (const path in apiData.paths) {
         for (const method in apiData.paths[path]) {
           const operation = apiData.paths[path][method];
 
-          // Verificar se o campo 'summary' existe, se não, adicionar o padrão
+          // Check if 'summary' field exists, if not, add default
           if (!operation.summary) {
-            operation.summary = operation.tags || operation.description;
+            operation.summary = "No summary";
             summaryAdded = true;
           }
         }
       }
 
-      // Se algum summary foi adicionado, salvar o arquivo
+      // If any summary was added, save the file
       if (summaryAdded) {
         fs.writeFileSync(filePath, JSON.stringify(apiData, null, 2), "utf-8");
+        processedFiles.push(file);
       }
     } catch (error) {
+      skippedFiles.push(file);
       console.warn(chalk.yellow(`Skipping file ${file}: ${error.message}`));
     }
   });
 
-  console.log(chalk.magenta("Validation completed successfully!"));
+  // Log summary of processed files
+  console.log(chalk.magenta("\nProcessing Summary:"));
+  console.log(chalk.green(`Processed Files: ${processedFiles.length}`));
+  if (processedFiles.length > 0) {
+    console.log(chalk.green("Files processed:"));
+    processedFiles.forEach((file) => console.log(`- ${file}`));
+  }
 
+  if (skippedFiles.length > 0) {
+    console.log(chalk.yellow(`Skipped Files: ${skippedFiles.length}`));
+    console.log(chalk.yellow("Skipped files:"));
+    skippedFiles.forEach((file) => console.log(`- ${file}`));
+  }
+
+  console.log(chalk.magenta("Validation completed successfully!"));
   // Chama o script rebuildDocs.sh após validar os arquivos
   const { exec } = require("child_process");
   exec("./rebuildDocs.sh", (error, stdout) => {
@@ -138,7 +156,7 @@ const generateDocsFromFiles = async () => {
       );
       return;
     }
-    //console.log(chalk.green(`rebuildDocs.sh output: ${stdout}`));
+    console.log(chalk.green(`Generating docs...`));
     console.log(
       chalk.green(
         "\nAll operations completed successfully! Please run 'npm start' to start the application."
@@ -182,9 +200,9 @@ const generateDocsFromURI = async () => {
       let fileName = "";
       if (isJson) {
         const openApiData = response.data;
-        if (openApiData.info && openApiData.info.title) {
+        if (openApiData.info) {
           // Usando o título da OpenAPI
-          fileName = openApiData.info.title;
+          fileName = openApiData.info.name || openApiData.info.title;
         } else if (openApiData.host) {
           // Usando o host como fallback
           fileName = new URL(uri).hostname;
@@ -257,9 +275,7 @@ const configureAccessInfo = async () => {
     password,
     companyName,
     oauthURL,
-    scope,
   } = await inquirer.prompt([
-   
     {
       type: "input",
       name: "oauthURL",
@@ -277,7 +293,6 @@ const configureAccessInfo = async () => {
     },
     { type: "input", name: "username", message: "Inform your Username:" },
     { type: "input", name: "password", message: "Inform your Password:" },
-    { type: "input", name: "scope", message: "Inform the scope:" },
 
     {
       type: "input",
@@ -299,14 +314,21 @@ const configureAccessInfo = async () => {
     PASSWORD: password,
     COMPANY_NAME: companyName,
     OAUTH_URL: oauthURL,
-    SCOPE: scope
+    SCOPE: "openid",
   };
+
 
   saveEnv(envVars);
   console.log(chalk.green("Access info saved successfully."));
 
   // Gera o token e salva no .env
-  const token = await generateAccessToken(clientID, clientSecret, username, password, oauthURL, scope);
+  const token = await generateAccessToken(
+    clientID,
+    clientSecret,
+    username,
+    password,
+    oauthURL,
+  );
   envVars.ACCESS_TOKEN = token;
   saveEnv(envVars);
 
@@ -326,7 +348,13 @@ const cleanAccessInfo = async () => {
 };
 
 // Função para gerar o token de acesso
-const generateAccessToken = async (clientID, clientSecret, username, password, oauthURL, scope) => {
+const generateAccessToken = async (
+  clientID,
+  clientSecret,
+  username,
+  password,
+  oauthURL,
+) => {
   try {
     const options = {
       method: "POST",
@@ -340,7 +368,7 @@ const generateAccessToken = async (clientID, clientSecret, username, password, o
         username: username,
         password: password,
         grant_type: "password",
-        scope: scope
+        scope: "openid",
       },
     };
 
@@ -353,6 +381,7 @@ const generateAccessToken = async (clientID, clientSecret, username, password, o
 };
 
 const jwt = require("jsonwebtoken");
+const { env } = require("process");
 
 // Função para verificar se o token é válido
 const isTokenValid = (token) => {
@@ -380,7 +409,6 @@ const isTokenValid = (token) => {
     return false;
   }
 };
-// Função para buscar e salvar as especificações da API
 const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
   try {
     const newApiUri = `${apiURI}/preview?companyName=${companyName}`;
@@ -403,6 +431,21 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
 
     const apiSpecs = apiResponse.data.apiInformations;
     apiSpecs.forEach((apiSpec, index) => {
+
+      // Verificar se swaggerFile é válido
+      if (typeof apiSpec.swaggerFile !== "string" || apiSpec.swaggerFile.startsWith("http")) {
+        console.warn(chalk.yellow(`⚠️  Ignoring invalid swaggerFile for API: ${apiSpec.apiName || `spec-${index + 1}`}`));
+        return; // Ignora esse item e segue para o próximo
+      }
+
+      let jsonData;
+      try {
+        jsonData = JSON.parse(apiSpec.swaggerFile);
+      } catch (parseError) {
+        console.warn(chalk.yellow(`⚠️  Invalid JSON in swaggerFile for API: ${apiSpec.apiName || `spec-${index + 1}`}`));
+        return; // Ignora esse item e segue para o próximo
+      }
+
       const apiName = apiSpec.apiName
         ? apiSpec.apiName
             .replace(/\s+/g, "-")
@@ -413,32 +456,51 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
       const fileName = `${apiName}.json`;
       const filePath = path.join(apiFolder, fileName);
 
-      const jsonData = JSON.parse(apiSpec.swaggerFile);
       fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
+      console.log(chalk.green(`✅ API spec saved: ${filePath}`));
     });
 
-    return apiSpecs;
   } catch (error) {
     console.error(chalk.red("Error fetching or saving API specs:"), error);
     throw error;
   }
 };
 
+
 // Função principal para usar os dados configurados
 const useConfiguredAccessInfo = async () => {
   const envVars = loadEnv();
   if (!envVars) {
-    console.log(chalk.red("No access info found. Please configure access first."));
+    console.log(
+      chalk.red("No access info found. Please configure access first.")
+    );
     return;
   }
 
-  const { API_URI, CLIENT_ID, CLIENT_SECRET, USERNAME, PASSWORD, COMPANY_NAME, ACCESS_TOKEN, OAUTH_URL, SCOPE } = envVars;
+  const {
+    API_URI,
+    CLIENT_ID,
+    CLIENT_SECRET,
+    USERNAME,
+    PASSWORD,
+    COMPANY_NAME,
+    ACCESS_TOKEN,
+    OAUTH_URL,
+    SCOPE,
+  } = envVars;
 
   // Verifica se o token é válido
   let token = ACCESS_TOKEN;
-  if (!(await isTokenValid(token))) {
+  if (!(isTokenValid(token))) {
     console.log(chalk.yellow("Token expired. Generating a new one..."));
-    token = await generateAccessToken(CLIENT_ID, CLIENT_SECRET, USERNAME, PASSWORD, OAUTH_URL, SCOPE);
+    token = await generateAccessToken(
+      CLIENT_ID,
+      CLIENT_SECRET,
+      USERNAME,
+      PASSWORD,
+      OAUTH_URL,
+      SCOPE
+    );
     envVars.ACCESS_TOKEN = token;
     saveEnv(envVars);
   }
@@ -468,7 +530,10 @@ const generateDocsFromQAP = async () => {
         console.log(chalk.red("Invalid option selected."));
     }
   } catch (error) {
-    console.error(chalk.red("An error occurred in generateDocsFromQAP:"), error);
+    console.error(
+      chalk.red("An error occurred in generateDocsFromQAP:"),
+      error
+    );
   }
 };
 

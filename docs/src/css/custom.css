@@ -46,88 +46,113 @@
 https://docusaurus-openapi.tryingpan.dev/customization/styling
 */
 
-/* Reduzir o texto dos subtópicos da sidebar */
-.menu__list .menu__link {
-  font-size: 14px; /* Menor para subníveis */
+
+.markdown h1 {
+  font-size: 1.5rem; 
+  font-weight: 600;
+  white-space: normal !important; 
+
 }
-/* API Menu Items */
+
+.markdown h2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.markdown h3 {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+
+.markdown p {
+  font-size: 1rem; 
+  line-height: 1.6; 
+}
+
+
+.menu__link--active {
+  color: inherit !important;
+ 
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  border-right: 4px solid var(--ifm-color-primary) !important;
+  padding-right: 8px !important;
+}
+
+
+.menu__list-item {
+  white-space: normal !important; 
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  font-size: 14px !important; 
+  line-height: 1.2;
+  justify-content: start;
+  font-weight: 400;
+
+
+}
+
 .api-method > .menu__link,
 .schema > .menu__link {
-  display: flex;
   align-items: center;
   justify-content: start;
 }
 
 .api-method > .menu__link::before,
 .schema > .menu__link::before {
-  width: 50px; /* Ajuste para o tamanho desejado */
+  width: 40px;
   height: 20px;
-  font-size: 10px; /* Tamanho do texto */
-  line-height: 20px; /* Altura da linha */
+  font-size: 10px;
+  line-height: 20px;
   text-transform: uppercase;
-  font-weight: 700; /* Texto em negrito */
-  border-radius: 4px; /* Cantos arredondados */
-  margin-right: var(--ifm-spacing-horizontal); /* Espaçamento */
+  font-weight: 600;
+  border-radius: 0.25rem;
+  border: 1px solid;
+  margin-right: var(--ifm-spacing-horizontal);
   text-align: center;
-  flex-shrink: 0; /* Impedir que encolha */
-  background-color: transparent; /* Fundo transparente */
-  border: 1px solid; /* Define largura da borda */
-  box-shadow: none; /* Removendo sombra */
+  flex-shrink: 0;
+  border-color: transparent;
+  color: white;
 }
 
-/* Estilização das bordas coloridas para cada método */
 .get > .menu__link::before {
-  content: "GET";
-  border-color: #45bef7; /* Azul */
-  color: #45bef7;
+  content: "get";
+  background-color: var(--ifm-color-primary);
 }
 
 .post > .menu__link::before {
-  content: "POST";
-  border-color: #4caf50; /* Verde */
-  color: #4caf50;
+  content: "post";
+  background-color: var(--openapi-code-green);
 }
 
 .delete > .menu__link::before {
-  content: "DELETE";
-  border-color: #f44336; /* Vermelho */
-  color: #f44336
+  content: "del";
+  background-color: var(--openapi-code-red);
 }
 
 .put > .menu__link::before {
-  content: "PUT";
-  border-color: #2159f3; /* Azul */
-  color: #2159f3
+  content: "put";
+  background-color: var(--openapi-code-blue);
 }
 
 .patch > .menu__link::before {
-  content: "PATCH";
-  border-color: #ff9800; /* Laranja */
-  color: #ff9800
+  content: "patch";
+  background-color: var(--openapi-code-orange);
 }
 
 .head > .menu__link::before {
-  content: "HEAD";
-  border-color: #673ab7; /* Roxo */
-  color: #673ab7
+  content: "head";
+  background-color: var(--ifm-color-secondary-darkest);
 }
 
 .event > .menu__link::before {
-  content: "EVENT";
-  border-color: #9c27b0; /* Roxo escuro */
-  color: #9c27b0
+  content: "event";
+  background-color: var(--ifm-color-secondary-darkest);
 }
 
 .schema > .menu__link::before {
-  content: "SCHEMA";
-  border-color: #69a6c4; /* Cinza */
-  color: #69a6c4
-}
-
-/* Hover com transição suave */
-.api-method > .menu__link:hover::before,
-.schema > .menu__link:hover::before {
-  filter: brightness(1.1); /* Realce de cor */
-  transform: scale(1.05); /* Leve aumento no tamanho */
-  transition: all 0.2s ease-in-out;
+  content: "schema";
+  background-color: var(--ifm-color-secondary-darkest);
 }

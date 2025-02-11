@@ -2,12 +2,16 @@
 echo 'Rebuilding docs'
 
 # Lista todos os arquivos YAML no diretório "apis"
-apiFiles=(apis/*.yaml apis/*.yml apis/*.json)
+apiFiles=($(find apis -maxdepth 1 -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json" \) 2>/dev/null))
+
+
+echo "Arquivos encontrados: ${apiFiles[@]}"
 
 # Verifica se existem arquivos antes de continuar
 if [ ! -f "${apiFiles[0]}" ]; then
-  echo "No OpenAPI YAML or JSON files found in the 'open-apis/' directory."
+  echo "No OpenAPI YAML or JSON files found in the 'apis/' directory."
   exit 1
+  
 fi
 
 # Itera sobre os arquivos para gerar os docs
@@ -21,7 +25,7 @@ for apiFile in "${apiFiles[@]}"; do
   echo "Plugin ID: $pluginId"
 
   # Limpa os docs (sem o plugin ID)
-  yarn docusaurus clean-api-docs
+  yarn docusaurus clean-api-docs $apiName --plugin-id $pluginId
 
   # Executa a geração de docs com o plugin correto
   yarn docusaurus gen-api-docs $apiName --plugin-id $pluginId
