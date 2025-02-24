@@ -431,27 +431,42 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
 
     const apiSpecs = apiResponse.data.apiInformations;
     apiSpecs.forEach((apiSpec, index) => {
-
-      // Verificar se swaggerFile é válido
-      if (typeof apiSpec.swaggerFile !== "string" || apiSpec.swaggerFile.startsWith("http")) {
-        console.warn(chalk.yellow(`⚠️  Ignoring invalid swaggerFile for API: ${apiSpec.apiName || `spec-${index + 1}`}`));
-        return; // Ignora esse item e segue para o próximo
-      }
-
-      let jsonData;
-      try {
-        jsonData = JSON.parse(apiSpec.swaggerFile);
-      } catch (parseError) {
-        console.warn(chalk.yellow(`⚠️  Invalid JSON in swaggerFile for API: ${apiSpec.apiName || `spec-${index + 1}`}`));
-        return; // Ignora esse item e segue para o próximo
-      }
-
       const apiName = apiSpec.apiName
         ? apiSpec.apiName
             .replace(/\s+/g, "-")
             .replace(/[^\w.-]/g, "")
             .replace(/-+$/, "")
         : `spec-${index + 1}`;
+
+      let jsonData;
+      
+      // Verificar se swaggerFile existe e é válido
+      if (!apiSpec.swaggerFile) {
+        console.warn(chalk.yellow(`⚠️  Missing swaggerFile for API: ${apiSpec.apiName || `spec-${index + 1}`}`));
+        return; // Ignora esse item e segue para o próximo
+      }
+
+      // Lidar com diferentes formatos de swaggerFile
+      if (typeof apiSpec.swaggerFile === "string") {
+        // Caso 1: swaggerFile é uma string - tenta parsear como JSON
+        if (apiSpec.swaggerFile.startsWith("http")) {
+          console.warn(chalk.yellow(`⚠️  URL formato não suportado em swaggerFile para API: ${apiSpec.apiName}`));
+          return;
+        }
+        
+        try {
+          jsonData = JSON.parse(apiSpec.swaggerFile);
+        } catch (parseError) {
+          console.warn(chalk.yellow(`⚠️  Invalid JSON string in swaggerFile for API: ${apiSpec.apiName}`));
+          return;
+        }
+      } else if (typeof apiSpec.swaggerFile === "object") {
+        // Caso 2: swaggerFile já é um objeto JSON
+        jsonData = apiSpec.swaggerFile;
+      } else {
+        console.warn(chalk.yellow(`⚠️  Unsupported swaggerFile format for API: ${apiSpec.apiName}`));
+        return;
+      }
 
       const fileName = `${apiName}.json`;
       const filePath = path.join(apiFolder, fileName);
