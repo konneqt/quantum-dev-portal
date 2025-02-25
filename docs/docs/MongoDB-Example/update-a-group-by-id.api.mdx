@@ -1,0 +1,69 @@
+---
+id: update-a-group-by-id
+title: "Update a group by ID"
+description: "Update a group by ID"
+sidebar_label: "Update a group by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1zGjkQ/SuqqT3sVmEg3mxtihs2rhRVsePFcHI4aEYNKJmRxpLGMUXx37dbmi8YOyZ3fLAHqdX99Lr79eBd5PjaRqPHaG10kdto2YsM2FwrC7i8iy6HQ/qTaOVAOXrkeZ7KhDup1eC71YrWbLKBjNOT2+YQjSIdf4fERb0oNzoH42TwJkXLxjoj1RptBNjEyJw84vLs5r/FdHYz6bMxK5R8KoBJgbHlSoJhK20YZw/X01uGOHVhEmDcMgErqUCweMvcBpgF8yxxB6M/42HTj/a9KAN3AsTEAHdwAs45xvkWTdB4LjP4FmFg7nz0GthPRMaFQFxOv43rGYyVgcf3I5bGTK8OQ8WAJ/CjKwzy4P2mOmTpNMeL2fQkp9y6Wy0oGSdylGnr0EeCKWQVWw1XApMiUxtCS9viDgywIheUDFYav0pfdWLukZyCSHFEcHxXOna8iP4xgJMuJY+3VD++jrIYs9CKxY3hWwwlHWT2/RL7w8Dqt5JyVPChanhanHBfSeThVlw4eMUVeRLS5inif9fXmG2KjKsL7BDB47QkkjqSSAu0HDEWlrqOUolFgXBKLiviP5MI+esFRTmF5BJsJ0hLR+gkhXjwppaRmnGpqLiRYRuqkVO92dCrUgmSOPCg6JY25wnUMD2FJUKPFl4cGMXT6Qk98fV+Pv16N/5C+hYAhfhY/FwdS91BiXZ1zjcC6QF5SVKJZ/utlN4h8t8T3F8luEpOK8F+CVc65D8UCfJlV0XKqnFCuD6GaXJoe8UFGqHOWxdsPnRtpgrrXVJufoAKVh+7VnfaIdpCCbL457VYUxUS5aUEOQZjdKjZEsGVFtvzwDsPvPPAOw+888A7D7y3Bl6H/YXvXCw3/0WK8E4n1AjcoEvn2+cR5wGZ5txtcEt5sDQiet150iSZBpM0JD7OFNAJGwZGCNpwGe2XXv83WlDAwvckhR1Fg/BNb7CTYk+R/SAM6AqTosHGudyOBoMnm8jsQkCm+09GcpPy2PaTVBdiwHM5KGsKzODvfz99uuywjNLHY25hhIKo1lrE7ForhfKgAzoLSWGk2/rIaCgTfFq2dx6IlKAg5X5ND2GsaKPPYZ+yQhN61szymxee5SlUs7gpiWo41uOv2arnU7PUjJbW2sFkaNYP9bmVyVpHHytJbMUM6tYq2UqkagfLlkg8VqvLw17snA8d0QIh1Up7IivJouRMrlhFVPv6H/rD/rCTWC8Gl/0hOzrKxvfTPpv4hrWNbJAlKJFrqZxl8JJr0hzqMew8vvYaZEgKRKjiIDBo5XCfkJZ98kaDHWCr68MhKQO8v/Qvi76ud2UD1P/q6EUjLAkkcIOxaH23o3pdmHS/p2WsIUPVuaTsYAPExBemDpmlZ2R7xVN73JGtV8foz1nZu3+xt/q09zriagSobas28PEHbINk7JdotUHZQh8EKmxch9AXvvSag5032H2vOjHG9/Tc/dK2rST3iznaxuVLcqYFHTH8J5U9/vYYtWfCt61f22GnqHWBqcb94JJ+/gdWwF+r
+sidebar_class_name: "put api-method"
+info_path: MongoDB-Example/mongodb-example
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a group by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/groups/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update a group by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"id","schema":{"type":"string"},"required":true,"description":"Unique group identifier"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"REQUIRED. A unique identifier for a SCIM resource as defined by the service provider."},"meta":{"type":"object","properties":{"created":{"type":"string","description":"The \"DateTime\" that the resource was added to the service provider."},"version":{"type":"string","description":"The version of the resource being returned."},"location":{"type":"string","description":"The URI of the resource being returned."},"lastModified":{"type":"string","description":"The most recent DateTime that the details of this resource were updated at the service provider."},"resourceType":{"type":"string","description":"The name of the resource type of the resource."}},"title":"Meta"},"members":{"type":"array","items":{"type":"object","properties":{"$ref":{"type":"string","description":"The URI of a SCIM resource."},"value":{"type":"string","description":"id attribute of a SCIM resource"},"display":{"type":"string","description":"A human-readable name for the member"}},"title":"Member"},"description":"A list of members of the Group."},"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"externalId":{"type":"string","description":"OPTIONAL. A String that is an identifier for the resource as defined by the provisioning client."},"displayName":{"type":"string","description":"REQUIRED. A human-readable name for the Group."}},"title":"Group"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"REQUIRED. A unique identifier for a SCIM resource as defined by the service provider."},"meta":{"type":"object","properties":{"created":{"type":"string","description":"The \"DateTime\" that the resource was added to the service provider."},"version":{"type":"string","description":"The version of the resource being returned."},"location":{"type":"string","description":"The URI of the resource being returned."},"lastModified":{"type":"string","description":"The most recent DateTime that the details of this resource were updated at the service provider."},"resourceType":{"type":"string","description":"The name of the resource type of the resource."}},"title":"Meta"},"members":{"type":"array","items":{"type":"object","properties":{"$ref":{"type":"string","description":"The URI of a SCIM resource."},"value":{"type":"string","description":"id attribute of a SCIM resource"},"display":{"type":"string","description":"A human-readable name for the member"}},"title":"Member"},"description":"A list of members of the Group."},"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"externalId":{"type":"string","description":"OPTIONAL. A String that is an identifier for the resource as defined by the provisioning client."},"displayName":{"type":"string","description":"REQUIRED. A human-readable name for the Group."}},"title":"Group"}}},"description":"Successful response"},"400":{"description":"Bad request"},"401":{"description":"Invalid token"},"404":{"description":"Not found"},"500":{"description":"Internal server error"}}}
+>
+  
+</StatusCodes>
+

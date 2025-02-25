@@ -1,0 +1,93 @@
+/* Estilização geral da seção */
+.hero-section {
+    padding-bottom: 3.5rem;
+  }
+  
+  /* Cabeçalho da Hero Section */
+  .hero-header {
+    text-align: center;
+    padding: 4rem 1rem 0;
+  }
+  
+  .hero-header-content h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-header-content p {
+    max-width: 40rem;
+    margin: 0 auto;
+    color: #6b7280; /* Texto secundário */
+  }
+  
+  /* Contêiner dos produtos */
+  .hero-products {
+    --ifm-link-hover-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+  
+  /* Estilos do Card */
+  .hero-product {
+    width: 90vw;
+    max-width: 440px;
+    border: 1px solid;
+    background: transparent;
+    border-radius: 1.5rem;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  .hero-product-link {
+    display: block;
+    text-decoration: none;
+    padding: 1.5rem;
+  }
+  
+  .hero-product:hover {
+    color: var(--docs-color-text);
+    transform: translateY(-5px);
+    border-color: #6379f2;
+  }
+  
+  /* Altera a cor do título e do ícone no hover */
+  .hero-product:hover .hero-product-title {
+    color: #6379f2; /* Cor do título no hover */
+  }
+  
+  .hero-product:hover .hero-product-icon {
+    color: #6379f2; /* Cor do ícone no hover */
+  }
+  
+  .hero-product-content {
+    padding-bottom: 0;
+  }
+  
+  .hero-product-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--docs-color-text);
+    transition: color 0.2s ease-in-out; /* Transição suave para a cor do título */
+  }
+  
+  .hero-product-icon {
+    color: var(--docs-color-text);
+    width: 1.75rem;
+    height: 1.75rem;
+    transition: color 0.2s ease-in-out; /* Transição suave para a cor do ícone */
+  }
+  
+  .hero-product-text {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
