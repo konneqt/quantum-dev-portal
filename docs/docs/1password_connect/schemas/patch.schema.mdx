@@ -1,0 +1,33 @@
+---
+id: patch
+title: "Patch"
+description: ""
+sidebar_label: "Patch"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: [{"op":"add","path":"/fields/06gnn2b95example10q91512p5/label","value":{}}]
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Patch"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"items":{"properties":{"op":{"enum":["add","remove","replace"],"type":"string"},"path":{"description":"An RFC6901 JSON Pointer pointing to the Item document, an Item Attribute, and Item Field by Field ID, or an Item Field Attribute","example":"/fields/06gnn2b95example10q91512p5/label","type":"string"},"value":{"type":"object"}},"required":["op","path"],"type":"object"},"type":"array","title":"Patch"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

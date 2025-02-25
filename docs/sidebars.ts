@@ -21,7 +21,7 @@ function findSidebar(directory: string): any[] {
             const category = {
               type: 'category',
               label: item.name,
-              items: require(sidebarPath), 
+              items: require(sidebarPath),
             };
             sidebars.push(category);
           }
@@ -60,7 +60,7 @@ const sidebars: SidebarsConfig = {
         description: 'Quantum Admin Apis',
         slug: '/docs/',
       },
-      items: kcSideBar, 
+      items: kcSideBar,
     },
   ],
 };

@@ -8,6 +8,8 @@ const clear = require("clear");
 const path = require("path");
 const chalk = require("chalk");
 const yaml = require("js-yaml");
+const templates = require("./configureTemplates/listTemplates");
+const configureTemplates = require("./configureTemplates/index");
 
 const pjson = require("../package.json");
 
@@ -23,6 +25,7 @@ const QAP_OPTIONS = [
   "Clean stored Access Info",
   "Use configured stored Access Info",
 ];
+//const TEMPLATE_OPTIONS = ["List Templates", "Use Templates"];
 
 const MENU_LOGO = `
 ===================================================================    
@@ -57,6 +60,17 @@ const askQapOptions = () => {
     },
   ]);
 };
+
+/* const askTemplateOptions = () => {
+  return inquirer.prompt([
+    {
+      type: "list",
+      name: "option",
+      message: "Choose an option:",
+      choices: TEMPLATE_OPTIONS,
+    },
+  ]);
+}; */
 
 const handleHelp = () => {
   console.log(chalk.green("\nHelp Section:"));
@@ -147,22 +161,23 @@ const generateDocsFromFiles = async () => {
   }
 
   console.log(chalk.magenta("Validation completed successfully!"));
+  console.log(chalk.green(`Generating docs...`));
+
   // Chama o script rebuildDocs.sh após validar os arquivos
   const { exec } = require("child_process");
-  exec("./rebuildDocs.sh", (error, stdout) => {
+  exec("./rebuildDocs.sh", (error, stdout, stderr) => {
     if (error) {
-      console.error(
-        chalk.red(`Error executing rebuildDocs.sh: ${error.message}`)
-      );
+      console.error(chalk.red(`Error executing rebuildDocs.sh: ${error.message}`));
       return;
     }
-    console.log(chalk.green(`Generating docs...`));
+    if (stderr) {
+      console.error(chalk.yellow(`Script stderr: ${stderr}`));
+    }
     console.log(
-      chalk.green(
-        "\nAll operations completed successfully! Please run 'npm start' to start the application."
-      )
+      chalk.green("\nAll operations completed successfully! Please run 'npm start' to start the application.")
     );
   });
+  
 };
 
 const generateDocsFromURI = async () => {
@@ -198,26 +213,47 @@ const generateDocsFromURI = async () => {
 
       // Extração do título da OpenAPI ou host da URL
       let fileName = "";
+      let openApiData;
+      
       if (isJson) {
-        const openApiData = response.data;
-        if (openApiData.info) {
+        openApiData = response.data;
+        if (openApiData.info && (openApiData.info.name || openApiData.info.title)) {
           // Usando o título da OpenAPI
           fileName = openApiData.info.name || openApiData.info.title;
         } else if (openApiData.host) {
           // Usando o host como fallback
-          fileName = new URL(uri).hostname;
+          fileName = openApiData.host;
         } else {
-          fileName = "openapi";
+          // Extrair hostname da URI
+          try {
+            fileName = new URL(uri).hostname;
+          } catch (e) {
+            fileName = "openapi";
+          }
         }
       } else {
-        // Para YAML, assumimos que o título vem de info.title
-        const openApiData = yaml.load(response.data);
-        if (openApiData.info && openApiData.info.title) {
-          fileName = openApiData.info.title;
-        } else if (openApiData.host) {
-          fileName = new URL(uri).hostname;
-        } else {
-          fileName = "openapi";
+        // Para YAML, precisamos fazer o parse
+        try {
+          openApiData = yaml.load(response.data);
+          if (openApiData.info && openApiData.info.title) {
+            fileName = openApiData.info.title;
+          } else if (openApiData.host) {
+            fileName = openApiData.host;
+          } else {
+            // Extrair hostname da URI
+            try {
+              fileName = new URL(uri).hostname;
+            } catch (e) {
+              fileName = "openapi";
+            }
+          }
+        } catch (e) {
+          // Se falhar o parse, use um nome padrão baseado na URI
+          try {
+            fileName = new URL(uri).hostname;
+          } catch (e) {
+            fileName = "openapi";
+          }
         }
       }
 
@@ -226,7 +262,15 @@ const generateDocsFromURI = async () => {
       const extension = isJson ? ".json" : ".yaml";
       const filePath = path.join(apiFolder, `${fileName}${extension}`);
 
-      fs.writeFileSync(filePath, response.data);
+      // Correção: Serializar o objeto antes de salvar
+      if (typeof response.data === 'object') {
+        // Se for objeto, converte para string
+        fs.writeFileSync(filePath, JSON.stringify(response.data, null, 2), 'utf-8');
+      } else {
+        // Se já for string, salva diretamente
+        fs.writeFileSync(filePath, response.data, 'utf-8');
+      }
+      
       console.log(chalk.green(`File saved locally at: ${filePath}`));
 
       await generateDocsFromFiles();
@@ -317,7 +361,6 @@ const configureAccessInfo = async () => {
     SCOPE: "openid",
   };
 
-
   saveEnv(envVars);
   console.log(chalk.green("Access info saved successfully."));
 
@@ -327,7 +370,7 @@ const configureAccessInfo = async () => {
     clientSecret,
     username,
     password,
-    oauthURL,
+    oauthURL
   );
   envVars.ACCESS_TOKEN = token;
   saveEnv(envVars);
@@ -353,7 +396,7 @@ const generateAccessToken = async (
   clientSecret,
   username,
   password,
-  oauthURL,
+  oauthURL
 ) => {
   try {
     const options = {
@@ -506,7 +549,7 @@ const useConfiguredAccessInfo = async () => {
 
   // Verifica se o token é válido
   let token = ACCESS_TOKEN;
-  if (!(isTokenValid(token))) {
+  if (!isTokenValid(token)) {
     console.log(chalk.yellow("Token expired. Generating a new one..."));
     token = await generateAccessToken(
       CLIENT_ID,
@@ -524,6 +567,29 @@ const useConfiguredAccessInfo = async () => {
   await fetchAndSaveApiSpecs(API_URI, COMPANY_NAME, token);
   await generateDocsFromFiles();
 };
+
+/* const handleTemplate = async () => {
+  try {
+    init();
+    const { option } = await askTemplateOptions();
+
+    switch (option) {
+      case "List Templates":
+        await templates();
+        break;
+      case "Use Templates":
+        await configureTemplates();
+        break;
+      default:
+        console.log(chalk.red("Invalid option selected."));
+    }
+  } catch (error) {
+    console.error(
+      chalk.red("An error occurred when configuring the template"),
+      error
+    );
+  }
+}; */
 
 // Função principal do QAP
 const generateDocsFromQAP = async () => {
@@ -570,6 +636,9 @@ const run = async () => {
       case "Generate from QAP Control Plane Instance":
         await generateDocsFromQAP();
         break;
+     /*  case "Choose a Template":
+        await handleTemplate();
+        break; */
       default:
         console.log(chalk.red("Invalid option selected."));
     }

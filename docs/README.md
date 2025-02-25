@@ -51,7 +51,7 @@ To run the project's CLI, use the following command:
 
 
 ```
-$ node ./cli/index.js
+$ ./run-cli.sh
 ```
 
 This command initializes the project's command line interface, allowing you to generate your documentation dynamically. The main features include:

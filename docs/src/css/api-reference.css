@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@100;400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+html,
+body, h1, h2, h3, h4, h5, h6 {
+ font-family: "Onest", "Rubik", "Nunito", sans-serif !important;
+}
+/* Root variables */
+:root {
+  --openapi-code-green: #22c55e;
+  --openapi-code-red: #ef4444;
+  --openapi-code-blue: #3b82f6;
+  --openapi-code-orange: #f97316;
+}
+
+/* Active menu link styles */
+.menu__link--active {
+  color: inherit !important;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  border-right: 4px solid var(--ifm-color-primary) !important;
+  padding-right: 8px !important;
+  
+}
+
+/* Menu list item styles */
+.menu__list-item {
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-size: 14px !important;
+  line-height: 1.2;
+  justify-content: start;
+  font-weight: 500;
+}
+
+/* API method and schema link styles */
+.api-method > .menu__link,
+.schema > .menu__link {
+  align-items: center;
+  justify-content: start;
+  display: flex;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--ifm-menu-color);
+  border-radius: 4px;
+}
+
+/* Common styles for method badges */
+.api-method > .menu__link::before,
+.schema > .menu__link::before {
+  width: 50px;
+  height: 20px;
+  font-size: 10px;
+  line-height: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  margin-right: var(--ifm-spacing-horizontal);
+  text-align: center;
+  flex-shrink: 0;
+  color: white;
+}
+
+/* HTTP Method specific styles */
+.get > .menu__link::before {
+  content: 'get';
+  background-color: var(--ifm-color-primary);
+}
+
+.post > .menu__link::before {
+  content: 'post';
+  background-color: var(--openapi-code-green);
+}
+
+.delete > .menu__link::before {
+  content: 'del';
+  background-color: var(--openapi-code-red);
+}
+
+.put > .menu__link::before {
+  content: 'put';
+  background-color: var(--openapi-code-blue);
+}
+
+.patch > .menu__link::before {
+  content: 'patch';
+  background-color: var(--openapi-code-orange);
+}
+
+.head > .menu__link::before {
+  content: 'head';
+  background-color: var(--ifm-color-secondary-darkest);
+}
+
+.event > .menu__link::before {
+  content: 'event';
+  background-color: var(--ifm-color-secondary-darkest);
+}
+
+.schema > .menu__link::before {
+  content: 'schema';
+  background-color: var(--ifm-color-secondary-darkest);
+}
+
+/* Markdown content styles */
+.markdown p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Method endpoint display styles */
+.http-method {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.http-method.get {
+  background-color: var(--ifm-color-primary);
+}
+.http-method.post {
+  background-color: var(--openapi-code-green);
+}
+.http-method.put {
+  background-color: var(--openapi-code-blue);
+}
+.http-method.delete {
+  background-color: var(--openapi-code-red);
+}
+.http-method.patch {
+  background-color: var(--openapi-code-orange);
+}
+
+/* Hover effects */
+.menu__link:hover {
+  background-color: var(--ifm-menu-color-background-hover);
+}
+
+/* Code block styles */
+.markdown pre {
+  background-color: var(--ifm-code-background);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.markdown code {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+.markdown h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  white-space: normal !important;
+}
+
+.markdown h2.anchor {
+  font-size: 1.3rem;
+  font-weight: 600;
+}

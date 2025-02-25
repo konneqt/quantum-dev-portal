@@ -1,0 +1,33 @@
+---
+id: file
+title: "File"
+description: ""
+sidebar_label: "File"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"content":"VGhlIGZ1dHVyZSBiZWxvbmdzIHRvIHRoZSBjdXJpb3VzLgo=","content_path":"v1/vaults/ionaiwtdvgclrixbt6ztpqcxnq/items/p7eflcy7f5mk7vg6zrzf5rjjyu/files/6r65pjq33banznomn7q22sj44e/content","id":"6r65pjq33banznomn7q22sj44e","name":"foo.txt","size":35}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"File"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"example":{"content":"VGhlIGZ1dHVyZSBiZWxvbmdzIHRvIHRoZSBjdXJpb3VzLgo=","content_path":"v1/vaults/ionaiwtdvgclrixbt6ztpqcxnq/items/p7eflcy7f5mk7vg6zrzf5rjjyu/files/6r65pjq33banznomn7q22sj44e/content","id":"6r65pjq33banznomn7q22sj44e","name":"foo.txt","size":35},"properties":{"content":{"description":"Base64-encoded contents of the file. Only set if size <= OP_MAX_INLINE_FILE_SIZE_KB kb and `inline_files` is set to `true`.","format":"byte","type":"string"},"content_path":{"description":"Path of the Connect API that can be used to download the contents of this file.","readOnly":true,"type":"string"},"id":{"description":"ID of the file","type":"string"},"name":{"description":"Name of the file","type":"string"},"section":{"description":"For files that are in a section, this field describes the section.","properties":{"id":{"type":"string"}},"type":"object"},"size":{"description":"Size in bytes of the file","type":"integer"}},"type":"object","title":"File"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

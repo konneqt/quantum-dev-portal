@@ -1,0 +1,114 @@
+:root {
+    --api-reference-bg-dark: linear-gradient(to right, #e9eef1, #f0f0f0); /* Gradiente para o modo claro */
+    --api-reference-bg-light: linear-gradient(to right, #000000, #4b4b4b);
+    --color-content-light: #fff;
+    --color-content-dark: #000
+  }
+  
+  [data-theme='dark'] {
+    --api-reference-bg: var(--api-reference-bg-dark); 
+    --color-content: var(--color-content-dark);
+  }
+  
+  [data-theme='light'] {
+    --api-reference-bg: var(--api-reference-bg-light); 
+    --color-content: var(--color-content-light)
+  }
+  
+
+/* Seção com o gradiente de fundo */
+.api-reference-section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 3.5rem;
+  }
+  
+  .api-reference-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    text-align: center;
+    color: var(--docs-color-text);
+    background: var(--api-reference-bg);
+    border-radius: 1rem;
+    position: relative;
+  }
+  
+  .api-reference-container .api-reference-link {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+  }
+  
+  .api-reference-container .api-reference-link:hover {
+    background-color: rgba(51, 51, 51, 0.6);
+  }
+  
+  .api-reference-container .api-reference-link svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: #b3b3b3;
+  }
+  
+  /* Título e descrição */
+  .api-reference-container h2 {
+    color: var(--color-content);
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  .api-reference-container p {
+    color: #989ba3;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+  
+  .api-reference-container .get-started-link {
+    font-weight: 500;
+    color: #6379f2;
+  }
+  
+  .api-reference-image-container {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+  
+  /* Imagem responsiva */
+  .api-reference-image {
+    max-height: 20rem; 
+    object-fit: contain;
+    width: auto; 
+    border-radius: 1rem; 
+    margin: 1.5rem; 
+}
+
+  
+  /* Media queries para responsividade */
+  @media (min-width: 768px) {
+    .api-reference-container {
+      flex-direction: row;
+      text-align: left;
+      padding: 5rem 3rem;
+    }
+    
+    .api-reference-content {
+      flex: 1;
+    }
+    
+    .api-reference-container p, 
+    .api-reference-container h2 {
+      margin: 0 0 1.5rem 0;
+    }
+  }
