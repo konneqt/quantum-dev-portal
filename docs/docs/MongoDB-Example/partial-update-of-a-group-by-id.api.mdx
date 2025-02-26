@@ -1,0 +1,69 @@
+---
+id: partial-update-of-a-group-by-id
+title: "Partial Update of a group by ID"
+description: "Partial Update of a group by ID"
+sidebar_label: "Partial Update of a group by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWMFu2zgQ/RVC2MMu4MhutostfHPiYNfAJk0d+5T6QIljm61EKiSVxjD87ztDSpZsJY17dw+tMhzOPL2ZeaN0Gzm+stHwMVoZXRY2WvQiA7bQygKat9HlYED/pFo5UI4eeVFkMuVOatX/ZrUim03XkHN6cpsComGkk2+QuqgXFUYXYJwM0aRo+VhnpFqhjwCbGllQRDRPb77MJ9ObccxGrFTyqQQmBeaWSwmGLbVhnD1cT24Z4tSlSYFxywQspQLBkg1za2AWzLPEE8z+jJdNHO16UQ7uBIipAe7gBJwzzPM1GqPzTObwNcLE3Pnse2A/EBkXAnE5/TauZzBWBh7fz1g5M708TJUA3sAfXWmQBx8306FKpwWeTycnBeXW3WpBxTiRo1xbhzFSLCGr2Wq4ElgUmdmQWtoWd2CAlYWgYrDK+VX66hszj+QURIojguN3pWvHRoyPCZx0GUW8pf7xfZQnWIVWLm4M32Aq6SC377fYbwaWv1SUo4YPXcOz8oT3lUQeHiWlg1dCUSQhbZEh/ndjjdi6zLm6wAkRPMkqImkiibRAyxFjwdQNlElsCoRTcVkT/w+JkH+9oCinkFyB7SRp6QjdpBQP3tUyUjMuFTU3MmxDN3LqNxtmVSpBEgceFL2lLXgKe5iewgqhRwsvDozi2eSEmfh8P5t8vhv9R/oWAIX82PxcHUvdQYt2dc4PAukBRUkziXfjVknvEPmvCe7PClwXp1Vgb0JLh/yHMkW+7LLMWL1OCNfHsE0Ofa+4QCfUeeuCz4euz0Rhv0uqzXdQwetj1+tOO0RbKkEef72Wa6JCobyUIMdgjA49WyG40mJzXnjnhXdeeOeFd15454X31sLrsH/Psd1xscz9BIfO879TEfTJmGaCG4zu/CQ94mqgWwV3azxSHjdti153tTT1ph0lDemQMyUcI5iH3RGSNrRGu4VfBWstQsJ07cFg4mHUD7/29bdS7Ci334oBX2kydFg7V9hhv/9kU5lfCMh1/GQkNxlPbJxmuhR9Xsh+1WBg+n/+/enTZYdy1EGecAtDVEe10iJh11op1Aod8FlISyPdxmdGR5ni06J98kC0BDmpzvcEEcaaOPo5nFOJaF1Pm8V+88LzIoN6MTf9UW/K/S5sjvbLqjE1e6ZlO1gTjf1QrFu13IvqY62PrZxB6lr9WyvWPsCipRiPtXVxOJid+2E8WiCkWmpPZK1fVJzxFauJar/+h3gQDzqF9cpwGQ/Y0VU2up/EbOyn1zYaQp6gRKGlcpbBS6FJgGjgcAz5yguSIV0QoY+D2qCXw3NCWk3K+9N2AHPfKg756SMV0n9E+hbfVrOw/y+QXjTE7kAu15iW7Nstte7cZLsdmbGdDDXqggqFs5AQdVhFJJmekfglz+zxeLY+KaPfp9Ug/8HeGtre64jr1aA2rTbBx++wCfqxW6DXGuUMYxCocHAdUl/4Lmwudr5sd736xgi/3wv3U9+2rNyPZtf/ondSfT7nWtAlw3/QDODfHqX2XPgZ9rYtjo1alVh3PA9B6c//wXNonQ==
+sidebar_class_name: "patch api-method"
+info_path: MongoDB-Example/mongodb-example
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Partial Update of a group by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/groups/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Partial Update of a group by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"id","schema":{"type":"string"},"required":true,"description":"Unique group identifier"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"REQUIRED. A unique identifier for a SCIM resource as defined by the service provider."},"meta":{"type":"object","properties":{"created":{"type":"string","description":"The \"DateTime\" that the resource was added to the service provider."},"version":{"type":"string","description":"The version of the resource being returned."},"location":{"type":"string","description":"The URI of the resource being returned."},"lastModified":{"type":"string","description":"The most recent DateTime that the details of this resource were updated at the service provider."},"resourceType":{"type":"string","description":"The name of the resource type of the resource."}},"title":"Meta"},"members":{"type":"array","items":{"type":"object","properties":{"$ref":{"type":"string","description":"The URI of a SCIM resource."},"value":{"type":"string","description":"id attribute of a SCIM resource"},"display":{"type":"string","description":"A human-readable name for the member"}},"title":"Member"},"description":"A list of members of the Group."},"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"externalId":{"type":"string","description":"OPTIONAL. A String that is an identifier for the resource as defined by the provisioning client."},"displayName":{"type":"string","description":"REQUIRED. A human-readable name for the Group."}},"title":"Group"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"REQUIRED. A unique identifier for a SCIM resource as defined by the service provider."},"meta":{"type":"object","properties":{"created":{"type":"string","description":"The \"DateTime\" that the resource was added to the service provider."},"version":{"type":"string","description":"The version of the resource being returned."},"location":{"type":"string","description":"The URI of the resource being returned."},"lastModified":{"type":"string","description":"The most recent DateTime that the details of this resource were updated at the service provider."},"resourceType":{"type":"string","description":"The name of the resource type of the resource."}},"title":"Meta"},"members":{"type":"array","items":{"type":"object","properties":{"$ref":{"type":"string","description":"The URI of a SCIM resource."},"value":{"type":"string","description":"id attribute of a SCIM resource"},"display":{"type":"string","description":"A human-readable name for the member"}},"title":"Member"},"description":"A list of members of the Group."},"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"externalId":{"type":"string","description":"OPTIONAL. A String that is an identifier for the resource as defined by the provisioning client."},"displayName":{"type":"string","description":"REQUIRED. A human-readable name for the Group."}},"title":"Group"}}},"description":"Successful response"},"400":{"description":"Bad request"},"401":{"description":"Invalid token"},"404":{"description":"Not found"},"500":{"description":"Internal server error"}}}
+>
+  
+</StatusCodes>
+

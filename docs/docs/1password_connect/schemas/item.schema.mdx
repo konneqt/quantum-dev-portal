@@ -1,0 +1,33 @@
+---
+id: item
+title: "Item"
+description: ""
+sidebar_label: "Item"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"category":"LOGIN","createdAt":"2024-07-29T15:51:28.071Z","favorite":false,"id":"string","lastEditedBy":"string","state":"ARCHIVED","tags":["string"],"title":"string","updatedAt":"2024-07-29T15:51:28.071Z","urls":[{"href":"https://example.com","primary":true},{"href":"https://example.org"}],"vault":{"id":"string"},"version":0}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Item"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"properties":{"category":{"enum":["LOGIN","PASSWORD","API_CREDENTIAL","SERVER","DATABASE","CREDIT_CARD","MEMBERSHIP","PASSPORT","SOFTWARE_LICENSE","OUTDOOR_LICENSE","SECURE_NOTE","WIRELESS_ROUTER","BANK_ACCOUNT","DRIVER_LICENSE","IDENTITY","REWARD_PROGRAM","DOCUMENT","EMAIL_ACCOUNT","SOCIAL_SECURITY_NUMBER","MEDICAL_RECORD","SSH_KEY","CUSTOM"],"type":"string"},"createdAt":{"format":"date-time","readOnly":true,"type":"string"},"favorite":{"default":false,"type":"boolean"},"id":{"pattern":"^[\\da-z]{26}$","type":"string"},"lastEditedBy":{"readOnly":true,"type":"string"},"state":{"enum":["ARCHIVED","DELETED"],"readOnly":true,"type":"string"},"tags":{"items":{"type":"string"},"type":"array"},"title":{"type":"string"},"updatedAt":{"format":"date-time","readOnly":true,"type":"string"},"urls":{"example":[{"href":"https://example.com","primary":true},{"href":"https://example.org"}],"items":{"properties":{"href":{"format":"url","type":"string"},"label":{"type":"string"},"primary":{"type":"boolean"}},"required":["href"],"type":"object"},"type":"array"},"vault":{"properties":{"id":{"pattern":"^[\\da-z]{26}$","type":"string"}},"required":["id"],"type":"object"},"version":{"type":"integer"}},"required":["vault","category"],"type":"object","title":"Item"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

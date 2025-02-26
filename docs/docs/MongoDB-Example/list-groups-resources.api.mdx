@@ -1,0 +1,61 @@
+---
+id: list-groups-resources
+title: "List groups resources"
+description: "List groups resources"
+sidebar_label: "List groups resources"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVl1T2zoQ/SsazX0EJ6Xt3A5vtDCdzBTaQni65UG2NolaWTL6oGQy/Pe7K9nBiYG6fetTHGm1e/bs2ZU2PIil58f/8aWzsfH85oA78I01HnB5w4+mU/qprAlgAn2KptGqEkFZM/nuraE1X62gFvQV1g3wY27L71AFfsAbZxtwQWVv2c73DIVzYo12KkDdX/fBKbPkDwdcgq+caigerl+efb2eXZ6dFuyETjK7YFfJ1DPCKJTBb3Z9OfMsrERgwgGLHiQLlikjCTjgDjAjasxTVODJB61cfZidsxZhQZEvwdvoKhiD95mElRzm9EJKLBp1G4EpiWSrhQLHFtYxkbG5Fg8TnklYKINpleuE3YO7U7iD0e/wsEv4awgjalI5QE5G4JxjnG/8FI3nqoZvPBNM0bfAfiIyIWWm+1lcd+C8ysL5dcTWuCvSNlQJVGgHITrkIfnVNstynGPUyCinwodzK6kYIzmqrQ/oo8ISso6tR64kFkXpVnTK97gDkmojqRisNX6Svu7EPCEZg4i0PsiVju0von8MEFTQ5PGc9JN0VJdYhT/vgn8cLH6rKHuCz6oROo7IVxF5uFXGAE+4ShNF+UYj/l/6OmGrWAtziB0iRalbIqkjibRMyx5jeWnoSCsUBcJpueyI/0hTN6X3d41GuA/gjNCzET3x+ct89vni5BPNtwwox0fxC7M/6nYkOpxzqRFoHpCXSis8W/RKeoHIf2/gvlTgrji9AqelF6lnddRBHSa1ym3ZK1s3Gu5ZbpCdguSMcep7avwu90xzsEFovIbQZV8BCi/jJerseRjUS+kwM5EERxhc9rMdbx2nGaNjCMGharBv0xR9InGPS4Pcr2KFcP0iata9HAj6m/xw2LV9L2SXa7Z5NbSZGeROkSp/gMlWb4ZWFzZgnaKRZPH2qVgzkyWahigyAM7Z3K27dp8o/fz6eWSfp9tzZVHefAlpoomwwj+T9p2EDZvc0ttpw6PTuLcKofHHk8mtr1R9KKG2xa1TwmlR+qLSNsqJaNSkrT24yet/3707GlQR7wxRCg/HeJOYpZUl+2CNQdkQ/BsKXEWnwjpFRkNV4ddNf+eKOjWP3nZ/Kx3CyNtpQ//zPrGizMImw26WUfDT9+zsXpB2ee/e5q+KaTEdAE9T4qiYsr2j7OTLrGCnqZP94zwhSzCysShnz+C+sTSMqPmwJcUyDSdHM0K25UktgVYB9wmpSd3+bAF3wG0JCDi6JjgrVNJWKtymLW7/EbzCMLSy2VAprp1+eKDl1CNEN91HWNuSqELy8QCOEGxJqskPWNPMx7ZoSDntxTV8OFPJtir7eDbHMvwPEHP/jg==
+sidebar_class_name: "get api-method"
+info_path: MongoDB-Example/mongodb-example
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List groups resources"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/groups"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List groups resources
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"object","properties":{"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"Resources":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string","description":"REQUIRED. A unique identifier for a SCIM resource as defined by the service provider."},"meta":{"type":"object","properties":{"created":{"type":"string","description":"The \"DateTime\" that the resource was added to the service provider."},"version":{"type":"string","description":"The version of the resource being returned."},"location":{"type":"string","description":"The URI of the resource being returned."},"lastModified":{"type":"string","description":"The most recent DateTime that the details of this resource were updated at the service provider."},"resourceType":{"type":"string","description":"The name of the resource type of the resource."}},"title":"Meta"},"members":{"type":"array","items":{"type":"object","properties":{"$ref":{"type":"string","description":"The URI of a SCIM resource."},"value":{"type":"string","description":"id attribute of a SCIM resource"},"display":{"type":"string","description":"A human-readable name for the member"}},"title":"Member"},"description":"A list of members of the Group."},"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"externalId":{"type":"string","description":"OPTIONAL. A String that is an identifier for the resource as defined by the provisioning client."},"displayName":{"type":"string","description":"REQUIRED. A human-readable name for the Group."}},"title":"Group"},"description":"REQUIRED. A multi-valued list of complex objects containing the requested resources."},"totalResults":{"type":"integer","description":"REQUIRED. The total number of results returned by the list or query operation."}},"title":"Groups"}}},"description":"Successful response"},"400":{"description":"Bad request"},"401":{"description":"Invalid token"},"404":{"description":"Not found"},"500":{"description":"Internal server error"}}}
+>
+  
+</StatusCodes>
+

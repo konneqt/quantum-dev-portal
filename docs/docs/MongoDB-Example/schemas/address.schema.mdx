@@ -1,0 +1,33 @@
+---
+id: address
+title: "Address"
+description: ""
+sidebar_label: "Address"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"region":"string","country":"string","locality":"string","formatted":"string","postalCode":"string","streetAddress":"string"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Address"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"region":{"type":"string","description":"The state or region component."},"country":{"type":"string","description":"The country name component."},"locality":{"type":"string","description":"The city or locality component."},"formatted":{"type":"string","description":"The full mailing address, formatted for display or use with             a mailing label."},"postalCode":{"type":"string","description":"The zip code or postal code component."},"streetAddress":{"type":"string","description":"The full street address component, which may include house             number, street name, P.O. box, and multi-line extended street address             information."}},"title":"Address"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
