@@ -11,9 +11,9 @@ Before you start, make sure you have the following requirements installed:
 
 - Node.js (version 18 or higher)
 
-- Yarn or npm
+- Yarn(version 1.22.22) or npm(version 10.8.2 or higher)
 
-- Git (optional, but recommended)
+- Git(version 2.34.1)
 
 ### Clone the Repository
 
