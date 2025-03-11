@@ -55,9 +55,18 @@ To run the project's CLI, use the following command:
 ```
 
 This command initializes the project's command line interface, allowing you to generate your documentation dynamically. The main features include:
-- Generate documentation from OpenAPI files available within the `apis` folder.
-- Generate documentation from a URI entered by the user.
-- Generate documentation from the OpenAPI files available in `Quantum Api Platform - QAP`, where you must first configure your access to the system.
+1.  Generate documentation from OpenAPI files available within the `apis` folder.
+2. Generate documentation from a URI entered by the user.
+3. Generate documentation from the OpenAPI files available in `Quantum Api Platform - QAP`, where you must first configure your access to the system.
+    - **Access configuration:**
+    To access the system, enter the following data: `Client ID` and `Client Secret`, 
+    `Username` and `Password`,
+    `Company Name`,
+    ` URI of the QAP APIs`,
+    `OAuth URL` (to generate the access token)
+4. Choose one of the available templates to use in the Quantum API Dev Portal: `Dyte`, `Chaos Mesh` or `Homarr`. All have been customised from pre-existing templates, bringing more modern and intuitive layouts to offer an improved experience when using our Dev Portal.
+Below are some images of what our templates look like:
+
 
 ## Running the Development Server
 
