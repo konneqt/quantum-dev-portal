@@ -20,13 +20,13 @@ Before you start, make sure you have the following requirements installed:
 Clone this repository via SSH or using HTTPS:
 
 ```
-$ git clone https://github.com/konneqt/quantum-dev-portal.git
+ git clone https://github.com/konneqt/quantum-dev-portal.git
 ```
 
 Then access the project folder and go to the `docs` folder
 
 ```
-$ cd quantum-dev-portal/docs
+ cd quantum-dev-portal/docs
 ```
 
 ### Install dependencies
@@ -36,13 +36,13 @@ Use Yarn or npm to install the project's dependencies:
 With Yarn:
 
 ```
-$ yarn
+ yarn
 ```
 
 With npm:
 
 ```
-$ npm install
+npm install
 ```
 
 ## Run CLI
@@ -51,7 +51,7 @@ To run the project's CLI, use the following command:
 
 
 ```
-$ ./run-cli.sh
+ ./run-cli.sh
 ```
 
 This command initializes the project's command line interface, allowing you to generate your documentation dynamically. The main features include:
@@ -66,13 +66,13 @@ To start the local server and view the documentation, run:
 With Yarn:
 
 ```
-$ yarn start
+yarn start
 ```
 
 With npm:
 
 ```
-$ npm start
+ npm start
 ```
 
 This will open the documentation at http://localhost:3000/.

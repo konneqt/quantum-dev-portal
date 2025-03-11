@@ -1,0 +1,69 @@
+---
+id: deployment-unit-controller-edit-gateway
+title: "No summary"
+description: "No summary"
+sidebar_label: "No summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV8tu2zgU/RXhrmYAJXZrDNBq50ncIslM4iYOsrCNgJaubcYSqZJUXEPQ18xiPqQ/NrikrIftOvVsZjM7gdQ9vM/DwxxkiooZLsVVBAFcYhrLTYLCPApuLqQwSsYxqmeMuPnMDK7ZBnxImWIJGlQagnEOgiUIAayQ9hR+zbjCCAKjMvSBCwggZWYJPuhwiQmDIAezSclEG8XFAopi6gxRm99ltKE/dnFCKQwKQ1ssTWMeWq87L1oKWtuDlrMXDA05qyhGw1Hb/9ZssUDVN4aFS0Lf9cWHCHWoeErwEMCDM/AqCx/wG0vS2Nq4zXPrReHDnMf489A3iq1QHEZe2b0KeFHmPsh3MOqi1Lb5RHjexJZlAoE3gf7wyru+699NwHdbIR1Ie71ut1wyPMG7zNDib91qFUUoIy4WDoe8qTBSqezfvQ8ft3+ncbbgQtOqyOK4XKWk0JJ1ixZeUWlOSITZKwGPerx1UDoHJ9DrdhPd2LQBPRsTu22KoLktM5Nm5vmH0RyMp46oFZBLS5RKLowNdTyl5WIiCvCBxfHd3E7F8T7kP9EfZW29q3ZrlL1w9o4aw83eW0iUzi3aLVk08T5LuYjR6w+vCNBmsoEosmSG6ijihTVpQPa63cLfdtRpWCNXZe9PHnONoRSRbiJTYQu/asvTIh9srZrRbyeMyn+aq0OyaEb94SP5Vg7Baa4NS6OmZ1tCOQ3pE1kcYIODQ3eUJH44cEfH7e1hO0IdO8yxN2YF2OKzWYwPGGaKm00jOzMpY2TijR4gY6+ybmSK7pkKfrhXxRPQD1SzBH9Zrx5VfFpFr59uvMf7P1pFXRqT6qDTWa/X5ws7vyzl+jyUSUeyzCzfd157nRCV0eBOHfyriaGjj07Ny3p1yTUFfWKmCHlr2QCes1hjfd89yEyFpw1Ay82b+/7N4PYSiqIpTMbEviV1bgmvpqsGu5SsUM90OZB7PbjbNVWh27lv5Ws3yCm5YBwju43L0R0U013fdxXMjuqotUIDcFDLt7bEs0cU7gidSqHd7fS+292XGjaLhi1I9EFUwZxlghs6TFcTOc6BhSFqfWbkCgUE4ykpvDbcrfR0liRMUfoSNEtJCjS1FbB6MYDOzimdMrROvsIN3bYa1atToY3zH0gKujjaXpQq0bYoMmXp3X18kiphBgK4fhpRK7hmoyHba7WBMAq9UCZelngW2Lt+GnkkiT2WkUTlIfv+9/e/pM0XDcp9rWwH29Y8oETbanJXTLYUYUMQ/q/2/jO1V9DrZi4tPZWD9iVjwmSJ148SLqyk2qOqlHuXMtTeXCpPobbDrz0591q24G8TBwG8O++CewGxkERKYfWKNgmzXV2+v1oD1Tq0ok+D30wnjRm35J25m8gN2/5I103mQ0CPu6kPS6kN/ZvnM6bxUcVFQctfM1QbN4WvTHF3H4xziBzXRSWx77lVPergl/uS4n716gFsu1suMkEOvbI4syLJt+9O9/ospoUPS2QRKnu827lwh5yNyL623HtFEkVVPDR8JCKYlY/RREZkotiaXrhs7Q6WNg5LNHYth5iJRcYW9Q1JlaL7uHk7tqmn+VZoh5bn7o8RkUxRVJE6NqOLofgHGII3nA==
+sidebar_class_name: "put api-method"
+info_path: docs/quantum_admin_api/quantum-admin-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"No summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/deployment-unit/gateway/{key}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+No summary
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"key","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"swaggerAttached":{"type":"string","description":"Swagger Attached","example":"swagger.json"},"fileAttached":{"type":"string","description":"Kraken Attached","example":"kraken.json"},"gateway":{"description":"Gateway","example":"{\n  \"name\": \"API JOAO\",\n  \"cache\": 300,\n  \"timeOut\": 5000,\n  \"encoding\": \"json\",\n  \"port\": 3890,\n  \"plugins\": null,\n  \"file\": {\n    \"version\": \"3\",\n    \"name\": \"API JOAO\",\n    \"timeout\": \"300ms\",\n    \"cache_ttl\": \"5000s\",\n    \"output_encoding\": \"json\",\n    \"port\": 3890,\n    \"plugin\": null,\n    \"endpoints\": []\n  }\n}","allOf":[{"type":"object","properties":{"id":{"type":"string","description":"Gateway Id","example":"gateway-1"},"name":{"type":"string","description":"API Gateway Name","example":"Google API"},"cache":{"type":"number","description":"API Gateway Cache","example":300},"timeOut":{"type":"number","description":"API Gateway Timeout Miliseconds","example":5000},"encoding":{"type":"string","description":"API Gateway Encoding","example":"json"},"port":{"type":"number","description":"API Gateway Port","example":3890},"plugins":{"type":"string","description":"API Gateway Plugins","example":""},"file":{"type":"string","description":"API Gateway File","example":"{\n  \"version\": \"3\",\n  \"name\": \"API JOAO\",\n  \"timeout\": \"300ms\",\n  \"cache_ttl\": \"5000s\",\n  \"output_encoding\": \"json\",\n  \"port\": 3890,\n  \"plugin\": null,\n  \"endpoints\": []\n}"},"enableSecurity":{"type":"boolean","description":"API Gateway Enable Security","example":true},"enablePlugins":{"type":"boolean","description":"API Gateway Enable Plugins","example":true},"jwkUrl":{"type":"string","description":"API Gateway JWK URL","example":"https://www.googleapis.com/oauth2/v3/certs"},"jwkEncoding":{"type":"string","description":"API Gateway JWK Encoding","example":"json"},"jwkDisable":{"type":"boolean","description":"API Gateway JWK Disable","example":false},"gatewaySource":{"type":"string","description":"API Gateway","example":"KRAKEND"}},"required":["id","name","cache","timeOut","encoding","port","plugins","file","enableSecurity","enablePlugins","jwkUrl","jwkEncoding","jwkDisable","gatewaySource"],"title":"GatewayDTO"}]}},"required":["swaggerAttached","fileAttached","gateway"],"title":"EditGatewayDeploymentUnitDTO"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":""}}}
+>
+  
+</StatusCodes>
+

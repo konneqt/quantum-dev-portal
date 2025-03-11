@@ -1,0 +1,69 @@
+---
+id: gateway-controller-save-file-by-api-key
+title: "No summary"
+description: "No summary"
+sidebar_label: "No summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdlM2O00AMx19l5BNIWRpYIUFuZT/QLhK7wCIObbVyE7cdSGZmZzzdraI8DQcehBdDzqQtpW9AL03s8T+252e3YB15ZG3NVQUFvEemR9ycWcPe1jX5+4BrutQ1vduMnf5AG8jAoceGmHyAYtKCwYagANy6PT1E7amCgn2kDLSBAhzyCjII5YoahKIF3jiJCuy1WULXzVIgBX5nq42c+FentIbJsLjQuVqXfdqj78EasR1J2/l3Klny9VIkawriXeiajhPIoKJQeu1EEwoY316poRlKyocM6AkbJ7HQTo1SU1iTD9qaKRRqCqdTyJJZ+pFsInJ9M77ZuVg3ZCMPEXnehJ2rxHJF98x1cr7O83zvtJFd5Hsypa20WaYjUvjuhLO+lz198zbfmuq41H12Jtb1YCRTOasNB7FPZlPTQdf9fWeT1KBZBqy5r3Zog3Th/O4Gui4FBGdNSC19lefyd9jBXpdxKZDAMmmI7OGpj1aF2DTohZyGeGUFQxf7exNmChgNwaM2IdYJR+TXib+ZvJTRa958EQJSRliWFMIJ2x+0h0OKmRN68pAND5fWN8hQwPW3O8i2TKyY3RERF4Y9qdI2KjaqF1bX3+6UDIPCKGTqEn//+v3T9pXL7XzeA32xhWcL4P8Gkcz5wvaDNXDzKaLh2Khx1WijxrdXx0PmtDq3ZVAL65WnYKMvKSi7UAexkG27BAW8fJFD2gVYyi6QXjsbuMH+oodldIDVwUd3g8/0xCNXozaSfPS1+BJye14zKIa9NstgZQOLs23nGOirr7tOzA+R/CaRuEavcS7VT1qodJDnCooF1oGO8tjtM3j2eRi/52oP4WF+gxGN5LTGOsobZPCDNvvd2826DFaEFfk+g+Q8S985uROJffDRDpUVvJvA268yD/NhFTe2khCPj7Lf8TF92/al9PPW21qo0SwjLuVskpTfH3mmIUQ=
+sidebar_class_name: "put api-method"
+info_path: docs/quantum_admin_api/quantum-admin-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"No summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/gateway/{apiKey}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+No summary
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"apiKey","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"file":{"type":"string","description":"API Gateway File","example":"{\n  \"version\": \"3\",\n  \"name\": \"API JOAO\",\n  \"timeout\": \"300ms\",\n  \"cache_ttl\": \"5000s\",\n  \"output_encoding\": \"json\",\n  \"port\": 3890,\n  \"plugin\": null,\n  \"endpoints\": []\n}"}},"required":["file"],"title":"GatewayFileDTO"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":""}}}
+>
+  
+</StatusCodes>
+

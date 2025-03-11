@@ -4,46 +4,53 @@ const chalk = require("chalk");
 const axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
-const atob = require("atob");
 
 const configureTemplates = async () => {
   const templates = listTemplatesModule.templates;
-  listTemplatesModule();
+  
+  // Create choices array with an option to go back
+  const choices = [
+    { name: "0. Go back", value: "back" },
+    ...templates.map((template, index) => ({
+      name: `${index + 1}. ${template}`,
+      value: template
+    }))
+  ];
 
-  const { templateName } = await inquirer.prompt([
+  // Prompt user to select a template
+  const { selectedTemplate } = await inquirer.prompt([
     {
-      type: "input",
-      name: "templateName",
-      message: "Enter the name of the template:",
-    },
-  ]);
-
-  const normalizedTemplateName = templateName.trim();
-
-  if (templates.includes(normalizedTemplateName)) {
-    console.log(chalk.green(`✅ Template "${normalizedTemplateName}" found!`));
-
-    try {
-      await downloadTemplateFiles(normalizedTemplateName);
-      console.log(
-        chalk.green(
-          `✅ Template "${normalizedTemplateName}" configured successfully!`
-        )
-      );
-    } catch (error) {
-      console.error(chalk.red(`Error configuring template: ${error.message}`));
+      type: "list",
+      name: "selectedTemplate",
+      message: "Select a template (or 0 to go back):",
+      choices: choices,
+      default: "back"
     }
-  } else {
+  ]);
+  
+  // Handle "go back" option
+  if (selectedTemplate === "back") {
+    console.log(chalk.yellow("Returning to main menu..."));
+    return;
+  }
+  
+  console.log(chalk.green(`✅ Template "${selectedTemplate}" selected!`));
+
+  try {
+    await downloadTemplateFiles(selectedTemplate);
     console.log(
-      chalk.red(
-        `The template '${normalizedTemplateName}' does not exist or is incorrect.`
+      chalk.green(
+        `✅ Template "${selectedTemplate}" configured successfully!`
       )
     );
+  
     console.log(
-      chalk.yellow(
-        "Use the 'List Templates' command to see the available templates."
+      chalk.blue(
+        "🚀 Now, run `npm install` to install the dependencies."
       )
     );
+  }  catch (error) {
+    console.error(chalk.red(`Error configuring template: ${error.message}`));
   }
 };
 
@@ -53,33 +60,45 @@ async function downloadTemplateFiles(templateName) {
     
   let foldersToDownload;
   let filesToDownload;
+  let templateDir;
   
-  // Verificação do template escolhido
+  // Check the selected template
   if (templateName.toLowerCase() === "dyte") {
-    foldersToDownload = ["static", "src", "plugins"];
-    filesToDownload = [
-      "package.json",
-      "docusaurus.config.ts",
-      "sidebars.ts",
-      "tailwind.config.cjs",
-      "tsconfig.ui-kit.json",
-    ];
-  } else if (templateName.toLowerCase() === "homarr") {
     foldersToDownload = ["static", "src"];
     filesToDownload = [
       "package.json",
       "docusaurus.config.ts",
       "sidebars.ts",
-      "tailwind.config.js",
+      "tsconfig.ui-kit.json",
     ];
+    templateDir = "dyte";
+  } else if (templateName.toLowerCase() === "chaos mesh" || templateName.toLowerCase() === "chaos-mesh") {
+    foldersToDownload = ["static", "src"];
+    filesToDownload = [
+      "package.json",
+      "docusaurus.config.ts",
+      "sidebars.ts",
+    ];
+    templateDir = "chaos-mesh"; 
+  } 
+  else if (templateName.toLowerCase() === "homarr" ) {
+    foldersToDownload = ["static", "src"];
+    filesToDownload = [
+      "package.json",
+      "docusaurus.config.ts",
+      "sidebars.ts",
+    ];
+    templateDir = "homarr"; 
   } else {
-    // Template padrão (caso não seja dyte nem hommar)
-    console.log(
-      chalk.yellow(`🗑️ Any template selected`)
-    );
+    foldersToDownload = ["static", "src"];
+    filesToDownload = [
+      "package.json",
+      "docusaurus.config.ts",
+      "sidebars.ts",
+    ];
+    templateDir = "default"; 
   }
 
-  const templateDir = templateName.toLowerCase();
   const templateUrl = `${repoBaseUrl}/${templateDir}`;
 
   console.log(
@@ -89,7 +108,7 @@ async function downloadTemplateFiles(templateName) {
   for (const folder of foldersToDownload) {
     const localFolderPath = path.join(process.cwd(), folder);
 
-    // Se a pasta já existir, remover antes de baixar
+    // If folder already exists, remove it before downloading
     if (await fs.pathExists(localFolderPath)) {
       console.log(
         chalk.yellow(`🗑️ Removing existing folder: ${localFolderPath}`)
@@ -110,7 +129,7 @@ async function downloadTemplateFiles(templateName) {
   for (const file of filesToDownload) {
     const localFilePath = path.join(process.cwd(), file);
 
-    // Não remover package.json
+    // Don't remove package.json
     if (file !== "package.json" && (await fs.pathExists(localFilePath))) {
       console.log(chalk.yellow(`🗑️ Removing existing file: ${localFilePath}`));
       await fs.remove(localFilePath);
@@ -130,7 +149,6 @@ async function downloadFolder(folderUrl, localPath) {
     const response = await axios.get(folderUrl, {
       headers: { Accept: "application/vnd.github.v3+json" },
     });
-
     await fs.ensureDir(localPath);
 
     for (const item of response.data) {
@@ -153,9 +171,9 @@ async function downloadFile(fileUrl, localPath) {
   try {
     console.log(chalk.blue(`⬇️ Downloading ${fileUrl} to ${localPath}...`));
 
-    // Verifica se é uma URL direta ou um endpoint da API
+    // Check if it's a direct URL or an API endpoint
     if (fileUrl.includes("api.github.com")) {
-      // É um endpoint da API, precisa obter o download_url
+      // It's an API endpoint, need to get the download_url
       const response = await axios.get(fileUrl, {
         headers: { Accept: "application/vnd.github.v3+json" },
       });
@@ -164,11 +182,11 @@ async function downloadFile(fileUrl, localPath) {
         const decodedContent = Buffer.from(response.data.content, "base64");
         await fs.writeFile(localPath, decodedContent);
       } else if (response.data.download_url) {
-        // Baixa diretamente da download_url para arquivos binários
+        // Download directly from download_url for binary files
         await downloadBinaryFile(response.data.download_url, localPath);
       }
     } else {
-      // É uma URL direta de download, baixa como binário
+      // It's a direct download URL, download as binary
       await downloadBinaryFile(fileUrl, localPath);
     }
 
@@ -178,15 +196,6 @@ async function downloadFile(fileUrl, localPath) {
       chalk.yellow(`⚠️ Could not download ${fileUrl}: ${error.message}`)
     );
   }
-}
-
-async function downloadBinaryFile(url, localPath) {
-  const response = await axios({
-    method: "get",
-    url: url,
-    responseType: "arraybuffer",
-  });
-  await fs.writeFile(localPath, response.data);
 }
 
 async function mergePackageJson(packageJsonUrl) {
@@ -207,7 +216,7 @@ async function mergePackageJson(packageJsonUrl) {
       ).toString("utf8");
       templatePackage = JSON.parse(decodedContent);
     } else {
-      throw new Error("⚠️ package.json do template não contém dados válidos.");
+      throw new Error("⚠️ Template package.json doesn't contain valid data.");
     }
 
     const localPackagePath = path.join(process.cwd(), "package.json");
@@ -235,12 +244,21 @@ async function mergePackageJson(packageJsonUrl) {
       JSON.stringify(mergedPackage, null, 2)
     );
 
-    console.log(chalk.green(`✅ package.json mesclado com sucesso!`));
+    console.log(chalk.green(`✅ package.json merged successfully!`));
   } catch (error) {
     console.error(
-      chalk.red(`❌ Erro ao mesclar package.json: ${error.message}`)
+      chalk.red(`❌ Error merging package.json: ${error.message}`)
     );
   }
+}
+
+async function downloadBinaryFile(url, localPath) {
+  const response = await axios({
+    method: "get",
+    url: url,
+    responseType: "arraybuffer",
+  });
+  await fs.writeFile(localPath, response.data);
 }
 
 module.exports = configureTemplates;

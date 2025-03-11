@@ -1,0 +1,33 @@
+---
+id: createplandto
+title: "CreatePlanDTO"
+description: ""
+sidebar_label: "CreatePlanDTO"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"name":"Free Plan","description":"Free plan with unlimited requests","key":"free-plan"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"CreatePlanDTO"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"name":{"type":"string","description":"Plan name","example":"Free Plan"},"description":{"type":"string","description":"Plan description","example":"Free plan with unlimited requests"},"key":{"type":"string","description":"Plan key","example":"free-plan"}},"required":["name","description","key"],"title":"CreatePlanDTO"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

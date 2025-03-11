@@ -1,0 +1,33 @@
+---
+id: createuserdto
+title: "CreateUserDTO"
+description: ""
+sidebar_label: "CreateUserDTO"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"email":"johndoe@campany.com","companyName":"Company name","password":"Password","acceptedTerms":"Accept terms","firstName":"First name","lastName":"Last name","username":"johndoe","phoneNumber":"123456789","phoneCountryCode":"+55","phoneAreaCode":"81"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"CreateUserDTO"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"email":{"type":"string","description":"Email of the user","example":"johndoe@campany.com"},"companyName":{"type":"string","description":"Company name of the user","example":"Company name"},"password":{"type":"string","description":"Password of the user","example":"Password"},"acceptedTerms":{"type":"boolean","description":"Accept terms of the user","example":"Accept terms"},"firstName":{"type":"string","description":"First name of the user","example":"First name"},"lastName":{"type":"string","description":"Last name of the user","example":"Last name"},"username":{"type":"string","description":"Username of the user","example":"johndoe"},"phoneNumber":{"type":"string","description":"Phone number of the user","example":"123456789"},"phoneCountryCode":{"type":"string","description":"Country code of the user","example":"+55"},"phoneAreaCode":{"type":"string","description":"Area code of the user","example":"81"}},"required":["email","companyName","password","acceptedTerms","firstName","lastName","username","phoneNumber","phoneCountryCode","phoneAreaCode"],"title":"CreateUserDTO"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
