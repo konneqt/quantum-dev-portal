@@ -71,6 +71,9 @@
     "jsonwebtoken": "^9.0.2",
     "lru-cache": "^11.0.2",
     "lucide-react": "^0.475.0",
+    "inquirer": "^12.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "lru-cache": "^11.0.2",
     "nanoid": "^5.1.2",
     "patch-package": "^8.0.0",
     "prism-react-renderer": "^2.4.1",
@@ -94,6 +97,7 @@
     "swagger-ui-react": "^5.18.3",
     "swiper": "^11.2.3",
     "tailwindcss": "^4.0.6"
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
@@ -139,6 +143,14 @@
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "zod": "^3.24.2"
+    "react-markdown": "^10.0.0",
+    "stream-browserify": "^3.0.0",
+    "swc-loader": "^0.2.6",
+    "tailwindcss": "^4.0.9",
+    "typedoc": "^0.27.9",
+    "typedoc-plugin-markdown": "^4.4.2",
+    "typescript": "^5.7.3",
+    "url": "^0.11.4"
   },
   "browserslist": {
     "production": [

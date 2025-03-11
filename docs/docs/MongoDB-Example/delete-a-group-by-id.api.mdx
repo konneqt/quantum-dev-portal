@@ -1,0 +1,69 @@
+---
+id: delete-a-group-by-id
+title: "Delete a group by ID"
+description: "Delete a group by ID"
+sidebar_label: "Delete a group by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJx1U8Fu2zAM/RVCpw3IbDfLsMK3tQmGAOswrOtpyEGx6FioLDmSHNQw/O8j7SxIk/YUWnwKH9976kWUuyDyv2LnXdsEsZkJj6FxNiAd92KeLfincDaijVQOM6EwFF43UTsrcvGdL4JCgxEVhLYoMISyNaYThF1kGd9/feVOKvC4bzHECXNzjVnbgzRaQXTPaCfU4hr100UoXWsVI768NWtNxL2VBgL6A3pA750Xw9Uay3EBkDAKAdsO1ksxE430sqaGZ5F6oRnayFhRy1KDvrSiOhQV1pKnx67h0xC9tjtmxYtqj0rk0bd4OfbJatLhOFQr0liXGokgGUFzK0f3xCTuyIYm5yKdzEp7rQYePm42EWy9IUAVYxPyNN2HQtefFNYu2XstvZHbkBTGtSqVjU7ZVakt+vTz19vbubjSREa5lQFzqJ3dObWFe2ctFtFNBAMWrdexGycTUBdUbc47j6zLlKRj/6QQc/yvHH9PfTZG29KNQB0Ndx54+PIOVi+ybgzrwOtOFG+SLMmuiD/erx9gnmRwcRW+/VonsMSSlg4QK4QTEq1qnLYxAL40LlCUS+ehllbuEFqSOIC0ajIqJGwsoSL1mekxCu9k6BW30/4RX2LaGNKf/2z0rT8afHqNM5FTvEjPimbxed+zH0/eDAMfU3Q8q0/lQZLBW9aLvFA6cE3ZKaUJl6E7e87iw+9jPD/Ce1Gcvc34eChtx4ZI0/IXlc/YTa9i2AxnGV6ufqz+rMjffzOpgiM=
+sidebar_class_name: "delete api-method"
+info_path: MongoDB-Example/mongodb-example
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a group by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/groups/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a group by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"id","schema":{"type":"string"},"required":true,"description":"Unique group identifier"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"content":{},"description":"Group deleted successfully"},"400":{"description":"Bad request"},"401":{"description":"Invalid token"},"404":{"description":"Not found"},"500":{"description":"Internal server error"}}}
+>
+  
+</StatusCodes>
+

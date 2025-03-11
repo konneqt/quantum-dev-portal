@@ -1,0 +1,33 @@
+---
+id: vault
+title: "Vault"
+description: ""
+sidebar_label: "Vault"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"attributeVersion":0,"contentVersion":0,"createdAt":"2024-07-29T15:51:28.071Z","description":"string","id":"string","items":0,"name":"string","type":"USER_CREATED","updatedAt":"2024-07-29T15:51:28.071Z"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Vault"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"properties":{"attributeVersion":{"description":"The vault version","type":"integer"},"contentVersion":{"description":"The version of the vault contents","type":"integer"},"createdAt":{"format":"date-time","readOnly":true,"type":"string"},"description":{"type":"string"},"id":{"pattern":"^[\\da-z]{26}$","type":"string"},"items":{"description":"Number of active items in the vault","type":"integer"},"name":{"type":"string"},"type":{"enum":["USER_CREATED","PERSONAL","EVERYONE","TRANSFER"],"type":"string"},"updatedAt":{"format":"date-time","readOnly":true,"type":"string"}},"type":"object","title":"Vault"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

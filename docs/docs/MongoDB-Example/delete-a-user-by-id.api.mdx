@@ -1,0 +1,69 @@
+---
+id: delete-a-user-by-id
+title: "Delete a user by ID"
+description: "Delete a user by ID"
+sidebar_label: "Delete a user by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJx1U8Fu2zAM/RVCpw3IbDfrsMK3tckhwDoM63oqclAsOhYqS44kBwkM//tIOw3SOjuZIp/Mx/eoTkS5DSJ/EW1AH8R6JjyGxtmAlO3EPLvlT+FsRBsp7GdCYSi8bqJ2VuTime6BQoMRFYS2KDCEsjXmKAh6m2V8/f2Ne6nA467FEEfMzRSzsntptILoXtGOqNsp6peLULrWKkZ8u9ZrRby9lQaI5Z6IovfOi34yxWIYACSwDLA5wmohZqKRXtaU96xQJzQjGxkrKlkq0EkrikNRYS25eTw2nA3Ra7tlUjyn9qhEHn2LE+2sJhnGnlqRwLrUSPTIBWpbObomRmkHMtQ4F+lgVNpp1XPrYayRXusN1asYm5Cn6S4Uuv6isHbJzmvpjdyEpDCuValsdMqOSm3Rp1+/393NxUQQGeVGBsyhdnbr1AYenLVYRDfyC1i0Xsfj0JmAuqBofVl5YlXGLTrVz/owxzfd+DzW2RVtSzcAdTRceeTmi3tYHmTdGJaBxx0p3iRZkk2IPz2sHmGeZPDhKvz4vUpggSUNHSBWCGckWtU4bWMAPDQu0B6XzkMtrdyO5gSQVsHWu7YJCdtKqEh1ZnpahOsL9I7aefyIh5g2huTnfw22dSd7397hTOS0WqRmRZ043XXsxrM3fc9pWhvP2lO4l2TvhtUiJ5QOHNPilNKEjwt38ZDFpz+n1fwM/1nD2XW+p6S0R3ZDmpZPFL7icXwQ/bq/2N/F8ufy75LM/QdcMX6z
+sidebar_class_name: "delete api-method"
+info_path: MongoDB-Example/mongodb-example
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a user by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/users/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a user by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"id","schema":{"type":"string"},"required":true,"description":"Unique user identifier"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"content":{},"description":"User deleted successfully"},"400":{"description":"Bad request"},"401":{"description":"Invalid token"},"404":{"description":"Not found"},"500":{"description":"Internal server error"}}}
+>
+  
+</StatusCodes>
+

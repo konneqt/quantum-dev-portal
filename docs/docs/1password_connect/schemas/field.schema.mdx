@@ -1,0 +1,33 @@
+---
+id: field
+title: "Field"
+description: ""
+sidebar_label: "Field"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"entropy":0,"generate":false,"id":"string","label":"string","purpose":"","recipe":{"characterSets":["LETTERS"],"excludeCharacters":"abc1","length":32},"section":{"id":"string"},"type":"STRING","value":"string"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Field"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"properties":{"entropy":{"description":"For fields with a purpose of `PASSWORD` this is the entropy of the value","readOnly":true,"type":"number"},"generate":{"default":false,"description":"If value is not present then a new value should be generated for this field","type":"boolean"},"id":{"type":"string"},"label":{"type":"string"},"purpose":{"description":"Some item types, Login and Password, have fields used for autofill. This property indicates that purpose and is required for some item types.","enum":["","USERNAME","PASSWORD","NOTES"],"type":"string"},"recipe":{"description":"The recipe is used in conjunction with the \"generate\" property to set the character set used to generate a new secure value","properties":{"characterSets":{"items":{"enum":["LETTERS","DIGITS","SYMBOLS"],"type":"string"},"maximum":3,"minimum":0,"type":"array","uniqueItems":true},"excludeCharacters":{"description":"List of all characters that should be excluded from generated passwords.","example":"abc1","type":"string"},"length":{"default":32,"description":"Length of the generated value","maximum":64,"minimum":1,"type":"integer"}},"type":"object","title":"GeneratorRecipe"},"section":{"properties":{"id":{"type":"string"}},"type":"object"},"type":{"default":"STRING","enum":["STRING","EMAIL","CONCEALED","URL","TOTP","DATE","MONTH_YEAR","MENU"],"type":"string"},"value":{"type":"string"}},"required":["id","type"],"type":"object","title":"Field"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
