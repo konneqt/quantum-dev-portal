@@ -17,7 +17,7 @@ Before you start, make sure you have the following requirements installed:
 
 ### Clone the Repository
 
-Clone this repository via SSH or using HTTPS:
+Clone this repository using HTTPS:
 
 ```
  git clone https://github.com/konneqt/quantum-dev-portal.git
