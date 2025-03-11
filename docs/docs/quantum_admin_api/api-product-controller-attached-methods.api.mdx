@@ -1,0 +1,69 @@
+---
+id: api-product-controller-attached-methods
+title: "No summary"
+description: "No summary"
+sidebar_label: "No summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJxtlE1u2zAQha8izJquky61c5O0SII2bu0iC8MoxtJEZiKRCkklEQSeposeJBcrhpR/JGdjyBI5b96bj+xA12TQSa2uc0hhVsu50XmTuQutnNFlSeYPOofZlvLv5LY6tyCgRoMVOTIW0tVagKHnhqz7ovMW0i78lYZySJ1pSECmlSPl+BPWdSmzIDh9tFrxO5ttqUJ+cm1NkILePFLmWMdwe06SjXt3zd1Sa4/WW2ekKkBATjYzsubqbGZ+ndxSCwLoDau65KWF1kVJE6zl5Ila8AKq6Irtdx8UOJg+FPkWiiSz+TWIXQ9oDLKUdFR90Jv3AuwrFgWZhW5MRh/ZHaov4vKBcl8ilDukvBpHc+xqrLsW4KQL1WZhsNHh5fIOvI91ba2VjZl/Pjs/zSXIOyxsLz2pozbXtpQ1RroW0lUHmGVk7cTpJ1JMil+PTf7QiW2qCk27bxpSqLUN40e3hRSmRxLTCOOkX8p65mXP4U58wUT10Axa6GFj8xtCE9KND1+1qdBBCjf3y8NUt87VJ4O5Us5QkukqaaokFE5u7pcJH4oEGyZdZvj+7/2vDkEx5r8OB+RqN8xToMd0DuAcUjdi6QCGAKkedKCrn/LPBpVrqmSWV1L120ec1zK51JlNHrRJDNlQ1Cb6IRnsBQEcddxz/ukM4snGjE82O+WxVRhiVhhCHox3ILqn39Gbm9YlSsXNN6bkb3HyQ7gEDGe/FrBlTtIVdN0GLf02pff8+rkh00YiXtBI3HAOq7UXsCXMyQQ2OeAULuLVNFlyM7y8bMJpHl9TTO4ez/ndghnZ9NddpXPeY/AVRPhNAQToYDQwGN51UKIqGix4bazJmWHDTvdpjKgMne5uGNUeddh1ccWS+fMeRG8ogu7X3vv/v4MHaQ==
+sidebar_class_name: "post api-method"
+info_path: quantum_admin_api/quantum-admin-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"No summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api-product/attach-method"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+No summary
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"apiProductKeys":{"type":"string","description":"API Key","example":"google-api-key"},"methodsId":{"description":"API Methods","example":"Google API","type":"array","items":{"type":"string"}},"swaggerSource":{"type":"object","description":"Swagger","example":"swagger"}},"required":["apiProductKeys","methodsId","swaggerSource"],"title":"AttachMethodDTO"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":""}}}
+>
+  
+</StatusCodes>
+

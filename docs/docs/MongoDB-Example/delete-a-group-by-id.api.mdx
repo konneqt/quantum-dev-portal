@@ -1,0 +1,69 @@
+---
+id: delete-a-group-by-id
+title: "Delete a group by ID"
+description: "Delete a group by ID"
+sidebar_label: "Delete a group by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJx1U8Fu2zAM/RWBpw3w4rTrsMK3tQmGAOswrOupyIGx6FioLDkiXTQw/O8D7TRom/Zki3wEH98jexDcMhT3sE2xaxnWGSTiNgYmhqKH8/mFfsoYhIJA0Q8ZWOIyuVZcDFDATy00ljwJWcNdWRJz1Xm/hyGDi/lc61+XXKE1iXYdsUyYs1PMKjyid9ZIfKAwoS5OUb+jmCp2wSri23u9VkEoBfSGKT1SMpRSTDCcjLEYBzBoRiHMZm9WC8igxYQNCSUVqQen0BalhgwCNgQFOAsZcFlTg9pd9q1GWZILW2Wlg7pEFgpJHb1texfcrqNDU2cpiKscJRjWGTQkdbRQwCTuyEZqKCCfzMp7ZwdtPk42EeyShwJqkZaLPN9x6Zovlpo42yWHyeOGZ6WPnc2xdbm6ii5Qyr9+v7w8hxNNUHCDTIVpYthGuzHXMQQqJU4EmcouOdmPnTfIroTifv0yc6u6TJt0yB8VUo7Pyul7yqsxLlRxBDrxmrnR5osrs3zCpvWqg447UTybzWfzE+K316sbcz6bmzel5sef1cwsqHKB2EhN5oikYNvogrChpzYyWVPFZBoMuCXTMSU2GOxkFM/U2DayNBiU6WEVPtihV9yO8ws9Sd56dON2j771B4OP15hB4azeZB1ZNN736sdd8sOg4V1HSdVfZ/CIyeFG9brvwTrWfwtFhZ7fLt2Lc4ZPfw/r+dl8tIrZ+4wPQQx7NQR9py/I4IH201UM6+HFDi+Wv5b/ljAM/wEzqYIj
+sidebar_class_name: "delete api-method"
+info_path: MongoDB-Example/mongodb-example
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a group by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/groups/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a group by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"id","schema":{"type":"string"},"required":true,"description":"Unique group identifier"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"content":{},"description":"Group deleted successfully"},"400":{"description":"Bad request"},"401":{"description":"Invalid token"},"404":{"description":"Not found"},"500":{"description":"Internal server error"}}}
+>
+  
+</StatusCodes>
+

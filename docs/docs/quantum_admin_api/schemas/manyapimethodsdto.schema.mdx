@@ -1,0 +1,33 @@
+---
+id: manyapimethodsdto
+title: "ManyApiMethodsDTO"
+description: ""
+sidebar_label: "ManyApiMethodsDTO"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"apiKey":"api-key-name","methods":"[{path: 'api/v1/users', httpMethod: 'GET', techDetails: 'https://swagger.io/specification/', openApiDetails: 'https://petstore.swagger.io/v2/swagger.json'}]"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ManyApiMethodsDTO"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"apiKey":{"type":"string","description":"API Key","example":"api-key-name"},"methods":{"description":"API Methods","example":"[{path: 'api/v1/users', httpMethod: 'GET', techDetails: 'https://swagger.io/specification/', openApiDetails: 'https://petstore.swagger.io/v2/swagger.json'}]","type":"array","items":{"type":"string"}}},"required":["apiKey","methods"],"title":"ManyApiMethodsDTO"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

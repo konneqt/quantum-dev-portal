@@ -9,7 +9,7 @@ This guide provides detailed instructions for installing and configuring the pro
 
 Before you start, make sure you have the following requirements installed:
 
-- Node.js (version 18 or higher)
+- Node.js (version 20.18.3)
 
 - Yarn or npm
 

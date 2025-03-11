@@ -1,0 +1,69 @@
+---
+id: api-controller-update-api
+title: "No summary"
+description: "No summary"
+sidebar_label: "No summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1Vttu40YM/RWBTy2gxNntbas3b7IFvE2zbmxjHwKjoCXano00M5kZOTEEfU0f+iH7YwtqZFsXpzYK9MmyRPKQM+Q5LEBpMuiEkqMEIhhqca2kMypNyfyV6wQdDbWAEDQazMiRsRA9FCAxI4gAtXikLYRg6CkXhhKInMkpBCEhAo1uDSHYeE0ZQlSA22r2ss4IuYKynHtHsu69SrZs0Y0TK+lIOv6EWqcirnIdfLFK8rteaLX4QrHjfA1X5gRZ7yt+p+1dlXQ3jRASsrERmiNDBDMpnnIKuMJgqUywVbkJhuMRhEAvmOm0LvzikbYX1TmUISTC6hTPRLjxxicghuNRcFeH9/FOxZ1uNQVqeTzcePb+dnTNwSzKZKFeZiY9HXLibYPZ/e3rma6d0zYaDOrAl6jFZawyxtJGJXnMwc6CG+/Nz0NsICW0GSvjMP2/gVCLW7VSpzHY6nTkVK3UoYaG/8kuOvz79yZqGDJIhkLeqNieRvgDhQzY9HQViYpt894dmcx+Wk7IbER8TuuyPfdu7XEasUJoQtpnXK3ITFRuzkGcePPAVvb/AU+nWJHmyVZLUQajm1bQN29/+PGnn3959yuUZZM8H5pM1WaVmgRa49udr84UHHq1nVOjB3o31T3HfZ3zEJxwVfaznS7cTD9BWfoSrFbSerZ9e3XFP+1jqCp1uLJ1lRzQUpwb4baVpGAck7UXTj2ShOhhzurQDnGnAptnGRpWnIzcWrFm6bzie9aaCHhQB4WXpZKLIbPxmtWAm7Bq1MLQAq0FhWtcEBoyENYPvymToYMIPn6e7q7C90bvvj9IZyiIVRbkWVAFDj5+ngYsoAHmrGYixq//fP1bVUfCUnZ/EMEPux5pi1ZbcDp6c5CKfWY127fJ/lWi7vF0j/e6/HrEYM+LfWrrHlGXlZqkdJxS+ozyymD2eOBVu938NoeRF5elp/a61//MUbo8C4ZJJmRNDp1itDiQpCHPJxWXtXwhBO5E7/Pm8gr8coMxLzfcCFpZl2HVhfV21er349rg6MUNdIqiovbcS5+fBT9lIUT1kjYPYa2s4w9FsUBLM5OWJb9+ysls/Yhs0AhccOUPBTcZPycQLTG11Mthv5zBd/c1hX0fHHqwnVv9EiUXs8E0538QAqe2XyTLeRnCmjAhU2XgP157nIupJ8Cdc28hZMbY08J4xoO6qPfKTCXsYvCZl1V89tiqKqUigupdASnKVY4rtvUh+WYw5/Pcn3mHGqpEj1ZXFN5iyiRQlvtiPduU87IsvwFDx+xG
+sidebar_class_name: "put api-method"
+info_path: quantum_admin_api/quantum-admin-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"No summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/api/{apikey}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+No summary
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"apikey","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"apiKeyName":{"type":"string","description":"Unique name for your API","example":"api-key-name"},"displayName":{"type":"string","description":"Display name for your API","example":"API Name"},"type":{"type":"string","description":"Type of your API","example":"PUBLIC"},"sandboxUrl":{"type":"string","description":"Sandbox URL for your API","example":"https://sandbox.api.com"},"productionUrl":{"type":"string","description":"Production URL for your API","example":"https://api.com"},"devPortalUrl":{"type":"string","description":"Production URL for your API","example":"https://api.com"},"apiLogo":{"type":"string","description":"Logo for your API","example":"https://logo.com"},"description":{"type":"string","description":"Description for your API","example":"API Description"},"mainDocs":{"type":"string","description":"Main Docs for your API","example":"https://docs.api.com"},"termsOfService":{"type":"string","description":"Terms of Service for your API","example":"https://terms.api.com"},"swaggerSource":{"type":"string","description":"Swagger source for your API","example":"https://terms.api.com"},"planId":{"type":"string","description":"Plan ID","example":"123456789"}},"required":["apiKeyName","displayName","type","sandboxUrl","productionUrl","devPortalUrl","apiLogo","description","mainDocs","termsOfService","swaggerSource","planId"],"title":"UpdateApiDTO"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":""}}}
+>
+  
+</StatusCodes>
+

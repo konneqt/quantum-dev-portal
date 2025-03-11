@@ -1,0 +1,33 @@
+---
+id: plandto
+title: "PlanDTO"
+description: ""
+sidebar_label: "PlanDTO"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"id":"Plan Id","name":"Free Plan","key":"free-plan","description":"Free Plan Description"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"PlanDTO"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"id":{"type":"string","description":"Plan Id","example":"Plan Id"},"name":{"type":"string","description":"Plan Name","example":"Free Plan"},"key":{"type":"string","description":"Plan Key","example":"free-plan"},"description":{"type":"string","description":"Plan Description","example":"Free Plan Description"}},"required":["id","name","key","description"],"title":"PlanDTO"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

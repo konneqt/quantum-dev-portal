@@ -1,0 +1,69 @@
+---
+id: user-controller-active-user
+title: "No summary"
+description: "No summary"
+sidebar_label: "No summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJxtVMtOGzEU/RXrrlrJNNDl7ChQCRaFQhCLKKpuPDeJYcYe/AhEI39NF/0Qfqy69uTVdJXJ9T33cc6xe7AdOQzamusaKnj05C6sCc42DblfqIJeEQdBQocOWwrkPFSTHgy2BBXoGiQ4eo3aUQ1VcJEkaAMVdBiWIMGrJbUIVQ9h3THCB6fNAlKaFiD58M3Wa874t46yJpAJfIRd12iVJx09e2s4dlTazp5JBZ7V8V5Bk8/YvMZe3szahtCAhJq8crrjslDBeU4UsSxM79h2DZVhUtpfc7KpOZUQdOCkAcxkXY5vIaWC8J01vozx9fSMfw5bAqcFXDCpkBtPJXhS0emwzkSjUuT9SbAvZKCaTJm3wxo/rPCxbdGtQUJLYWlZy876TAXLUMGIa4/K1KNe14mlIbcqcu71fGBSN7ztdx74zvwRukxR+fhuXYsBKrh5GoPckLwMoTti+MoER0LZVsRW5MLi5mks2FsCI4utFX78+fhtMzGs9P3OI1cbRXaaZm3YcXObBR7E+BnRhNiK87rVRpzfXR9r3WlxaZUXc+uEI2+jU+SFnYsDLEhgjgrm7MspFFeiYlfyiExzi5mf4UocyHHQdGvAQO9h1DWoDSQJ0TV8VpQaXCA3G0qodM2mWLKe1QT6foaeHl2TEodfI7l1kXCFTuOM95/0UGvP3zVUc2w8HU2yvVvw6X7w9WexU+9wwiGIhldaYRP5H0h4oXV5A9I0SVgS1uRy93JwUXqcjBm+Ax7dZbb01rd3tw/sotnwJrS2ZozDN35o8K00tnmP7NIc66FBs4i44NxSk8XByJTu7v2hb/Ok/12t70vGmB2a0nbTchXSNKX0F+jDy5s=
+sidebar_class_name: "post api-method"
+info_path: quantum_admin_api/quantum-admin-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"No summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user/active/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+No summary
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"active":{"type":"boolean","description":"Active user","example":true}},"required":["active"],"title":"ActiveUserDTO"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":""}}}
+>
+  
+</StatusCodes>
+

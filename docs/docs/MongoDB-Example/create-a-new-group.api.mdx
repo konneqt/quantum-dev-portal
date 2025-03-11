@@ -1,0 +1,69 @@
+---
+id: create-a-new-group
+title: "Create a new group"
+description: "Create a new group"
+sidebar_label: "Create a new group"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1v4zYQ/SvEoIcWUGwn3aJb3fKFwkDzUSc5ZX0YiWObG4lUSCqJYfi/F0NKthxlN+7dvtihhjPDN2/eUFmBx7mD9BHm1tSVg2kCllxltCMH6QpORsf8lRvtSXv+iVVVqBy9Mnr43RnNay5fUIn8yy8rghRM9p1yDwlU1lRkvYrelOzYOG+VnkMCklxuVcUeIYXJ5b8P48nlxUCcilqr55qEkqS9mimyYmasQHF3Pr4SlpypbU4CnZA0U5qkyJbCL0g4si8qJ1FZ86Ik2QGsEyjJ75Fibgk97ZHn/YLEN7hAT/eqpG8g/AJ9iL5J7BWdQClJCm9+nNcLWacijp9HbIyFme2GykjpubDka6tJBr+FiVXaz/HDZLyXU3T+ykguxp4YlcZ5YSkn7UWL1hYrSR5V4WJo5TrYkSVRV5KLIRrjD+Frd9yHTPbJSGNJvbPytveLA1ivE/DKF+zxivkTeFRmZF0nFlqLS0hAeSrd5xT7xdLsfxXlHeEja7Co9zivYvC8VVnt6QNX7EkqVxW4/NzXqVjUJeojSygxKxoguSMZtAjLO8TiUt9RoZzndBosW+D/ZhEKx4uKsg/ITbK9IB0d4Z0c4i6YOsFqhkozuR8mYxfZiMw3F3tVackSRyEpPqWrMKdNmgHCJsOQLb15shqL8R49cXN7P765Pv2H9S0mFOMrJ1C/l7odivZ1LjQC6wF7yQtF2g86Jb3Gcg+KdAX3ZwVui9MpcFiC9boH/l2d5+TcrC5EO044ry+jEeeza3uGUlh6rsn5aHPctxnrFywU1+aJdLT60re6Nl7MTK1ltPirb3Fu9KxQuRe/yjqOMZLiiZa/8Y4/PspurGNpg/iQFWStiSxvcj4zcnkYkYcReRiRhxF5GJGHEfmjEdlD/zzIqECh6VWE1y8ICrwwElKojAttgX4BKQyb17ME4hjiV7YV1LaAFBbeVy4dDp9drsojSaUZPFuFtsDMDfLC1HKIlRo2FSU7/P3Pr19Peme8QI8ZOkpFafTcyEycG60p9zzuphw4r63yyxA5Q6dySB+n3Sd3XO7Yv83zDa6cIzSU5b/jc8aE5+NkO0kv37CsCmon4bYg7WjaDJ/to8102C5thb2ztqPL2/Vddew0y0bFHltB6sSM2tIhTCsRGwfTTos+tqvT3U7o7Y987CSh9MwEIFvB4OJcnIkWqO7xjwejwahX2NCKJ4OReLdVnN6OB+IitIvbNi1bkpaVUdo7QW+V4Y5nhpeocR4UwHIjykja2N5M1xLDINXxCB/SeyezDTs8vflhVaAKV7vA6lXD/O4/JhbcEukjrFbM0wdbrNe8/FyTZVZOuSpWcVcGZiawIJRkQ/2eaBmvf3xHOwql3haxd19bJ+2O0zynyv/Udtrp2tubu3tIIGvuhKWRvMfiK/MMXyEFSMCE84c+CWsrKFDPa5yzbfTJn/8A/ScUOw==
+sidebar_class_name: "post api-method"
+info_path: MongoDB-Example/mongodb-example
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a new group"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/groups"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a new group
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"REQUIRED. A unique identifier for a SCIM resource as defined by the service provider."},"meta":{"type":"object","properties":{"created":{"type":"string","description":"The \"DateTime\" that the resource was added to the service provider."},"version":{"type":"string","description":"The version of the resource being returned."},"location":{"type":"string","description":"The URI of the resource being returned."},"lastModified":{"type":"string","description":"The most recent DateTime that the details of this resource were updated at the service provider."},"resourceType":{"type":"string","description":"The name of the resource type of the resource."}},"title":"Meta"},"members":{"type":"array","items":{"type":"object","properties":{"$ref":{"type":"string","description":"The URI of a SCIM resource."},"value":{"type":"string","description":"id attribute of a SCIM resource"},"display":{"type":"string","description":"A human-readable name for the member"}},"title":"Member"},"description":"A list of members of the Group."},"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"externalId":{"type":"string","description":"OPTIONAL. A String that is an identifier for the resource as defined by the provisioning client."},"displayName":{"type":"string","description":"REQUIRED. A human-readable name for the Group."}},"title":"Group"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"REQUIRED. A unique identifier for a SCIM resource as defined by the service provider."},"meta":{"type":"object","properties":{"created":{"type":"string","description":"The \"DateTime\" that the resource was added to the service provider."},"version":{"type":"string","description":"The version of the resource being returned."},"location":{"type":"string","description":"The URI of the resource being returned."},"lastModified":{"type":"string","description":"The most recent DateTime that the details of this resource were updated at the service provider."},"resourceType":{"type":"string","description":"The name of the resource type of the resource."}},"title":"Meta"},"members":{"type":"array","items":{"type":"object","properties":{"$ref":{"type":"string","description":"The URI of a SCIM resource."},"value":{"type":"string","description":"id attribute of a SCIM resource"},"display":{"type":"string","description":"A human-readable name for the member"}},"title":"Member"},"description":"A list of members of the Group."},"schemas":{"type":"array","items":{"type":"string"},"description":"REQUIRED. Array of Strings containing URIs that are used to indicate the namespaces of the SCIM schemas."},"externalId":{"type":"string","description":"OPTIONAL. A String that is an identifier for the resource as defined by the provisioning client."},"displayName":{"type":"string","description":"REQUIRED. A human-readable name for the Group."}},"title":"Group"}}},"description":"Successful response"},"400":{"description":"Bad request"},"401":{"description":"Invalid token"},"404":{"description":"Not found"},"409":{"description":"Conflict (duplicated key)"},"500":{"description":"Internal server error"}}}
+>
+  
+</StatusCodes>
+
