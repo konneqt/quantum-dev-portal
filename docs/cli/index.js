@@ -2,7 +2,7 @@
 
 const fs = require("fs-extra");
 const axios = require("axios");
-const inquirer = require("inquirer");
+const { prompt } = require("inquirer");
 const figlet = require("figlet");
 const clear = require("clear");
 const path = require("path");
@@ -18,14 +18,22 @@ const OPTIONS = [
   "Generate Docs based on OpenAPIs Files",
   "Generate from Open API URI",
   "Generate from QAP Control Plane Instance",
+  "Choose a Template",
+  "Exit"
 ];
 
 const QAP_OPTIONS = [
   "Configure Access Info",
   "Clean stored Access Info",
   "Use configured stored Access Info",
+  "Go Back"
 ];
-//const TEMPLATE_OPTIONS = ["List Templates", "Use Templates"];
+
+const TEMPLATE_OPTIONS = [
+  "List Templates", 
+  "Use Templates",
+  "Go Back"
+];
 
 const MENU_LOGO = `
 ===================================================================    
@@ -40,7 +48,7 @@ const init = () => {
 };
 
 const askMenuOptions = () => {
-  return inquirer.prompt([
+  return prompt([
     {
       type: "list",
       name: "option",
@@ -51,7 +59,7 @@ const askMenuOptions = () => {
 };
 
 const askQapOptions = () => {
-  return inquirer.prompt([
+  return prompt([
     {
       type: "list",
       name: "option",
@@ -61,8 +69,8 @@ const askQapOptions = () => {
   ]);
 };
 
-/* const askTemplateOptions = () => {
-  return inquirer.prompt([
+const askTemplateOptions = () => {
+  return prompt([
     {
       type: "list",
       name: "option",
@@ -70,7 +78,7 @@ const askQapOptions = () => {
       choices: TEMPLATE_OPTIONS,
     },
   ]);
-}; */
+};
 
 const handleHelp = () => {
   console.log(chalk.green("\nHelp Section:"));
@@ -92,6 +100,80 @@ const handleHelp = () => {
   console.log(chalk.magenta("\nUse the tool wisely!\n"));
 };
 
+const validateOpenApiSpec = (apiData, fileName) => {
+  const issues = [];
+
+  // Check basic information
+  if (!apiData.info) {
+    issues.push("Missing required 'info' section");
+  } else {
+    if (!apiData.info.title) issues.push("Missing 'info.title'");
+    if (!apiData.info.version) issues.push("Missing 'info.version'");
+  }
+
+  // Check servers
+  if (!apiData.servers || apiData.servers.length === 0) {
+    issues.push("Missing 'servers' section - No base URLs defined");
+  } else {
+    apiData.servers.forEach((server, index) => {
+      if (!server.url) {
+        issues.push(`'servers[${index}].url' not defined`);
+      }
+    });
+  }
+
+  // Check paths
+  if (!apiData.paths || Object.keys(apiData.paths).length === 0) {
+    issues.push("Missing 'paths' section or no endpoints defined");
+  } else {
+    for (const path in apiData.paths) {
+      const pathItem = apiData.paths[path];
+      // Check if there are HTTP methods in the path
+      const methods = ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'];
+      const hasMethod = methods.some(method => pathItem[method]);
+      
+      if (!hasMethod) {
+        issues.push(`Path '${path}' doesn't contain any valid HTTP method`);
+      } else {
+        for (const method in pathItem) {
+          if (methods.includes(method)) {
+            const operation = pathItem[method];
+            
+            // Check if responses are defined
+            if (!operation.responses || Object.keys(operation.responses).length === 0) {
+              issues.push(`'${method.toUpperCase()} ${path}' has no defined responses`);
+            }
+            
+            // Check required parameters
+            if (operation.parameters) {
+              operation.parameters.forEach((param, idx) => {
+                if (param.required && !param.schema) {
+                  issues.push(`'${method.toUpperCase()} ${path}' - required parameter '${param.name}' has no schema defined`);
+                }
+              });
+            }
+            
+            // Check requestBody when applicable
+            if (['post', 'put', 'patch'].includes(method) && !operation.requestBody) {
+              issues.push(`'${method.toUpperCase()} ${path}' has no requestBody defined`);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Check components.schemas if referenced
+  const hasRefs = JSON.stringify(apiData).includes('"$ref"');
+  if (hasRefs && (!apiData.components || !apiData.components.schemas || Object.keys(apiData.components.schemas || {}).length === 0)) {
+    issues.push("There are schema references ($ref), but 'components.schemas' is not properly defined");
+  }
+
+  return issues;
+};
+
+// Now, modify the generateDocsFromFiles function to use this validation:
+
 const generateDocsFromFiles = async () => {
   const defaultFolder = path.join(process.cwd(), "apis");
   console.log(
@@ -112,6 +194,7 @@ const generateDocsFromFiles = async () => {
 
   const processedFiles = [];
   const skippedFiles = [];
+  const filesWithIssues = [];
 
   files.forEach((file, index) => {
     const filePath = path.join(defaultFolder, file);
@@ -119,30 +202,64 @@ const generateDocsFromFiles = async () => {
     try {
       // Load file content
       const fileContent = fs.readFileSync(filePath, "utf-8");
-      const apiData = JSON.parse(fileContent);
+      let apiData;
+      
+      // Try to parse the file
+      try {
+        apiData = JSON.parse(fileContent);
+      } catch (jsonError) {
+        // If JSON parse fails, try YAML
+        try {
+          apiData = yaml.load(fileContent);
+          if (!apiData) throw new Error("Empty or invalid YAML content");
+        } catch (yamlError) {
+          skippedFiles.push(`${file} (Parsing error: invalid format)`);
+          return;
+        }
+      }
+
+      // Validate OpenAPI specification
+      const issues = validateOpenApiSpec(apiData, file);
+      
+      if (issues.length > 0) {
+        console.log(chalk.yellow(`\n⚠️  Issues found in ${file}:`));
+        issues.forEach(issue => {
+          console.log(chalk.yellow(`  - ${issue}`));
+        });
+        filesWithIssues.push({ file, issues });
+      }
 
       // Check and add 'summary' to methods in 'paths'
       let summaryAdded = false;
-      for (const path in apiData.paths) {
-        for (const method in apiData.paths[path]) {
-          const operation = apiData.paths[path][method];
-
-          // Check if 'summary' field exists, if not, add default
-          if (!operation.summary) {
-            operation.summary = "No summary";
-            summaryAdded = true;
+      if (apiData.paths) {
+        for (const path in apiData.paths) {
+          for (const method in apiData.paths[path]) {
+            if (['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(method)) {
+              const operation = apiData.paths[path][method];
+              
+              // Check if 'summary' field exists, if not, add default
+              if (!operation.summary) {
+                operation.summary = "No summary";
+                summaryAdded = true;
+              }
+            }
           }
         }
       }
 
-      // If any summary was added, save the file
+      // If any summary was added or if there were issues to fix, save the file
       if (summaryAdded) {
-        fs.writeFileSync(filePath, JSON.stringify(apiData, null, 2), "utf-8");
+        // Decide whether to save as JSON or YAML based on file extension
+        if (file.endsWith('.yaml') || file.endsWith('.yml')) {
+          fs.writeFileSync(filePath, yaml.dump(apiData), "utf-8");
+        } else {
+          fs.writeFileSync(filePath, JSON.stringify(apiData, null, 2), "utf-8");
+        }
         processedFiles.push(file);
       }
     } catch (error) {
-      skippedFiles.push(file);
-      console.warn(chalk.yellow(`Skipping file ${file}: ${error.message}`));
+      console.error(chalk.red(`Error processing ${file}:`), error.message);
+      skippedFiles.push(`${file} (${error.message})`);
     }
   });
 
@@ -155,33 +272,54 @@ const generateDocsFromFiles = async () => {
   }
 
   if (skippedFiles.length > 0) {
-    console.log(chalk.yellow(`Skipped Files: ${skippedFiles.length}`));
+    console.log(chalk.yellow(`\nSkipped Files: ${skippedFiles.length}`));
     console.log(chalk.yellow("Skipped files:"));
     skippedFiles.forEach((file) => console.log(`- ${file}`));
+  }
+
+  if (filesWithIssues.length > 0) {
+    console.log(chalk.yellow(`\nFiles with OpenAPI specification issues: ${filesWithIssues.length}`));
+    console.log(chalk.yellow("These files may not work correctly in the developer portal:"));
+    filesWithIssues.forEach(({ file, issues }) => {
+      console.log(chalk.yellow(`- ${file} (${issues.length} issues)`));
+    });
+    
+    // Ask if user wants to continue despite issues
+    const { shouldContinue } = await prompt([
+      {
+        type: 'confirm',
+        name: 'shouldContinue',
+        message: 'Issues were found in OpenAPI specifications. Do you want to continue anyway?',
+        default: false
+      }
+    ]);
+    
+    if (!shouldContinue) {
+      console.log(chalk.magenta("Process interrupted by user. Please fix the issues and try again."));
+      return;
+    }
   }
 
   console.log(chalk.magenta("Validation completed successfully!"));
   console.log(chalk.green(`Generating docs...`));
 
-  // Chama o script rebuildDocs.sh após validar os arquivos
+  // Call the rebuildDocs.sh script after validating the files
   const { exec } = require("child_process");
   exec("./rebuildDocs.sh", (error, stdout, stderr) => {
     if (error) {
       console.error(chalk.red(`Error executing rebuildDocs.sh: ${error.message}`));
       return;
     }
-    if (stderr) {
-      console.error(chalk.yellow(`Script stderr: ${stderr}`));
-    }
+    
     console.log(
       chalk.green("\nAll operations completed successfully! Please run 'npm start' to start the application.")
     );
   });
-  
 };
 
+
 const generateDocsFromURI = async () => {
-  const { uri } = await inquirer.prompt([
+  const { uri } = await prompt([
     {
       type: "input",
       name: "uri",
@@ -319,7 +457,7 @@ const configureAccessInfo = async () => {
     password,
     companyName,
     oauthURL,
-  } = await inquirer.prompt([
+  } = await prompt([
     {
       type: "input",
       name: "oauthURL",
@@ -337,7 +475,6 @@ const configureAccessInfo = async () => {
     },
     { type: "input", name: "username", message: "Inform your Username:" },
     { type: "input", name: "password", message: "Inform your Password:" },
-
     {
       type: "input",
       name: "apiURI",
@@ -473,42 +610,55 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
     }
 
     const apiSpecs = apiResponse.data.apiInformations;
-    apiSpecs.forEach((apiSpec, index) => {
+    const filesWithIssues = [];
+    
+    for (const apiSpec of apiSpecs) {
       const apiName = apiSpec.apiName
         ? apiSpec.apiName
             .replace(/\s+/g, "-")
             .replace(/[^\w.-]/g, "")
             .replace(/-+$/, "")
-        : `spec-${index + 1}`;
+        : `spec-${apiSpecs.indexOf(apiSpec) + 1}`;
 
       let jsonData;
       
-      // Verificar se swaggerFile existe e é válido
+      // Check if swaggerFile exists and is valid
       if (!apiSpec.swaggerFile) {
-        console.warn(chalk.yellow(`⚠️  Missing swaggerFile for API: ${apiSpec.apiName || `spec-${index + 1}`}`));
-        return; // Ignora esse item e segue para o próximo
+        console.warn(chalk.yellow(`⚠️  Missing swaggerFile for API: ${apiSpec.apiName || `spec-${apiSpecs.indexOf(apiSpec) + 1}`}`));
+        continue; // Skip this item and go to the next one
       }
 
-      // Lidar com diferentes formatos de swaggerFile
+      // Handle different swaggerFile formats
       if (typeof apiSpec.swaggerFile === "string") {
-        // Caso 1: swaggerFile é uma string - tenta parsear como JSON
+        // Case 1: swaggerFile is a string - try to parse as JSON
         if (apiSpec.swaggerFile.startsWith("http")) {
-          console.warn(chalk.yellow(`⚠️  URL formato não suportado em swaggerFile para API: ${apiSpec.apiName}`));
-          return;
+          console.warn(chalk.yellow(`⚠️  URL format not supported in swaggerFile for API: ${apiSpec.apiName}`));
+          continue;
         }
         
         try {
           jsonData = JSON.parse(apiSpec.swaggerFile);
         } catch (parseError) {
           console.warn(chalk.yellow(`⚠️  Invalid JSON string in swaggerFile for API: ${apiSpec.apiName}`));
-          return;
+          continue;
         }
       } else if (typeof apiSpec.swaggerFile === "object") {
-        // Caso 2: swaggerFile já é um objeto JSON
+        // Case 2: swaggerFile is already a JSON object
         jsonData = apiSpec.swaggerFile;
       } else {
         console.warn(chalk.yellow(`⚠️  Unsupported swaggerFile format for API: ${apiSpec.apiName}`));
-        return;
+        continue;
+      }
+      
+      // Validate OpenAPI specification
+      const issues = validateOpenApiSpec(jsonData, apiName);
+      
+      if (issues.length > 0) {
+        console.log(chalk.yellow(`\n⚠️  Issues found in API ${apiName}:`));
+        issues.forEach(issue => {
+          console.log(chalk.yellow(`  - ${issue}`));
+        });
+        filesWithIssues.push({ api: apiName, issues });
       }
 
       const fileName = `${apiName}.json`;
@@ -516,7 +666,32 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
 
       fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
       console.log(chalk.green(`✅ API spec saved: ${filePath}`));
-    });
+    }
+    
+    if (filesWithIssues.length > 0) {
+      console.log(chalk.yellow(`\nAPIs with OpenAPI specification issues: ${filesWithIssues.length}`));
+      console.log(chalk.yellow("These APIs may not work correctly in the dev portal:"));
+      filesWithIssues.forEach(({ api, issues }) => {
+        console.log(chalk.yellow(`- ${api} (${issues.length} issues)`));
+      });
+      
+      // Ask if user wants to continue despite issues
+      const { shouldContinue } = await prompt([
+        {
+          type: 'confirm',
+          name: 'shouldContinue',
+          message: 'Issues were found in OpenAPI specifications. Do you want to continue anyway?',
+          default: false
+        }
+      ]);
+      
+      if (!shouldContinue) {
+        console.log(chalk.magenta("Process interrupted by user. Please fix the issues and try again."));
+        return false;
+      }
+    }
+    
+    return true;
 
   } catch (error) {
     console.error(chalk.red("Error fetching or saving API specs:"), error);
@@ -568,7 +743,7 @@ const useConfiguredAccessInfo = async () => {
   await generateDocsFromFiles();
 };
 
-/* const handleTemplate = async () => {
+const handleTemplate = async () => {
   try {
     init();
     const { option } = await askTemplateOptions();
@@ -580,6 +755,9 @@ const useConfiguredAccessInfo = async () => {
       case "Use Templates":
         await configureTemplates();
         break;
+      case "Go Back":
+        await run();
+        break;
       default:
         console.log(chalk.red("Invalid option selected."));
     }
@@ -589,8 +767,7 @@ const useConfiguredAccessInfo = async () => {
       error
     );
   }
-}; */
-
+};
 // Função principal do QAP
 const generateDocsFromQAP = async () => {
   try {
@@ -606,6 +783,9 @@ const generateDocsFromQAP = async () => {
         break;
       case "Use configured stored Access Info":
         await useConfiguredAccessInfo();
+        break;
+      case "Go Back":
+        await run();
         break;
       default:
         console.log(chalk.red("Invalid option selected."));
@@ -636,9 +816,12 @@ const run = async () => {
       case "Generate from QAP Control Plane Instance":
         await generateDocsFromQAP();
         break;
-     /*  case "Choose a Template":
+      case "Choose a Template":
         await handleTemplate();
-        break; */
+        break;
+      case "Exit":
+        console.log(chalk.green("Exiting application!"));
+        process.exit(0);
       default:
         console.log(chalk.red("Invalid option selected."));
     }
