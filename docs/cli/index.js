@@ -2,7 +2,7 @@
 
 const fs = require("fs-extra");
 const axios = require("axios");
-const { prompt } = require("inquirer");
+const inquirer = require("inquirer");
 const figlet = require("figlet");
 const clear = require("clear");
 const path = require("path");
@@ -26,13 +26,13 @@ const QAP_OPTIONS = [
   "Configure Access Info",
   "Clean stored Access Info",
   "Use configured stored Access Info",
-  "Go Back"
+  "Back"
 ];
 
 const TEMPLATE_OPTIONS = [
   "List Templates", 
   "Use Templates",
-  "Go Back"
+  "Back"
 ];
 
 const MENU_LOGO = `
@@ -48,7 +48,7 @@ const init = () => {
 };
 
 const askMenuOptions = () => {
-  return prompt([
+  return inquirer.prompt([
     {
       type: "list",
       name: "option",
@@ -59,7 +59,7 @@ const askMenuOptions = () => {
 };
 
 const askQapOptions = () => {
-  return prompt([
+  return inquirer.prompt([
     {
       type: "list",
       name: "option",
@@ -70,7 +70,7 @@ const askQapOptions = () => {
 };
 
 const askTemplateOptions = () => {
-  return prompt([
+  return inquirer.prompt([
     {
       type: "list",
       name: "option",
@@ -285,7 +285,7 @@ const generateDocsFromFiles = async () => {
     });
     
     // Ask if user wants to continue despite issues
-    const { shouldContinue } = await prompt([
+    const { shouldContinue } = await inquirer.prompt([
       {
         type: 'confirm',
         name: 'shouldContinue',
@@ -319,7 +319,7 @@ const generateDocsFromFiles = async () => {
 
 
 const generateDocsFromURI = async () => {
-  const { uri } = await prompt([
+  const { uri } = await inquirer.prompt([
     {
       type: "input",
       name: "uri",
@@ -457,7 +457,7 @@ const configureAccessInfo = async () => {
     password,
     companyName,
     oauthURL,
-  } = await prompt([
+  } = await inquirer.prompt([
     {
       type: "input",
       name: "oauthURL",
@@ -676,7 +676,7 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
       });
       
       // Ask if user wants to continue despite issues
-      const { shouldContinue } = await prompt([
+      const { shouldContinue } = await inquirer.prompt([
         {
           type: 'confirm',
           name: 'shouldContinue',
@@ -755,7 +755,7 @@ const handleTemplate = async () => {
       case "Use Templates":
         await configureTemplates();
         break;
-      case "Go Back":
+      case "Back":
         await run();
         break;
       default:
@@ -784,7 +784,7 @@ const generateDocsFromQAP = async () => {
       case "Use configured stored Access Info":
         await useConfiguredAccessInfo();
         break;
-      case "Go Back":
+      case "Back":
         await run();
         break;
       default:

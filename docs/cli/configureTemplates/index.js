@@ -10,7 +10,7 @@ const configureTemplates = async () => {
   
   // Create choices array with an option to go back
   const choices = [
-    { name: "0. Go back", value: "back" },
+    { name: "0. Back", value: "back" },
     ...templates.map((template, index) => ({
       name: `${index + 1}. ${template}`,
       value: template
