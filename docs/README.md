@@ -67,6 +67,34 @@ This command initializes the project's command line interface, allowing you to g
 4. Choose one of the available templates to use in the Quantum API Dev Portal: `Dyte`, `Chaos Mesh` or `Homarr`. All have been customised from pre-existing templates, bringing more modern and intuitive layouts to offer an improved experience when using our Dev Portal.
 Below are some images of what our templates look like:
 
+- `Chaos Mesh - dark mode`:
+
+  ![chaos - dark](https://github.com/user-attachments/assets/9681222f-b84e-468b-9d5a-c003baf7a87b)
+
+
+  - `Chaos Mesh - light mode`:
+
+  ![chaos - light](https://github.com/user-attachments/assets/02afb5da-dab1-4ec3-8732-bde8b707e179)
+
+
+ - `Dyte - dark mode`:
+   
+![Dyte-Dark mode](https://github.com/user-attachments/assets/e10532b5-cebb-4130-8ccf-fcddf2ccea29)
+
+- `Dyte - light mode`:
+
+  ![dyte - light mode](https://github.com/user-attachments/assets/df6b0df1-ce9d-4f4a-8ad8-2fc6a17c1d59)
+
+- `Homarr - dark mode`:
+   
+![homarr -dark](https://github.com/user-attachments/assets/cf707357-3989-4098-998f-9247a74b4ea3)
+
+
+- `Homarr - light mode`:
+
+ ![homar - light](https://github.com/user-attachments/assets/f3c5632d-e4f3-4d2c-930b-a76ee5bdb254)
+
+
 
 ## Running the Development Server
 
