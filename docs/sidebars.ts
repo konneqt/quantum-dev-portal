@@ -17,7 +17,6 @@ function findSidebar(directory: string): any[] {
         if (item.isDirectory()) {
           const sidebarPath = path.join(itemPath, 'sidebar.ts');
           if (fs.existsSync(sidebarPath)) {
-            console.log(`Sidebar found at: ${sidebarPath}`);
             const category = {
               type: 'category',
               label: item.name,

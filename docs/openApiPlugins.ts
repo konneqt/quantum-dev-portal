@@ -14,7 +14,6 @@ export function getOpenApiPlugins() {
 
   const response = apiFiles.map((file) => {
     const apiName = path.basename(file, path.extname(file)); 
-    console.log(apiName)
 
     return [
       "docusaurus-plugin-openapi-docs",

@@ -7,49 +7,42 @@ const path = require("path");
 
 const configureTemplates = async () => {
   const templates = listTemplatesModule.templates;
-  
-  // Create choices array with an option to go back
+
   const choices = [
     { name: "0. Back", value: "back" },
     ...templates.map((template, index) => ({
       name: `${index + 1}. ${template}`,
-      value: template
-    }))
+      value: template,
+    })),
   ];
 
-  // Prompt user to select a template
   const { selectedTemplate } = await inquirer.prompt([
     {
       type: "list",
       name: "selectedTemplate",
       message: "Select a template (or 0 to go back):",
       choices: choices,
-      default: "back"
-    }
+      default: "back",
+    },
   ]);
-  
-  // Handle "go back" option
+
   if (selectedTemplate === "back") {
     console.log(chalk.yellow("Returning to main menu..."));
     return;
   }
-  
+
   console.log(chalk.green(`✅ Template "${selectedTemplate}" selected!`));
 
   try {
     await downloadTemplateFiles(selectedTemplate);
     console.log(
-      chalk.green(
-        `✅ Template "${selectedTemplate}" configured successfully!`
-      )
+      chalk.green(`✅ Template "${selectedTemplate}" configured successfully!`)
     );
-  
+
     console.log(
-      chalk.blue(
-        "🚀 Now, run `npm install` to install the dependencies."
-      )
+      chalk.blue("🚀 Now, run `npm install` to install the dependencies.")
     );
-  }  catch (error) {
+  } catch (error) {
     console.error(chalk.red(`Error configuring template: ${error.message}`));
   }
 };
@@ -57,12 +50,11 @@ const configureTemplates = async () => {
 async function downloadTemplateFiles(templateName) {
   const repoBaseUrl =
     "https://api.github.com/repos/konneqt/templates-dev-portal/contents/templates";
-    
+
   let foldersToDownload;
   let filesToDownload;
   let templateDir;
-  
-  // Check the selected template
+
   if (templateName.toLowerCase() === "dyte") {
     foldersToDownload = ["static", "src"];
     filesToDownload = [
@@ -72,31 +64,21 @@ async function downloadTemplateFiles(templateName) {
       "tsconfig.ui-kit.json",
     ];
     templateDir = "dyte";
-  } else if (templateName.toLowerCase() === "chaos mesh" || templateName.toLowerCase() === "chaos-mesh") {
+  } else if (
+    templateName.toLowerCase() === "chaos mesh" ||
+    templateName.toLowerCase() === "chaos-mesh"
+  ) {
     foldersToDownload = ["static", "src"];
-    filesToDownload = [
-      "package.json",
-      "docusaurus.config.ts",
-      "sidebars.ts",
-    ];
-    templateDir = "chaos-mesh"; 
-  } 
-  else if (templateName.toLowerCase() === "homarr" ) {
+    filesToDownload = ["package.json", "docusaurus.config.ts", "sidebars.ts"];
+    templateDir = "chaos-mesh";
+  } else if (templateName.toLowerCase() === "homarr") {
     foldersToDownload = ["static", "src"];
-    filesToDownload = [
-      "package.json",
-      "docusaurus.config.ts",
-      "sidebars.ts",
-    ];
-    templateDir = "homarr"; 
+    filesToDownload = ["package.json", "docusaurus.config.ts", "sidebars.ts"];
+    templateDir = "homarr";
   } else {
     foldersToDownload = ["static", "src"];
-    filesToDownload = [
-      "package.json",
-      "docusaurus.config.ts",
-      "sidebars.ts",
-    ];
-    templateDir = "default"; 
+    filesToDownload = ["package.json", "docusaurus.config.ts", "sidebars.ts"];
+    templateDir = "default";
   }
 
   const templateUrl = `${repoBaseUrl}/${templateDir}`;
@@ -108,7 +90,6 @@ async function downloadTemplateFiles(templateName) {
   for (const folder of foldersToDownload) {
     const localFolderPath = path.join(process.cwd(), folder);
 
-    // If folder already exists, remove it before downloading
     if (await fs.pathExists(localFolderPath)) {
       console.log(
         chalk.yellow(`🗑️ Removing existing folder: ${localFolderPath}`)
@@ -129,7 +110,6 @@ async function downloadTemplateFiles(templateName) {
   for (const file of filesToDownload) {
     const localFilePath = path.join(process.cwd(), file);
 
-    // Don't remove package.json
     if (file !== "package.json" && (await fs.pathExists(localFilePath))) {
       console.log(chalk.yellow(`🗑️ Removing existing file: ${localFilePath}`));
       await fs.remove(localFilePath);
@@ -171,9 +151,7 @@ async function downloadFile(fileUrl, localPath) {
   try {
     console.log(chalk.blue(`⬇️ Downloading ${fileUrl} to ${localPath}...`));
 
-    // Check if it's a direct URL or an API endpoint
     if (fileUrl.includes("api.github.com")) {
-      // It's an API endpoint, need to get the download_url
       const response = await axios.get(fileUrl, {
         headers: { Accept: "application/vnd.github.v3+json" },
       });
@@ -182,11 +160,9 @@ async function downloadFile(fileUrl, localPath) {
         const decodedContent = Buffer.from(response.data.content, "base64");
         await fs.writeFile(localPath, decodedContent);
       } else if (response.data.download_url) {
-        // Download directly from download_url for binary files
         await downloadBinaryFile(response.data.download_url, localPath);
       }
     } else {
-      // It's a direct download URL, download as binary
       await downloadBinaryFile(fileUrl, localPath);
     }
 
@@ -246,9 +222,7 @@ async function mergePackageJson(packageJsonUrl) {
 
     console.log(chalk.green(`✅ package.json merged successfully!`));
   } catch (error) {
-    console.error(
-      chalk.red(`❌ Error merging package.json: ${error.message}`)
-    );
+    console.error(chalk.red(`❌ Error merging package.json: ${error.message}`));
   }
 }
 
