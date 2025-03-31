@@ -1,6 +1,7 @@
 {
   "name": "qdp",
   "version": "0.0.1",
+  "main": "./cli/index.js",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -18,6 +19,14 @@
     "qdp-build": "docusaurus build",
     "qdp-start": "npm run install-clean && npm run start"
   },
+  "bin": {
+    "qdp": "./cli/index.js"
+  },
+  "files": [
+    "cli/",
+    "apis/",
+    "api.mustache"
+  ],
   "resolutions": {
     "@react-types/button": "^3.7.0",
     "@react-types/radio": "^3.4.0",
@@ -62,9 +71,9 @@
     "url": "https://github.com/konneqt/quantum-dev-portal"
   },
   "keywords": [
-    "docusaurus",
+    "openapi",
     "documentation",
-    "openapi"
+    "docusaurus"
   ],
   "author": "Konneqt",
   "license": "MIT",
@@ -82,5 +91,9 @@
   },
   "engines": {
     "node": ">=18.0"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
   }
 }

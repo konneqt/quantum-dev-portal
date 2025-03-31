@@ -8,7 +8,7 @@ const templates = [
 ];
 
 // URL da página que mostra todos os templates
-const templatesGalleryUrl = "http://localhost:3000/quantum-dev-portal/docs/templates/";
+const templatesGalleryUrl = "https://konneqt.github.io/qdp-documentation/docs/templates/";
 
 const listTemplates = () => {
   console.log(chalk.green("\n📜 Templates available:\n"));

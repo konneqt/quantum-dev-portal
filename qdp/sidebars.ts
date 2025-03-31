@@ -43,20 +43,20 @@ const kcSideBar = findSidebar(baseDirectory);
 
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
-    'intro',
+ /*    'intro',
     {
       type: 'category',
       label: 'Tutorial for DevPortal',
       items: ['tutorial-basics/create-a-document'],
     },
-    'protect_apis',
+    'protect_apis', */
     {
       type: 'category',
       label: 'Quantum Admin Apis',
       link: {
         type: 'generated-index',
         title: 'Quantum Admin APIs',
-        description: 'Quantum Admin Apis',
+        description: 'Find the full documentation for all their APIs here, including details on endpoints, authentication and usage examples.',
         slug: '/docs/',
       },
       items: kcSideBar, 

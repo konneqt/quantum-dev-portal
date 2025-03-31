@@ -1,0 +1,33 @@
+---
+id: address
+title: "Address"
+description: ""
+sidebar_label: "Address"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"street":"437 Lytton","city":"Palo Alto","state":"CA","zip":"94301"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Address"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"street":{"type":"string","example":"437 Lytton"},"city":{"type":"string","example":"Palo Alto"},"state":{"type":"string","example":"CA"},"zip":{"type":"string","example":"94301"}},"xml":{"name":"address"},"title":"Address"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

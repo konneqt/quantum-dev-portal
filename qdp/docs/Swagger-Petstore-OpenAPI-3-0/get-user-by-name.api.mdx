@@ -1,0 +1,69 @@
+---
+id: get-user-by-name
+title: "Get user by user name"
+description: ""
+sidebar_label: "Get user by user name"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV0tv3DYQ/isTXhIDsuRXexDQNm5hBG6DOOjGh8I2HK40WjKWSIYcrbxd6L8XQ0n7iI2kRY/tSRL5zfCbB2dGa0FyEUR+I9qAXtwlosRQeO1IWyNyIRJhHXrJn5elyMUC6Tqg/3n1TjYoEuGklw0SelayFoZX86jMDADNapwkJb7U/UEhMAhISQKDWAYgC3OECqlQWKZwHRBY1zFU1gNhIG0WKYhEePzcao+lyMm3mIhQKGykyNeCVo4pBPLaLETf3zE4OGsCBt4/OTrixz6X0BYFhlC1NWzsFYkorCE0xHjpXK2LuJF9Ciy0fnqonX/CgtgtntWQHo7U5Q5GG8IFepGIyvpG0rD0/ZlIBD7KxtUo8uOjPtk68YlRO0hBCjkgok9EpX2gd9+U+NUqw/Ba/i20bDAwHBup669jP1llXkdcWtiGhZwMobO+/Lrc8cnp2XcRrqz5Bp8Nlt0zI0lteNa5+/FlF8GI3nf86cme4/s+EY9NtHMnl/k80hQJDN7uk72MGEX+T4j/bkIw8Oy52nJplrLWJUzhg9By5mAposTZU4lIzliCyramjMnWICk7FuBYdkmJXGSsM1tPmnuRiIB+OVXj1tciF4rIhTzLHFIg6/E0DZ1cLNCn2mbS6Wx5KrhKBixar2k14yQe8nQSuZctn7dNa/5mP1W17YaMbvgy6KFUtqSs13/Gq3H9bQ5RWzZJcdMIhXUDg85rwpzFRC4aW+pqBfwF2sDKth5kUdjWUGwJspyQ/D7sx4UhOtLp+wdc7dghnf4NVyKZQjshxralUJbjZdemslFwDPpsoA/vR4PgEK4cmvP3l3CaHj3T63QAHUBCiInFcjCLgrMYMJjLgCVYA6RwVxUEh4WuxkKTAvxhWyikgUqbEmxL0LAWObct3ZqJliS4mXy+9fTdq6drBylcDoeS0r4ETWP7A1vFZYcE0cQEOny5RAidju2ZmzUDSgx6wXx8IJDOeSsL9eLWTESN7UBh7aANoBvn7RKjHBvYKSSFHjS9DDBfQSMftFlAoaRZYNieUGmjIylNAesKeBoY9gpbYnprPvAM0clVAp0mBaSbyDcS+PJQbWCBBr2sE5CmBHx0NiAE2+BktMEOKpTUeoypdnU+O01vza25v6w4r156hNraSDaOJgph8v1JepRdnc/4CXwVR19OmZIw2EBR6+IBbhR63IYFS03W796Nn1pf//Dl7dkFLE82wVzJpj5I4bwmLgekl1ivEmYbvVBbWcJSy8j140WpCX6Et7y4yeGR9Udo0LRgY/K+uGezZ+ybNiAPSLU2DyG/NYdwwyPcNpM9OhvYgNXWooUm1c65+k80D7nkTO+TRQcbdcG2vhjitBP2ycebw/7xCdm8tvOskYHQZ8EXWSO1yTwO54XMOjTS6cGJIhGEvglXFd9OXeBYwvZuThYh2TgmyiLWvrEpciUhlM3rLTx2WF2gCbjTTM6dLBSy10WyU6/zLOu6LpVxN7V+kY2iIXt7+cvFu9nF4Ul6lCpqatY7phl3w/QoPT6OrdMGaqTZOesNUmxCfNHicxzR90rVejv08vQ/FkrCR8pcLXUcFCLP9diExl+HROSb+eQuEcoG4r31mgvbta/7npc/t+hXIr+5S8RSei3nXExv1qLUgd9LkVeyDvgVTq9+Hyf/A/hXPxDPGja1BcMtYCnrFgcvxK6xnb/6uz6ZmgOzH7bPiwId7Qg++WXgLrtp5G8uPoi+/wtTsqIC
+sidebar_class_name: "get api-method"
+info_path: Swagger-Petstore-OpenAPI-3-0/swagger-petstore-openapi-3-0
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get user by user name"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/user/{username}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"username","in":"path","description":"The name that needs to be fetched. Use user1 for testing. ","required":true,"schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"successful operation","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"username":{"type":"string","example":"theUser"},"firstName":{"type":"string","example":"John"},"lastName":{"type":"string","example":"James"},"email":{"type":"string","example":"john@email.com"},"password":{"type":"string","example":"12345"},"phone":{"type":"string","example":"12345"},"userStatus":{"type":"integer","description":"User Status","format":"int32","example":1}},"xml":{"name":"user"},"title":"User"}},"application/xml":{"schema":{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"username":{"type":"string","example":"theUser"},"firstName":{"type":"string","example":"John"},"lastName":{"type":"string","example":"James"},"email":{"type":"string","example":"john@email.com"},"password":{"type":"string","example":"12345"},"phone":{"type":"string","example":"12345"},"userStatus":{"type":"integer","description":"User Status","format":"int32","example":1}},"xml":{"name":"user"},"title":"User"}}}},"400":{"description":"Invalid username supplied"},"404":{"description":"User not found"}}}
+>
+  
+</StatusCodes>
+

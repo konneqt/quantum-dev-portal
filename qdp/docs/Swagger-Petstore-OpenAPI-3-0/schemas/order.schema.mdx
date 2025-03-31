@@ -1,0 +1,33 @@
+---
+id: order
+title: "Order"
+description: ""
+sidebar_label: "Order"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"id":10,"petId":198772,"quantity":7,"shipDate":"2024-07-29T15:51:28.071Z","status":"approved","complete":true}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Order"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"petId":{"type":"integer","format":"int64","example":198772},"quantity":{"type":"integer","format":"int32","example":7},"shipDate":{"type":"string","format":"date-time"},"status":{"type":"string","description":"Order Status","example":"approved","enum":["placed","approved","delivered"]},"complete":{"type":"boolean"}},"xml":{"name":"order"},"title":"Order"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

@@ -9,7 +9,7 @@ const configureTemplates = async () => {
   const templates = listTemplatesModule.templates;
 
   const templatesGalleryUrl =
-    "http://localhost:3000/quantum-dev-portal/docs/templates/";
+    "https://konneqt.github.io/qdp-documentation/docs/templates/";
 
   console.log(chalk.yellow("\n🖼️  View templates:"));
   console.log(chalk.cyan(`   ${templatesGalleryUrl}`));

@@ -13,15 +13,17 @@ const config: Config = {
   onBrokenMarkdownLinks: "ignore",
 
   // Set the production url of your site here
-  url: "https://qriar-labs.github.io",
+  url: "https://konneqt.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/quantum-dev-portal/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "qriar-labs", // Usually your GitHub org/user name.
+  organizationName: "konneqt", // Usually your GitHub org/user name.
   projectName: "quantum-dev-portal", // Usually your repo name.
+  deploymentBranch: 'main',
+
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -69,12 +71,12 @@ const config: Config = {
         src: "img/just_q_blue.png",
       },
       items: [
-        {
+      /*   {
           type: "docSidebar",
           sidebarId: "tutorialSidebar",
           position: "left",
           label: "Introduction",
-        },
+        }, */
         {
           to: "/quantum-dev-portal/docs/",
           label: "Documentation",
@@ -109,6 +111,5 @@ const config: Config = {
 
   plugins: [...getOpenApiPlugins()],
 };
-
 
 export default config;

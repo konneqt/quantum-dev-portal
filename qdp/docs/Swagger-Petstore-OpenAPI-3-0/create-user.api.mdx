@@ -1,0 +1,69 @@
+---
+id: create-user
+title: "Create user"
+description: "This can only be done by the logged in user."
+sidebar_label: "Create user"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/isbXNLMUKQfaQ+caRs344PbTOypnENH9jgQuRQRkwACLEWrGv73zoKkRDltnJzrk0RwH98uvt0FuBUkV16kC9F4dOI2Ejn6zClLymiRiutSecikBqOrDSwRcqMRlhugEqEyqxXmoDSwciwiYSw6yaoXuUhF5lASfmDDkXD4uUFPv5l8I9LtIzdvg2Qe7IBZfsKMRCQyowk1sbi0tlJZMJ188qyzFT4rsZb8jzYWRSp2itYxEFLo+a3KJzJKE64CoMK4WlK/9NNrEQl8kLWtUKTHR10U8qFljRNdT07p1VRSUNnH10WiUM7T+yc1fjelZvFKfpO0rNGzONZSVV+X/WRK/SbIxZmpWclK71vj8q/rHZ+cvv4xiJdGP4FnJ8vpmZOkxv9rcg+3l1MEg/Rh4k9PDhLfdZF4qEOcfe57WnaRIEUBQJ/tLjpgxKDyTIhnQgyEmLVtO2O7s8ZVqDOTY/5Mkf83RVjQobdG+36TcyxkU9GX48g3WYbeF00Fu4n2PI+eufU8j54J8c3NpotEjVQaPglb48O2SypFKpKmPxJ7dGt0fPreisZVIhUlkfVpklgkT8bhaexbuVqhi5VJpFXJ+lR0t6yZNU7RZs4M60k0qtzJhp3sOcfPHERRmbanW81MVX0fa6g0Tv0dePvhaQzBWjJqIQeRGdsjaJ0iTFlNpKI2uSo2wE98QdiYxoHMMtNoCpcBmY+S/L9/Hxb6zEmr7u5xM4lDWvUHbkQ05n2UiITiHSxR5kMlcj/+c3/bOB83ry+046Np6ezq46A8+hqYlsDA8x3NH3N5SuWBgzu67p6nlDzuGHhhQoQDdeZ9nuFqyDzM4NKiPru6gNP46AvShruZ8iDBhwhZD+ZBcR6YBUvpMQejw21tYgq8xUwVQ7uKAf4yTbjlFUrnYBqCmq3IpWnoRo+wJMFiJMeeErc/fLn2KoaL3imVyuWgaBiiYIqwbJEghBhBiy/XCL5VlJWYA5kgkKNXK8bjPIG01hmZlS9u9AhUmxZKrCw0HlRtnVlj0OMA2xKpRAeKXnq+qtbyXukVZKXUK/R7D4XSKoBS5LEqwLjxHR8X4xt9XUqCVm4iaBWVQKoOeAOAx06VhhVqdLKKQOoc8MEaj+BNjWPQGlsoUFLjMNTE5dn8NL7RN/ruouACeOn4Sm0C2ILBlAhj7k/io+TybM6/wD1jyOXIlIiFNWSVyu5hUaLD/bZgrsi4aRH/2rjq58dlPhVYn+w2cyPr6lUMZxVxyZBaY7WJGG3IQmVkDmslA9aP57ki+AXe8eKOwwPqj1CjbsAE8r6447DnnJvGIx+zKqXvfXqjZ7C4LqdMdmiN5wA2+4hWispmyXU3wpxxbxz/jxG92pnzpnFZv0+TbR9zvHP23R6SZWWWSS09oUu8y5JaKp047P35xFjU0qo+iSIShK72lwVXp8pw6LUHlZMEkWQ4bMosNOmx50irCGX9Zi8e5rTKUHucjKQzK7MSOevcdHZNPU2Stm1jGd7Gxq2SQdUn7y7enr+fn89O4qO4pLpiuwPNuH/FR/HxcRjAxlMt9cRX/+UGhol20KC2+wPz935HGno+4QMltpIqHEhCJNthiO4/WJU8W9OF2G653X1wVdfx8ucG3Uaki9tIrKVTcsktdnHbReOo4KkbRox428OcXbNXFq+afsI8daHsotHEWZahpf9QDhcEHtu788DV5fxaRGI5fAyrTR6OEnvL0fSBYXfdP7lpshQ=
+sidebar_class_name: "post api-method"
+info_path: Swagger-Petstore-OpenAPI-3-0/swagger-petstore-openapi-3-0
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create user"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+This can only be done by the logged in user.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Created user object","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"username":{"type":"string","example":"theUser"},"firstName":{"type":"string","example":"John"},"lastName":{"type":"string","example":"James"},"email":{"type":"string","example":"john@email.com"},"password":{"type":"string","example":"12345"},"phone":{"type":"string","example":"12345"},"userStatus":{"type":"integer","description":"User Status","format":"int32","example":1}},"xml":{"name":"user"},"title":"User"}},"application/xml":{"schema":{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"username":{"type":"string","example":"theUser"},"firstName":{"type":"string","example":"John"},"lastName":{"type":"string","example":"James"},"email":{"type":"string","example":"john@email.com"},"password":{"type":"string","example":"12345"},"phone":{"type":"string","example":"12345"},"userStatus":{"type":"integer","description":"User Status","format":"int32","example":1}},"xml":{"name":"user"},"title":"User"}},"application/x-www-form-urlencoded":{"schema":{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"username":{"type":"string","example":"theUser"},"firstName":{"type":"string","example":"John"},"lastName":{"type":"string","example":"James"},"email":{"type":"string","example":"john@email.com"},"password":{"type":"string","example":"12345"},"phone":{"type":"string","example":"12345"},"userStatus":{"type":"integer","description":"User Status","format":"int32","example":1}},"xml":{"name":"user"},"title":"User"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"default":{"description":"successful operation","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"username":{"type":"string","example":"theUser"},"firstName":{"type":"string","example":"John"},"lastName":{"type":"string","example":"James"},"email":{"type":"string","example":"john@email.com"},"password":{"type":"string","example":"12345"},"phone":{"type":"string","example":"12345"},"userStatus":{"type":"integer","description":"User Status","format":"int32","example":1}},"xml":{"name":"user"},"title":"User"}},"application/xml":{"schema":{"type":"object","properties":{"id":{"type":"integer","format":"int64","example":10},"username":{"type":"string","example":"theUser"},"firstName":{"type":"string","example":"John"},"lastName":{"type":"string","example":"James"},"email":{"type":"string","example":"john@email.com"},"password":{"type":"string","example":"12345"},"phone":{"type":"string","example":"12345"},"userStatus":{"type":"integer","description":"User Status","format":"int32","example":1}},"xml":{"name":"user"},"title":"User"}}}}}}
+>
+  
+</StatusCodes>
+

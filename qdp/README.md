@@ -23,10 +23,10 @@ Clone this repository using HTTPS:
  git clone https://github.com/konneqt/quantum-dev-portal.git
 ```
 
-Then access the project folder and go to the `docs` folder
+Then access the project folder and go to the `qdp` folder
 
 ```
- cd quantum-dev-portal/docs
+ cd quantum-dev-portal/qdp
 ```
 
 ### Install dependencies
@@ -51,7 +51,7 @@ To run the project's CLI, use the following command:
 
 
 ```
- ./run-cli.sh
+ npm run qdp-init
 ```
 
 This command initializes the project's command line interface, allowing you to generate your documentation dynamically. The main features include:
