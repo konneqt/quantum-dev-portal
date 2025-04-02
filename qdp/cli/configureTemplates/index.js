@@ -17,7 +17,7 @@ const configureTemplates = async () => {
 
 
   const choices = [
-    { name: "0. Back", value: "back" },
+    { name: "0. Exit", value: "exit" },
     ...templates.map((template, index) => ({
       name: `${index + 1}. ${template}`,
       value: template,
@@ -30,11 +30,11 @@ const configureTemplates = async () => {
       name: "selectedTemplate",
       message: "Select a template (or 0 to go back):",
       choices: choices,
-      default: "back",
+      default: "exit",
     },
   ]);
 
-  if (selectedTemplate === "back") {
+  if (selectedTemplate === "exit") {
     console.log(chalk.yellow("Returning to main menu..."));
     return;
   }

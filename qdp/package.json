@@ -22,11 +22,6 @@
   "bin": {
     "qdp": "./cli/index.js"
   },
-  "files": [
-    "cli/",
-    "apis/",
-    "api.mustache"
-  ],
   "resolutions": {
     "@react-types/button": "^3.7.0",
     "@react-types/radio": "^3.4.0",
@@ -40,7 +35,8 @@
     "@react-types/radio": "^3.4.0",
     "@react-types/shared": "^3.18.0",
     "@react-types/switch": "^3.4.0",
-    "@react-types/textfield": "^3.7.0"
+    "@react-types/textfield": "^3.7.0",
+    "glob": "11.0.1"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
@@ -70,8 +66,13 @@
     "type": "git",
     "url": "https://github.com/konneqt/quantum-dev-portal"
   },
+  "homepage": "https://konneqt.github.io/qdp-documentation/",
+  "bugs": {
+    "url": "https://github.com/konneqt/quantum-dev-portal/issues"
+  },
   "keywords": [
     "openapi",
+    "devportal",
     "documentation",
     "docusaurus"
   ],
