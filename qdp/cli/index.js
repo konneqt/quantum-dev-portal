@@ -10,8 +10,8 @@ const chalk = require("chalk");
 const yaml = require("js-yaml");
 const templates = require("./configureTemplates/listTemplates");
 const configureTemplates = require("./configureTemplates/index");
-
 const pjson = require("../package.json");
+const validateOpenAPISpec = require("../utils/validateOpenApiFile");
 
 const OPTIONS = [
   "Help",
@@ -91,111 +91,10 @@ const handleHelp = () => {
   );
   console.log(
     chalk.cyan(
-      "3. Generate from QAP: Fetches API specs from Quantum Admin API."
+      "3. Generate from QAP: Fetches API specs from Quantum API Platform."
     )
   );
   console.log(chalk.magenta("\nUse the tool wisely!\n"));
-};
-
-const validateOpenApiSpec = (apiData, fileName) => {
-  const issues = [];
-
-  // Check basic information
-  if (!apiData.info) {
-    issues.push("Missing required 'info' section");
-  } else {
-    if (!apiData.info.title) issues.push("Missing 'info.title'");
-    if (!apiData.info.version) issues.push("Missing 'info.version'");
-  }
-
-  // Check servers
-  if (!apiData.servers || apiData.servers.length === 0) {
-    issues.push("Missing 'servers' section - No base URLs defined");
-  } else {
-    apiData.servers.forEach((server, index) => {
-      if (!server.url) {
-        issues.push(`'servers[${index}].url' not defined`);
-      }
-    });
-  }
-
-  // Check paths
-  if (!apiData.paths || Object.keys(apiData.paths).length === 0) {
-    issues.push("Missing 'paths' section or no endpoints defined");
-  } else {
-    for (const path in apiData.paths) {
-      const pathItem = apiData.paths[path];
-      // Check if there are HTTP methods in the path
-      const methods = [
-        "get",
-        "post",
-        "put",
-        "delete",
-        "patch",
-        "options",
-        "head",
-      ];
-      const hasMethod = methods.some((method) => pathItem[method]);
-
-      if (!hasMethod) {
-        issues.push(`Path '${path}' doesn't contain any valid HTTP method`);
-      } else {
-        for (const method in pathItem) {
-          if (methods.includes(method)) {
-            const operation = pathItem[method];
-
-            // Check if responses are defined
-            if (
-              !operation.responses ||
-              Object.keys(operation.responses).length === 0
-            ) {
-              issues.push(
-                `'${method.toUpperCase()} ${path}' has no defined responses`
-              );
-            }
-
-            // Check required parameters
-            if (operation.parameters) {
-              operation.parameters.forEach((param, idx) => {
-                if (param.required && !param.schema) {
-                  issues.push(
-                    `'${method.toUpperCase()} ${path}' - required parameter '${
-                      param.name
-                    }' has no schema defined`
-                  );
-                }
-              });
-            }
-
-            // Check requestBody when applicable
-            if (
-              ["post", "put", "patch"].includes(method) &&
-              !operation.requestBody
-            ) {
-              issues.push(
-                `'${method.toUpperCase()} ${path}' has no requestBody defined`
-              );
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Check components.schemas if referenced
-  const hasRefs = JSON.stringify(apiData).includes('"$ref"');
-  if (
-    hasRefs &&
-    (!apiData.components ||
-      !apiData.components.schemas ||
-      Object.keys(apiData.components.schemas || {}).length === 0)
-  ) {
-    issues.push(
-      "There are schema references ($ref), but 'components.schemas' is not properly defined"
-    );
-  }
-
-  return issues;
 };
 
 const uploadOpenAPIFiles = async () => {
@@ -204,6 +103,8 @@ const uploadOpenAPIFiles = async () => {
   const inquirer = require("inquirer");
   const fs = require("fs-extra");
   const path = require("path");
+
+  const targetDir = path.join(__dirname, "apis");
 
   const { uploadMethod } = await inquirer.prompt([
     {
@@ -218,39 +119,10 @@ const uploadOpenAPIFiles = async () => {
     },
   ]);
 
-  if (uploadMethod === "back") {
-    return;
-  }
+  if (uploadMethod === "back") return;
 
-  // Target directory for API files
-  const targetDir = path.join(process.cwd(), "apis");
+  let results = { success: [], failed: [] };
 
-  // Create target directory if it doesn't exist
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true });
-    console.log(chalk.green(`Created target directory: ${targetDir}`));
-  }
-
-  // Function to handle file validation
-  const validateOpenAPIFile = (filePath) => {
-    try {
-      const extension = path.extname(filePath).toLowerCase();
-      if (![".json", ".yaml", ".yml"].includes(extension)) {
-        return `File must be a JSON or YAML file (${extension} provided)`;
-      }
-
-      const stats = fs.statSync(filePath);
-      if (!stats.isFile()) {
-        return "Path must be a file";
-      }
-
-      return true;
-    } catch (error) {
-      return `Error accessing file: ${error.message}`;
-    }
-  };
-
-  // Process files selected by the user
   if (uploadMethod === "local") {
     const { filePaths } = await inquirer.prompt([
       {
@@ -275,7 +147,7 @@ const uploadOpenAPIFiles = async () => {
     ]);
 
     const files = filePaths.split(",").map((p) => p.trim());
-    await processFiles(files, targetDir);
+    results = await processFiles(files, targetDir);
   } else if (uploadMethod === "directory") {
     const { directoryPath } = await inquirer.prompt([
       {
@@ -299,7 +171,6 @@ const uploadOpenAPIFiles = async () => {
       },
     ]);
 
-    // Read all files in the directory
     const files = fs
       .readdirSync(directoryPath)
       .filter((file) => {
@@ -315,7 +186,6 @@ const uploadOpenAPIFiles = async () => {
       return;
     }
 
-    // Allow user to select which files to import
     const { selectedFiles } = await inquirer.prompt([
       {
         type: "checkbox",
@@ -324,7 +194,7 @@ const uploadOpenAPIFiles = async () => {
         choices: files.map((file) => ({
           name: `${path.basename(file)} (${path.extname(file).substring(1)})`,
           value: file,
-          checked: true,
+          checked: false,
         })),
         validate: (answer) => {
           if (answer.length < 1) {
@@ -335,10 +205,14 @@ const uploadOpenAPIFiles = async () => {
       },
     ]);
 
-    await processFiles(selectedFiles, targetDir);
+    results = await processFiles(selectedFiles, targetDir);
   }
 
-  // Ask if user wants to generate docs now
+  if (results.success.length === 0) {
+    console.log(chalk.red("Interrupted Process"));
+    return;
+  }
+
   const { shouldGenerateDocs } = await inquirer.prompt([
     {
       type: "confirm",
@@ -351,6 +225,7 @@ const uploadOpenAPIFiles = async () => {
   if (shouldGenerateDocs) {
     await generateDocsFromFiles();
   }
+
 };
 
 // Function to process the files
@@ -361,144 +236,93 @@ const processFiles = async (files, targetDir) => {
   const path = require("path");
   const yaml = require("js-yaml");
 
-  const spinner = ora("Processing files...").start();
+  const spinner = ora("Processing OpenAPI files...").start();
+  const results = { success: [], failed: [] };
 
-  const results = {
-    success: [],
-    warning: [],
-    error: [],
-  };
-
-  for (const [index, file] of files.entries()) {
-    spinner.text = `Processing file ${index + 1}/${
-      files.length
-    }: ${path.basename(file)}`;
+  for (const filePath of files) {
+    const fileName = path.basename(filePath);
+    const targetPath = path.join(targetDir, fileName);
 
     try {
-      // Read the file content
-      const fileContent = fs.readFileSync(file, "utf-8");
-      let apiData;
+      const fileContent = fs.readFileSync(filePath, "utf8");
+      const extension = path.extname(filePath).toLowerCase();
+      const validation = validateOpenAPISpec(fileContent, extension);
 
-      // Parse the file content based on its extension
-      const extension = path.extname(file);
-      if (extension === ".json") {
-        try {
-          apiData = JSON.parse(fileContent);
-        } catch (jsonError) {
-          results.error.push(
-            `${path.basename(file)} (JSON parsing error: ${jsonError.message})`
-          );
-          continue;
-        }
-      } else if ([".yaml", ".yml"].includes(extension)) {
-        try {
-          apiData = yaml.load(fileContent);
-          if (!apiData) {
-            results.error.push(
-              `${path.basename(
-                file
-              )} (YAML parsing error: Empty or invalid YAML)`
-            );
-            continue;
-          }
-        } catch (yamlError) {
-          results.error.push(
-            `${path.basename(file)} (YAML parsing error: ${yamlError.message})`
-          );
-          continue;
-        }
-      }
-
-      // Validate the OpenAPI spec
-      const issues = validateOpenApiSpec(apiData, path.basename(file));
-
-      if (issues.length > 0) {
-        results.warning.push({
-          file: path.basename(file),
-          issues,
-        });
-      }
-
-      // Generate a suitable filename
-      let fileName = path.basename(file);
-      if (apiData.info && apiData.info.title) {
-        fileName = apiData.info.title
-          .replace(/[^a-zA-Z0-9]/g, "-")
-          .replace(/_+/g, "-")
-          .replace(/-+/g, "-")
-          .replace(/^_|_$/g, "");
-
-        fileName += extension;
-      }
-
-      // Write the file to the target directory
-      const targetPath = path.join(targetDir, fileName);
-
-      if (extension === ".json") {
-        fs.writeFileSync(targetPath, JSON.stringify(apiData, null, 2), "utf-8");
+      if (validation.valid) {
+        fs.copySync(filePath, targetPath);
+        results.success.push({ name: fileName, path: targetPath });
+        spinner.text = `Processed: ${fileName} (valid OpenAPI spec)`;
       } else {
-        fs.writeFileSync(targetPath, yaml.dump(apiData), "utf-8");
+        results.failed.push({ name: fileName, error: validation.message });
+        spinner.text = `Skipped: ${fileName} (not a valid OpenAPI spec)`;
       }
-
-      results.success.push(fileName);
     } catch (error) {
-      results.error.push(`${path.basename(file)} (Error: ${error.message})`);
+      results.failed.push({ name: fileName, error: error.message });
+      spinner.text = `Error processing: ${fileName}`;
     }
   }
 
-  spinner.succeed(`Processed ${files.length} files`);
+  spinner.stop();
 
-  // Report results
   if (results.success.length > 0) {
     console.log(
-      chalk.green(`\n✅ Successfully imported ${results.success.length} files:`)
+      chalk.green(
+        `\nSuccessfully imported ${results.success.length} OpenAPI files:`
+      )
     );
-    results.success.forEach((file) => console.log(chalk.green(`  - ${file}`)));
-  }
-
-  if (results.warning.length > 0) {
-    console.log(
-      chalk.yellow(`\n⚠️ Files with warnings: ${results.warning.length}`)
-    );
-    results.warning.forEach(({ file, issues }) => {
-      console.log(chalk.yellow(`  - ${file} (${issues.length} issues)`));
-      issues.slice(0, 3).forEach((issue) => {
-        console.log(chalk.yellow(`    • ${issue}`));
-      });
-      if (issues.length > 3) {
-        console.log(
-          chalk.yellow(`    • ... and ${issues.length - 3} more issues`)
-        );
-      }
+    results.success.forEach((file) => {
+      console.log(chalk.green(`  - ${file.name}`));
     });
   }
 
-  if (results.error.length > 0) {
+  if (results.failed.length > 0) {
     console.log(
-      chalk.red(`\n❌ Failed to import ${results.error.length} files:`)
+      chalk.red(
+        `\nFailed to import ${results.failed.length} files (not valid OpenAPI specs):`
+      )
     );
-    results.error.forEach((error) => console.log(chalk.red(`  - ${error}`)));
+    results.failed.forEach((file) => {
+      console.log(chalk.red(`  - ${file.name}: ${file.error}`));
+    });
   }
 
-  return results.success.length > 0;
+  if (results.success.length === 0 && results.failed.length > 0) {
+    console.log(
+      chalk.yellow("\nNo valid OpenAPI specifications were imported.")
+    );
+  }
+
+  return results;
+};
+
+const userFeedback = {
+  info: (message) => console.log(chalk.blue(`ℹ️`), message),
+  success: (message) => console.log(chalk.green(`✔`), message),
+  warning: (message) => console.log(chalk.yellow(`⚠️`), message),
+  error: (message) => console.log(chalk.red(`❌`), message),
+  tip: (message) => console.log(chalk.cyan(`💡`), message),
+  section: (title) => console.log(chalk.magenta(`\n== ${title} ==`)),
+  list: (items, prefix = "-") =>
+    items.forEach((item) => console.log(`  ${prefix} ${item}`)),
 };
 
 const generateDocsFromFiles = async () => {
   const { default: ora } = await import("ora");
-  const defaultFolder = path.join(process.cwd(), "apis");
-  console.log(
-    chalk.green(`Getting APIs from default folder: ${defaultFolder}`)
-  );
 
+  const defaultFolder = path.join(__dirname, "apis");
   if (!fs.existsSync(defaultFolder)) {
-    console.error(chalk.red("No APIs folder found at the default location."));
+    userFeedback.error("No APIs folder found at the default location.");
+    userFeedback.tip("Run the upload command first to add OpenAPI files.");
     return;
   }
-
+  console.log(defaultFolder);
   const files = fs.readdirSync(defaultFolder);
 
   if (files.length === 0) {
-    console.error(chalk.red("No OpenAPI files found in the folder."));
+    userFeedback.error("No OpenAPI files found in the folder.");
+    userFeedback.tip(
+      "Upload some OpenAPI files before generating documentation."
+    );
     return;
   }
 
@@ -531,7 +355,7 @@ const generateDocsFromFiles = async () => {
         }
       }
 
-      const issues = validateOpenApiSpec(apiData, file);
+      const issues = validateOpenAPISpec(apiData, file);
 
       if (issues.length > 0) {
         filesWithIssues.push({ file, issues });
@@ -586,20 +410,22 @@ const generateDocsFromFiles = async () => {
   }
 
   if (filesWithIssues.length > 0) {
-    console.log(
-      chalk.yellow(
-        `\nFiles with OpenAPI specification issues: ${filesWithIssues.length}`
-      )
+    userFeedback.warning(
+      `Found validation issues in ${filesWithIssues.length} file(s)`
     );
-    console.log(
-      chalk.yellow(
-        "These files may not work correctly in the developer portal:"
-      )
-    );
-    filesWithIssues.forEach(({ file, issues }) => {
-      console.log(chalk.yellow(`- ${file} (${issues.length} issues)`));
-      issues.forEach((issue) => {
-        console.log(chalk.yellow(`  - ${issue}`));
+
+    filesWithIssues.forEach(({ file, issues }, fileIndex) => {
+      const issueText = issues.length === 1 ? "issue" : "issues";
+      console.log(
+        chalk.yellow(
+          `\n  ${fileIndex + 1}. ${file} (${issues.length} ${issueText}):`
+        )
+      );
+
+      issues.forEach((issue, issueIndex) => {
+        console.log(
+          chalk.yellow(`     ${String.fromCharCode(97 + issueIndex)}. ${issue}`)
+        );
       });
     });
 
@@ -608,22 +434,22 @@ const generateDocsFromFiles = async () => {
         type: "confirm",
         name: "shouldContinue",
         message:
-          "Issues were found in OpenAPI specifications. Do you want to continue anyway?",
+          "Continue despite specification issues? (This may affect the generated documentation)",
         default: false,
       },
     ]);
 
     if (!shouldContinue) {
-      console.log(
-        chalk.magenta(
-          "Process interrupted by user. Please fix the issues and try again."
-        )
-      );
+      userFeedback.error("Process interrupted by user request");
+      userFeedback.tip("Fix the issues identified above and try again");
       return;
+    } else {
+      userFeedback.warning(
+        "Continuing with issues. Documentation quality may be affected"
+      );
     }
   }
-
-  console.log(chalk.magenta("Validation completed successfully!"));
+  userFeedback.success("Validation completed successfully!");
 
   // Spinner for docs generation
   const docsSpinner = ora({
@@ -635,9 +461,7 @@ const generateDocsFromFiles = async () => {
   exec("./rebuildDocs.sh", (error, stdout, stderr) => {
     if (error) {
       docsSpinner.fail("Documentation generation failed");
-      console.error(
-        chalk.red(`Error executing rebuildDocs.sh: ${error.message}`)
-      );
+      userFeedback.error(`Error executing: ${error.message}`);
       return;
     }
 
@@ -652,16 +476,28 @@ const generateDocsFromFiles = async () => {
 
 const generateDocsFromURI = async () => {
   const { default: ora } = await import("ora");
+  const inquirer = require("inquirer");
+  const fs = require("fs-extra");
+  const path = require("path");
+  const axios = require("axios");
+  const yaml = require("js-yaml");
+  const chalk = require("chalk");
+
   const { uri } = await inquirer.prompt([
     {
       type: "input",
       name: "uri",
-      message:
-        "Inform the URI Location (e.g., https://sample.com/api.yaml or .json):",
+      message: "Enter the URI of your OpenAPI specification:",
+      validate: (input) => {
+        if (!input) return "URI cannot be empty";
+        if (!input.startsWith("http"))
+          return "URI should start with http:// or https://";
+        return true;
+      },
     },
   ]);
 
-  console.log(chalk.green(`Fetching OpenAPI specification from: ${uri}`));
+  userFeedback.info(`Fetching specification from: ${uri}`);
 
   // Create a spinner for URI fetch
   const fetchSpinner = ora({
@@ -681,18 +517,12 @@ const generateDocsFromURI = async () => {
         contentType.includes("text/yaml");
 
       if (!isJson && !isYaml) {
-        throw new Error(
-          "The fetched content is neither JSON nor YAML. Please check the URI."
+        userFeedback.error("The fetched content is neither JSON nor YAML");
+        userFeedback.tip(
+          "Check that the URI points to a valid OpenAPI specification"
         );
+        return;
       }
-
-      const apiFolder = path.join(process.cwd(), "apis");
-      if (!fs.existsSync(apiFolder)) {
-        fs.mkdirSync(apiFolder);
-      }
-
-      let fileName = "";
-      let openApiData;
 
       // Create spinner for parsing and processing
       const processingSpinner = ora({
@@ -700,61 +530,71 @@ const generateDocsFromURI = async () => {
         spinner: "dots",
       }).start();
 
-      if (isJson) {
-        openApiData = response.data;
-        if (
-          openApiData.info &&
-          (openApiData.info.name || openApiData.info.title)
-        ) {
-          fileName = openApiData.info.name || openApiData.info.title;
-        } else if (openApiData.host) {
-          fileName = openApiData.host;
-        } else {
-          try {
-            fileName = new URL(uri).hostname;
-          } catch (e) {
-            fileName = "openapi";
-          }
-        }
+      // Determine file extension for validation
+      const extension = isJson ? ".json" : ".yaml";
+
+      // Validate if it's actually an OpenAPI specification
+      const validation = validateOpenAPISpec(response.data, extension);
+
+      if (!validation.valid) {
+        processingSpinner.fail(
+          "The content is not a valid OpenAPI specification"
+        );
+        userFeedback.error(validation.message);
+        userFeedback.tip(
+          "Check that the URI points to a valid OpenAPI/Swagger specification"
+        );
+        return;
+      }
+
+      // Get a suitable filename
+      let fileName = "";
+      const openApiData = validation.parsedContent;
+
+      if (openApiData.info && openApiData.info.title) {
+        fileName = openApiData.info.title;
+      } else if (openApiData.host) {
+        fileName = openApiData.host;
       } else {
         try {
-          openApiData = yaml.load(response.data);
-          if (openApiData.info && openApiData.info.title) {
-            fileName = openApiData.info.title;
-          } else if (openApiData.host) {
-            fileName = openApiData.host;
-          } else {
-            try {
-              fileName = new URL(uri).hostname;
-            } catch (e) {
-              fileName = "openapi";
-            }
-          }
+          fileName = new URL(uri).hostname;
         } catch (e) {
-          try {
-            fileName = new URL(uri).hostname;
-          } catch (e) {
-            fileName = "openapi";
-          }
+          fileName = "openapi";
         }
       }
 
-      fileName = fileName.replace(/[^a-z0-9]/gi, "-");
-      const extension = isJson ? ".json" : ".yaml";
-      const filePath = path.join(apiFolder, `${fileName}${extension}`);
+      fileName = fileName.replace(/[^a-z0-9]/gi, "-").toLowerCase();
 
-      if (typeof response.data === "object") {
-        fs.writeFileSync(
-          filePath,
-          JSON.stringify(response.data, null, 2),
-          "utf-8"
-        );
+      // Prepare content to save
+      let fileContent;
+      if (isJson) {
+        fileContent =
+          typeof response.data === "object"
+            ? JSON.stringify(response.data, null, 2)
+            : response.data;
       } else {
-        fs.writeFileSync(filePath, response.data, "utf-8");
+        fileContent = response.data;
       }
 
-      processingSpinner.succeed("API specification processed and saved!");
-      console.log(chalk.green(`File saved locally at: ${filePath}`));
+      // Save the file
+      const apiFolder = path.join(__dirname, "apis");
+      if (!fs.existsSync(apiFolder)) {
+        fs.mkdirSync(apiFolder, { recursive: true });
+        userFeedback.info(`Created new API directory at ${apiFolder}`);
+      }
+
+      const filePath = path.join(apiFolder, `${fileName}${extension}`);
+      fs.writeFileSync(filePath, fileContent, "utf-8");
+
+      processingSpinner.succeed(
+        `API specification validated and saved as ${fileName}${extension}!`
+      );
+      userFeedback.success(`Saved to: ${filePath}`);
+      userFeedback.info(
+        `OpenAPI Version: ${
+          validation.specVersion === "openapi3" ? "3.x" : "2.x"
+        }`
+      );
 
       await generateDocsFromFiles();
     }
@@ -764,8 +604,23 @@ const generateDocsFromURI = async () => {
 
     console.error(
       chalk.red("Failed to fetch OpenAPI Specification. Please check the URI."),
-      error
+      error.message || error
     );
+
+    // Provide more specific error messages for common issues
+    if (error.code === "ENOTFOUND") {
+      userFeedback.error(
+        "Host not found. Check the URL and your internet connection."
+      );
+    } else if (error.code === "ETIMEDOUT") {
+      userFeedback.error(
+        "Connection timed out. The server might be down or unresponsive."
+      );
+    } else if (error.response && error.response.status) {
+      userFeedback.error(
+        `Server returned HTTP ${error.response.status} ${error.response.statusText}`
+      );
+    }
   }
 };
 
@@ -962,7 +817,7 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
 
     fetchSpinner.succeed("API specifications successfully retrieved!");
 
-    const apiFolder = path.join(process.cwd(), "apis");
+    const apiFolder = path.join(__dirname, "apis");
     if (!fs.existsSync(apiFolder)) {
       fs.mkdirSync(apiFolder);
     }
@@ -1035,7 +890,7 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
         continue;
       }
 
-      const issues = validateOpenApiSpec(jsonData, apiName);
+      const issues = validateOpenAPISpec(jsonData, apiName);
 
       if (issues.length > 0) {
         filesWithIssues.push({ api: apiName, issues });
@@ -1197,9 +1052,7 @@ const generateDocsFromQAP = async () => {
         console.log(chalk.red("Invalid option selected."));
     }
   } catch (error) {
-    console.error(
-      chalk.red("An error occurred")
-    );
+    console.error(chalk.red("An error occurred"));
   }
 };
 
@@ -1237,10 +1090,9 @@ const run = async () => {
     if (error.response && error.response.data && error.response.data.message) {
       console.error(chalk.red(`${error.response.data.message}`));
     } else {
-      console.error(chalk.red("An error ocurred"));
+      console.error(chalk.red("An error ocurred", error));
     }
   }
 };
 
 run();
-

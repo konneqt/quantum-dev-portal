@@ -7,22 +7,21 @@ const path = require("path");
 
 const configureTemplates = async () => {
   const templates = listTemplatesModule.templates;
+  const currentTemplateInfo = await getCurrentTemplateInfo();
 
   const templatesGalleryUrl =
     "https://konneqt.github.io/qdp-documentation/docs/templates/";
 
-  console.log(chalk.yellow("\n🖼️  View templates:"));
-  console.log(chalk.cyan(`   ${templatesGalleryUrl}`));
-  console.log("\n");
-
-
-  const choices = [
-    { name: "0. Exit", value: "exit" },
-    ...templates.map((template, index) => ({
-      name: `${index + 1}. ${template}`,
-      value: template,
-    })),
-  ];
+    const choices = [
+      { name: "0. Exit", value: "exit" },
+      ...templates.map((template, index) => ({
+        name: `${index + 1}. ${template}${template.toLowerCase() === currentTemplateInfo.name.toLowerCase() ? ' (Current)' : ''}`,
+        value: template,
+      })),
+      new inquirer.Separator(), 
+      new inquirer.Separator("🖼️  View templates: https://konneqt.github.io/qdp-documentation/docs/templates/"),
+    
+    ];
 
   const { selectedTemplate } = await inquirer.prompt([
     {
@@ -35,17 +34,25 @@ const configureTemplates = async () => {
   ]);
 
   if (selectedTemplate === "exit") {
-    console.log(chalk.yellow("Returning to main menu..."));
+    console.log(chalk.yellow("Exiting..."));
     return;
   }
 
   console.log(chalk.green(`✅ Template "${selectedTemplate}" selected!`));
+
+
 
   try {
     await downloadTemplateFiles(selectedTemplate);
     console.log(
       chalk.green(`✅ Template "${selectedTemplate}" configured successfully!`)
     );
+
+    const templateInfoPath = path.join(process.cwd(), '.template-info.json');
+    await fs.writeJson(templateInfoPath, {
+      name: selectedTemplate,
+      installed: new Date().toISOString()
+    }, { spaces: 2 });
 
     console.log(
       chalk.blue("🚀 Now, run `npm install` to install the dependencies.")
@@ -54,6 +61,31 @@ const configureTemplates = async () => {
     console.error(chalk.red(`Error configuring template: ${error.message}`));
   }
 };
+
+async function getCurrentTemplateInfo() {
+  const templateInfoPath = path.join(process.cwd(), ".template-info.json");
+
+  try {
+    if (await fs.pathExists(templateInfoPath)) {
+      return await fs.readJson(templateInfoPath);
+    }
+  } catch (error) {
+    console.warn(
+      chalk.yellow(`⚠️ Error reading template info: ${error.message}`)
+    );
+  }
+
+  // Valor padrão se o arquivo não existir ou não puder ser lido
+  const defaultInfo = {
+    name: "default",
+    installed: null,
+  };
+
+  // Criar o arquivo com valor padrão
+  await fs.writeJson(templateInfoPath, defaultInfo, { spaces: 2 });
+
+  return defaultInfo;
+}
 
 async function downloadTemplateFiles(templateName) {
   const repoBaseUrl =
@@ -129,6 +161,16 @@ async function downloadTemplateFiles(templateName) {
       await downloadFile(`${templateUrl}/${file}`, localFilePath);
     }
   }
+
+  const templateInfoPath = path.join(process.cwd(), ".template-info.json");
+  await fs.writeJson(
+    templateInfoPath,
+    {
+      name: templateName,
+      installed: new Date().toISOString(),
+    },
+    { spaces: 2 }
+  );
 }
 
 async function downloadFolder(folderUrl, localPath) {

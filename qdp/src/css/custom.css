@@ -102,7 +102,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 
 .api-method > .menu__link::before,
 .schema > .menu__link::before {
-  width: 50px;
+  width: 40px;
   height: 20px;
   font-size: 10px;
   line-height: 20px;
@@ -128,7 +128,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 }
 
 .delete > .menu__link::before {
-  content: "delete";
+  content: "del";
   background-color: var(--openapi-code-red);
 }
 
