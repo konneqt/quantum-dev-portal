@@ -1,0 +1,201 @@
+/* Estilos gerais para o componente OWASPValidator */
+.container {
+  margin-bottom: 20px;
+}
+
+.header {
+  padding: 10px 15px;
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.headerTitle {
+  font-weight: var(--ifm-font-weight-bold);
+  font-size: 1.1rem;
+}
+
+.headerBadge {
+  background-color: var(--ifm-color-emphasis-200);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.rawResultsContainer {
+  padding: 1.5rem;
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.rawResultsTitle {
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  padding-bottom: 0.5rem;
+}
+
+.rawResultsPreTag {
+  background-color: var(--ifm-background-color);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow: auto;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  margin: 0;
+  max-height: 400px;
+}
+
+/* Animações */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes highlightPulse {
+  0% { background-color: rgba(33, 150, 243, 0.2); }
+  50% { background-color: rgba(33, 150, 243, 0.4); }
+  100% { background-color: transparent; }
+}
+
+.highlightVulnerability {
+  animation: highlightPulse 2s;
+}
+
+.loadingContainer {
+  margin: 2rem;
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinnerContainer {
+  margin-bottom: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border: 4px solid var(--ifm-color-emphasis-200);
+  border-top: 4px solid var(--ifm-color-primary);
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+.loadingTitle {
+  font-weight: var(--ifm-font-weight-bold);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.loadingSubtitle {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.errorContainer {
+  padding: 1.5rem;
+  background-color: var(--ifm-color-danger-lightest);
+  border-radius: 8px;
+  margin-top: 2rem;
+  border: 1px solid var(--ifm-color-danger-light);
+}
+
+.errorTitle {
+  color: var(--ifm-color-danger-dark);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.errorMessage {
+  color: var(--ifm-color-emphasis-800);
+}
+
+:global(.dark) .errorContainer {
+  background-color: rgba(244, 67, 54, 0.1);
+  border-color: rgba(244, 67, 54, 0.3);
+}
+
+:global(.dark) .errorTitle {
+  color: rgba(244, 67, 54, 0.9);
+}
+
+.tabContainer {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  background-color: #f5f5f5; /* default for light mode */
+}
+
+[data-theme='dark'] .tabContainer {
+  background-color: #2c2c2e; /* darker tone for dark mode */
+}
+
+
+.tabButton {
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: normal;
+  border-bottom: none;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.tabButtonActive {
+  font-weight: var(--ifm-font-weight-bold);
+  border-bottom: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.tabContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tabBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: var(--ifm-color-danger);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  margin-left: 5px;
+}
+
+.codeContextContainer {
+  position: relative;
+  font-family: var(--ifm-font-family-monospace);
+  padding: 0.5rem 0;
+}
+
+.lineNumberColumn {
+  position: absolute;
+  left: 0;
+  text-align: right;
+  padding-right: 10px;
+  color: var(--ifm-color-emphasis-600);
+  user-select: none;
+}
+
+.lineNumberHighlight {
+  font-weight: var(--ifm-font-weight-bold);
+  color: var(--ifm-color-danger);
+}
+
+.codeContent {
+  margin-left: 40px;
+  overflow-x: auto;
+}
+
+.lineHighlight {
+  background-color: rgba(244, 67, 54, 0.1);
+  font-weight: var(--ifm-font-weight-bold);
+  color: var(--ifm-color-danger);
+  padding: 0 5px;
+}

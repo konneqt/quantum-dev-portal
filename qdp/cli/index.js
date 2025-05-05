@@ -11,7 +11,7 @@ const yaml = require("js-yaml");
 const templates = require("./configureTemplates/listTemplates");
 const configureTemplates = require("./configureTemplates/index");
 const pjson = require("../package.json");
-const validateOpenAPISpec = require("../utils/validateOpenApiFile");
+const validateOpenAPISpec = require("../utils/validateOpenApiFile.js");
 
 const OPTIONS = [
   "Help",
@@ -135,7 +135,7 @@ const uploadOpenAPIFiles = async () => {
 
           const paths = input.split(",").map((p) => p.trim());
           for (const p of paths) {
-            const validation = validateOpenAPIFile(p);
+            const validation = validateOpenAPISpec(p);
             if (validation !== true) {
               return `Invalid file at ${p}: ${validation}`;
             }
@@ -148,6 +148,7 @@ const uploadOpenAPIFiles = async () => {
 
     const files = filePaths.split(",").map((p) => p.trim());
     results = await processFiles(files, targetDir);
+    if (!results) return;
   } else if (uploadMethod === "directory") {
     const { directoryPath } = await inquirer.prompt([
       {
@@ -206,13 +207,8 @@ const uploadOpenAPIFiles = async () => {
     ]);
 
     results = await processFiles(selectedFiles, targetDir);
+    if (!results) return; 
   }
-
-  if (results.success.length === 0) {
-    console.log(chalk.red("Interrupted Process"));
-    return;
-  }
-
   const { shouldGenerateDocs } = await inquirer.prompt([
     {
       type: "confirm",
@@ -225,7 +221,6 @@ const uploadOpenAPIFiles = async () => {
   if (shouldGenerateDocs) {
     await generateDocsFromFiles();
   }
-
 };
 
 // Function to process the files
@@ -234,10 +229,9 @@ const processFiles = async (files, targetDir) => {
   const { default: chalk } = await import("chalk");
   const fs = require("fs-extra");
   const path = require("path");
-  const yaml = require("js-yaml");
 
   const spinner = ora("Processing OpenAPI files...").start();
-  const results = { success: [], failed: [] };
+  const results = { success: [], failed: [], criticalErrors: [] };
 
   for (const filePath of files) {
     const fileName = path.basename(filePath);
@@ -250,15 +244,24 @@ const processFiles = async (files, targetDir) => {
 
       if (validation.valid) {
         fs.copySync(filePath, targetPath);
-        results.success.push({ name: fileName, path: targetPath });
-        spinner.text = `Processed: ${fileName} (valid OpenAPI spec)`;
+        results.success.push({
+          name: fileName,
+          path: targetPath,
+          warnings: validation.warnings || [],
+        });
+        spinner.text = `Processed: ${fileName} ✅`;
       } else {
         results.failed.push({ name: fileName, error: validation.message });
-        spinner.text = `Skipped: ${fileName} (not a valid OpenAPI spec)`;
+
+        if (validation.message.includes("Missing required 'openapi' field")) {
+          results.criticalErrors.push(fileName);
+        }
+
+        spinner.text = `Skipped: ${fileName} ❌`;
       }
     } catch (error) {
       results.failed.push({ name: fileName, error: error.message });
-      spinner.text = `Error processing: ${fileName}`;
+      spinner.text = `Error processing: ${fileName} ❌`;
     }
   }
 
@@ -266,40 +269,47 @@ const processFiles = async (files, targetDir) => {
 
   if (results.success.length > 0) {
     console.log(
-      chalk.green(
-        `\nSuccessfully imported ${results.success.length} OpenAPI files:`
-      )
+      chalk.green(`\nSuccessfully imported ${results.success.length} OpenAPI files:`)
     );
     results.success.forEach((file) => {
       console.log(chalk.green(`  - ${file.name}`));
+      if (file.warnings?.length) {
+        file.warnings.forEach((w) =>
+          console.log(chalk.yellow(`    ⚠️ Warning: ${w}`))
+        );
+      }
     });
   }
 
   if (results.failed.length > 0) {
-    console.log(
-      chalk.red(
-        `\nFailed to import ${results.failed.length} files (not valid OpenAPI specs):`
-      )
-    );
+    console.log(chalk.red(`\nIssues found in ${results.failed.length} files:`));
     results.failed.forEach((file) => {
       console.log(chalk.red(`  - ${file.name}: ${file.error}`));
     });
   }
 
-  if (results.success.length === 0 && results.failed.length > 0) {
+  if (
+    results.success.length === 0 &&
+    results.criticalErrors.length === results.failed.length
+  ) {
     console.log(
-      chalk.yellow("\nNo valid OpenAPI specifications were imported.")
+      chalk.red(
+        "\nAll files failed due to critical errors (e.g., missing 'openapi' field). Cannot proceed."
+      )
     );
+    return null;
   }
 
   return results;
 };
 
+
+
 const userFeedback = {
-  info: (message) => console.log(chalk.blue(`ℹ️`), message),
+  info: (message) => console.log(chalk.blue(`ℹ️ `), message),
   success: (message) => console.log(chalk.green(`✔`), message),
-  warning: (message) => console.log(chalk.yellow(`⚠️`), message),
-  error: (message) => console.log(chalk.red(`❌`), message),
+  warning: (message) => console.log(chalk.yellow(`⚠️ `), message),
+  error: (message) => console.log(chalk.red(`✖`), message),
   tip: (message) => console.log(chalk.cyan(`💡`), message),
   section: (title) => console.log(chalk.magenta(`\n== ${title} ==`)),
   list: (items, prefix = "-") =>
@@ -311,11 +321,12 @@ const generateDocsFromFiles = async () => {
 
   const defaultFolder = path.join(__dirname, "apis");
   if (!fs.existsSync(defaultFolder)) {
-    userFeedback.error("No APIs folder found at the default location.");
-    userFeedback.tip("Run the upload command first to add OpenAPI files.");
+    userFeedback.error("No OpenApis found at the default location.");
+    userFeedback.tip(
+      "Run the “Upload OpenAPI Files” command first to add OpenAPI files."
+    );
     return;
   }
-  console.log(defaultFolder);
   const files = fs.readdirSync(defaultFolder);
 
   if (files.length === 0) {
@@ -356,11 +367,9 @@ const generateDocsFromFiles = async () => {
       }
 
       const issues = validateOpenAPISpec(apiData, file);
-
       if (issues.length > 0) {
         filesWithIssues.push({ file, issues });
       }
-
       let summaryAdded = false;
       if (apiData.paths) {
         for (const path in apiData.paths) {
@@ -421,8 +430,10 @@ const generateDocsFromFiles = async () => {
           `\n  ${fileIndex + 1}. ${file} (${issues.length} ${issueText}):`
         )
       );
-
-      issues.forEach((issue, issueIndex) => {
+      const issuesArray = Array.isArray(issues)
+        ? issues
+        : issues.issues || [issues.message || "Unknown error"];
+      issuesArray.forEach((issue, issueIndex) => {
         console.log(
           chalk.yellow(`     ${String.fromCharCode(97 + issueIndex)}. ${issue}`)
         );
@@ -458,10 +469,15 @@ const generateDocsFromFiles = async () => {
   }).start();
 
   const { exec } = require("child_process");
-  exec("./rebuildDocs.sh", (error, stdout, stderr) => {
+  const scriptPath = path.join(__dirname, "..", "cli/rebuildDocs.sh");
+
+  exec(`bash ${scriptPath}`, (error, stdout, stderr) => {
     if (error) {
       docsSpinner.fail("Documentation generation failed");
       userFeedback.error(`Error executing: ${error.message}`);
+      userFeedback.error(stderr);
+      userFeedback.error(stdout);
+
       return;
     }
 
@@ -841,8 +857,9 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
 
       const apiName = apiSpec.apiName
         ? apiSpec.apiName
+            .replace(/\./g, "-")
             .replace(/\s+/g, "-")
-            .replace(/[^\w.-]/g, "")
+            .replace(/[^\w-]/g, "")
             .replace(/-+$/, "")
         : `spec-${apiSpecs.indexOf(apiSpec) + 1}`;
 

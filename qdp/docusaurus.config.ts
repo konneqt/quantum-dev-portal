@@ -22,8 +22,7 @@ const config: Config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "konneqt", // Usually your GitHub org/user name.
   projectName: "quantum-dev-portal", // Usually your repo name.
-  deploymentBranch: 'main',
-
+  deploymentBranch: "main",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -32,6 +31,11 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+
+  // Adicione customFields aqui, no mesmo nível que presets, themeConfig, etc.
+ /*  customFields: {
+    sidebarData: require('./sidebar-data.js'),
+  }, */
 
   presets: [
     [
@@ -71,7 +75,7 @@ const config: Config = {
         src: "img/just_q_blue.png",
       },
       items: [
-      /*   {
+        /*   {
           type: "docSidebar",
           sidebarId: "tutorialSidebar",
           position: "left",
@@ -109,7 +113,26 @@ const config: Config = {
     },
   ],
 
-  plugins: [...getOpenApiPlugins()],
+  plugins: [
+    ...getOpenApiPlugins(),
+    function (context, options) {
+      return {
+        name: "custom-webpack-config",
+        configureWebpack(config, isServer, utils) {
+          return {
+            module: {
+              rules: [
+                {
+                  test: /\.(yaml|yml)$/,
+                  use: "yaml-loader",
+                },
+              ],
+            },
+          };
+        },
+      };
+    },
+    require.resolve('./plugins/sidebar/index.js'),
+  ],
 };
-
 export default config;
