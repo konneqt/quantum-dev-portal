@@ -3,6 +3,7 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import { getOpenApiPlugins } from "./openApiPlugins";
 
+require("dotenv").config();
 const config: Config = {
   title: "Quantum API DevPortal",
   tagline: "API DevPortal",
@@ -12,51 +13,31 @@ const config: Config = {
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "ignore",
 
-  // Set the production url of your site here
   url: "https://konneqt.github.io",
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/quantum-dev-portal/",
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: "konneqt", // Usually your GitHub org/user name.
-  projectName: "quantum-dev-portal", // Usually your repo name.
+  baseUrl: "/quantum-dev-portal/",
+  organizationName: "konneqt", 
+  projectName: "quantum-dev-portal",
   deploymentBranch: "main",
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
   },
-
-  // Adicione customFields aqui, no mesmo nível que presets, themeConfig, etc.
- /*  customFields: {
-    sidebarData: require('./sidebar-data.js'),
-  }, */
 
   presets: [
     [
       "classic",
       {
         docs: {
-          routeBasePath: "/", // Set this value to '/'.
+          routeBasePath: "/", 
           breadcrumbs: true,
           sidebarPath: "./sidebars.ts",
           docItemComponent: "@theme/ApiItem",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          //editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: false,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          //editUrl:
-          //  'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -66,7 +47,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: "img/just_q_blue.png",
     navbar: {
       title: "Quantum API-Devportal",
@@ -92,6 +72,14 @@ const config: Config = {
           position: "right",
         },
       ],
+    },
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
+    },
+    customSidebar: {
+      defaultDocsPath: '/docs',
     },
     footer: {
       style: "dark",
@@ -120,19 +108,62 @@ const config: Config = {
         name: "custom-webpack-config",
         configureWebpack(config, isServer, utils) {
           return {
+            resolve: {
+              extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+            },
             module: {
               rules: [
                 {
                   test: /\.(yaml|yml)$/,
                   use: "yaml-loader",
                 },
+                {
+                  test: /\.(js|jsx|ts|tsx)$/,
+                  exclude: /node_modules/,
+                  use: {
+                    loader: require.resolve('babel-loader'),
+                    options: {
+                      presets: [
+                        require.resolve('@docusaurus/core/lib/babel/preset'),
+                      ],
+                    },
+                  },
+                },
               ],
+            },
+            ignoreWarnings: [
+              {
+                message: /webpack\.cache\.PackFileCacheStrategy/,
+              },
+              {
+                message: /Serializing big strings/,
+              },
+              {
+                message: /deserialization performance/,
+              },
+            ],
+            infrastructureLogging: {
+              level: 'error',
+            },
+            stats: {
+              warnings: false,
+            },
+            performance: {
+              hints: false,
             },
           };
         },
       };
     },
-    require.resolve('./plugins/sidebar/index.js'),
   ],
+  
+  webpack: {
+    jsLoader: (isServer) => ({
+      test: /\.m?js$/,
+      resolve: {
+        fullySpecified: false,
+      }
+    }),
+  },
 };
 export default config;

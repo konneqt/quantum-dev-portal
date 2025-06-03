@@ -1,6 +1,6 @@
 {
   "name": "qdp",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./cli/index.js",
   "scripts": {
     "docusaurus": "docusaurus",
@@ -14,13 +14,14 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "install-clean": "npm install --legacy-peer-deps",
-    "qdp": "chmod +x run-cli.sh && ./run-cli.sh",
+    "qdp": "chmod +x ./cli/index.js && ./cli/index.js",
     "qdp-publish": "docusaurus deploy",
     "qdp-build": "docusaurus build",
     "qdp-start": "npm run install-clean && npm run start"
   },
   "bin": {
-    "qdp": "./cli/index.js"
+    "qdp": "./cli/index.js",
+    "qdp-start": "./cli/startServer.js"
   },
   "resolutions": {
     "@react-types/button": "^3.7.0",
@@ -48,8 +49,9 @@
     "@tabler/icons-react": "^3.31.0",
     "axios": "^1.8.1",
     "clear": "^0.1.0",
-    "docusaurus-plugin-openapi-docs": "^4.3.5",
+    "docusaurus-plugin-openapi-docs": "^4.4.0",
     "docusaurus-theme-openapi-docs": "^4.3.6",
+    "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "figlet": "^1.8.0",
     "inquirer": "^8.2.6",
@@ -98,7 +100,7 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   },
   "private": false,
   "publishConfig": {
