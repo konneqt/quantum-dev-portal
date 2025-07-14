@@ -5,51 +5,60 @@ const axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
 const { spawn } = require('child_process');
+const { resolveQdpRoot } = require("../utils/resolveQdpRoot");
 
 // Importa a função auxiliar do arquivo de upload (se disponível)
 let ensureLocalQdpExists;
+let setupSpinner; 
 try {
   ensureLocalQdpExists = require("./openApiUploader").ensureLocalQdpExists;
 } catch (error) {
   // Se não conseguir importar, define uma versão local
   ensureLocalQdpExists = async () => {
     const currentDir = process.cwd();
-    const localQdpPath = path.join(currentDir, 'qdp');
-    
-    if (!fs.existsSync(localQdpPath)) {
-      const { default: ora } = await import("ora");
-      const setupSpinner = ora("Setting up local qdp environment...").start();
-      
-      try {
-        console.log(chalk.blue('Setting up local qdp environment...'));
-        
-        const globalQdpPath = path.dirname(require.resolve('qdp/package.json'));
-        
-        await fs.copy(globalQdpPath, localQdpPath, {
-          filter: (src) => {
-            const relativePath = path.relative(globalQdpPath, src);
-            return !relativePath.startsWith('node_modules') && 
-                   !relativePath.startsWith('.git') &&
-                   !relativePath.startsWith('build') &&
-                   !relativePath.startsWith('.next');
-          }
-        });
-
-        // Garante que as pastas necessárias existem
-        const necessaryDirs = ['cli/apis', 'docs', 'src/pages'];
-        for (const dir of necessaryDirs) {
-          await fs.ensureDir(path.join(localQdpPath, dir));
-        }
-        
-        setupSpinner.succeed("Local qdp environment ready!");
-        console.log(chalk.green('Local environment ready!'));
-        
-      } catch (error) {
-        setupSpinner.fail("Failed to setup local environment");
-        throw error;
-      }
+    const localQdpPath = path.join(currentDir, "qdp");
+    const globalQdpPath = resolveQdpRoot();
+  
+    // Se o QDP global NÃO estiver dentro de node_modules, assume que veio de repositório (evita cópia)
+    if (!globalQdpPath.includes("node_modules")) {
+      return globalQdpPath;
     }
-    
+  
+    // Se já existir localmente, não precisa copiar
+    if (fs.existsSync(localQdpPath)) {
+      return localQdpPath;
+    }
+  
+    const { default: ora } = await import("ora");
+    setupSpinner = ora("Setting up local qdp environment...").start();
+  
+    try {
+      console.log(chalk.blue("Setting up local qdp environment..."));
+  
+      await fs.copy(globalQdpPath, localQdpPath, {
+        filter: (src) => {
+          const relativePath = path.relative(globalQdpPath, src);
+          return (
+            !relativePath.startsWith("node_modules") &&
+            !relativePath.startsWith(".git") &&
+            !relativePath.startsWith("build") &&
+            !relativePath.startsWith(".next")
+          );
+        },
+      });
+  
+      const necessaryDirs = ["cli/apis", "docs", "src/pages"];
+      for (const dir of necessaryDirs) {
+        await fs.ensureDir(path.join(localQdpPath, dir));
+      }
+  
+      setupSpinner.succeed("Local qdp environment ready!");
+      console.log(chalk.green("Local environment ready!"));
+    } catch (error) {
+      setupSpinner.fail("Failed to setup local environment");
+      throw error;
+    }
+  
     return localQdpPath;
   };
 }

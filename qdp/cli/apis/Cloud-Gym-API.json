@@ -1,0 +1,2549 @@
+{
+   "openapi": "3.0.0",
+   "info": {
+      "version": "2.1.0",
+      "title": "CloudGym API ",
+      "description": "Documentation"
+   },
+   "servers": [
+      {
+         "url": "https://api.cloudgym.io/"
+      },
+      {
+         "url": "http://127.0.0.1:3000/"
+      }
+   ],
+   "tags": [
+      {
+         "name": "Authentication"
+      },
+      {
+         "name": "Class"
+      },
+      {
+         "name": "ClassAttendance"
+      },
+      {
+         "name": "Contract"
+      },
+      {
+         "name": "Member"
+      },
+      {
+         "name": "Payment"
+      },
+      {
+         "name": "Plan"
+      },
+      {
+         "name": "Product"
+      },
+      {
+         "name": "Promotion"
+      },
+      {
+         "name": "Prospect"
+      },
+      {
+         "name": "Unit"
+      }
+   ],
+   "paths": {
+      "/auth": {
+         "post": {
+            "tags": [
+               "Authentication"
+            ],
+            "summary": "Request new access token",
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/TokenResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               },
+               "401": {
+                  "description": "Unauthorized"
+               }
+            },
+            "security": [
+               {
+                  "Credential": []
+               }
+            ]
+         }
+      },
+      "/v1/class": {
+         "post": {
+            "tags": [
+               "Class"
+            ],
+            "summary": "Add new attendee class",
+            "operationId": "aclass.create",
+            "requestBody": {
+               "description": "Class information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ClassResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ClassSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               },
+               "401": {
+                  "description": "Unauthorized"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/class/findbyunit/{id}": {
+         "get": {
+            "tags": [
+               "Class"
+            ],
+            "summary": "Find classes by unit ID",
+            "operationId": "aclass.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Unit ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ClassSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/class/{id}": {
+         "put": {
+            "tags": [
+               "Class"
+            ],
+            "summary": "Update attendee class by ID",
+            "operationId": "aclass.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Ateendee class ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Class information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ClassResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ClassSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/classattendance": {
+         "post": {
+            "tags": [
+               "ClassAttendance"
+            ],
+            "summary": "Add new attendence class",
+            "operationId": "aclass.createAttendance",
+            "requestBody": {
+               "description": "Classattendance information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ClassAttendanceResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ClassAttendanceResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/classattendance/findbymember/{id}": {
+         "get": {
+            "tags": [
+               "ClassAttendance"
+            ],
+            "summary": "Find attendence classes by member ID",
+            "operationId": "aclass.getAttendanceByMemberId",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "classattendance ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ClassAttendenceSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/classattendance/findbydate/{classid}/{date}": {
+         "get": {
+            "tags": [
+               "ClassAttendance"
+            ],
+            "summary": "Find attendence class by date",
+            "operationId": "aclass.getAttendanceAll",
+            "parameters": [
+               {
+                  "name": "classid",
+                  "in": "path",
+                  "description": "classattendance ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               },
+               {
+                  "name": "date",
+                  "in": "path",
+                  "description": "classattendance date",
+                  "required": true,
+                  "schema": {
+                     "type": "string",
+                     "format": "date"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ClassAttendenceSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/contract/findbymember/{id}": {
+         "get": {
+            "tags": [
+               "Contract"
+            ],
+            "summary": "Find all contracts",
+            "operationId": "contract.getByMemberId",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "member ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ContractCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/contract": {
+         "post": {
+            "tags": [
+               "Contract"
+            ],
+            "summary": "Add new contract",
+            "operationId": "contract.create",
+            "requestBody": {
+               "description": "Contract information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ContractResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ContractSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/contract/{id}": {
+         "get": {
+            "tags": [
+               "Contract"
+            ],
+            "summary": "Find contract by ID",
+            "operationId": "contract.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "contract ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ContractSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Contract"
+            ],
+            "summary": "Update contract by ID",
+            "operationId": "contract.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "contract ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Contract information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ContractResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ContractSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/member": {
+         "get": {
+            "tags": [
+               "Member"
+            ],
+            "summary": "Find all members",
+            "operationId": "member.getAll",
+            "parameters": [
+               {
+                  "in": "query",
+                  "schema": {
+                     "type": "string"
+                  },
+                  "name": "name"
+               },
+               {
+                  "in": "query",
+                  "schema": {
+                     "type": "string",
+                     "pattern": "[0-9]{3,11}"
+                  },
+                  "name": "cpf"
+               },
+               {
+                  "in": "query",
+                  "schema": {
+                     "type": "string",
+                     "format": "email"
+                  },
+                  "name": "email"
+               },
+               {
+                  "in": "query",
+                  "schema": {
+                     "type": "string"
+                  },
+                  "name": "phone"
+               },
+               {
+                  "in": "query",
+                  "schema": {
+                     "type": "string",
+                     "format": "date"
+                  },
+                  "name": "birthday"
+               },
+               {
+                  "in": "query",
+                  "schema": {
+                     "type": "integer",
+                     "description": "50 max records per request"
+                  },
+                  "name": "pagination"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/MemberCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "post": {
+            "tags": [
+               "Member"
+            ],
+            "summary": "Add new member",
+            "operationId": "member.create",
+            "requestBody": {
+               "description": "Member information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/MemberResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/MemberSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/member/{id}": {
+         "get": {
+            "tags": [
+               "Member"
+            ],
+            "summary": "Find member by ID",
+            "operationId": "member.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "member ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/MemberSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Member"
+            ],
+            "summary": "Update member by ID",
+            "operationId": "member.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "member ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Member information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/MemberResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/MemberSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/payment/findbycontract/{id}": {
+         "get": {
+            "tags": [
+               "Payment"
+            ],
+            "summary": "Find all payments",
+            "operationId": "payment.getByContractId",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Contract ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PaymentCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/payment": {
+         "post": {
+            "tags": [
+               "Payment"
+            ],
+            "summary": "Add new payment",
+            "operationId": "payment.create",
+            "requestBody": {
+               "description": "Payment information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/PaymentResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PaymentSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/payment/{id}": {
+         "get": {
+            "tags": [
+               "Payment"
+            ],
+            "summary": "Find payment by ID",
+            "operationId": "payment.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "payment ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PaymentSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Payment"
+            ],
+            "summary": "Update payment by ID",
+            "operationId": "payment.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "payment ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Payment information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/PaymentResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PaymentSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/plan": {
+         "get": {
+            "tags": [
+               "Plan"
+            ],
+            "summary": "Find all plans",
+            "operationId": "plan.getAll",
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PlanCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "post": {
+            "tags": [
+               "Plan"
+            ],
+            "summary": "Add new plan",
+            "operationId": "plan.create",
+            "requestBody": {
+               "description": "Plan information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/PlanResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PlanSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/plan/{id}": {
+         "get": {
+            "tags": [
+               "Plan"
+            ],
+            "summary": "Find plan by ID",
+            "operationId": "plan.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "plan ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PlanSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Plan"
+            ],
+            "summary": "Update plan by ID",
+            "operationId": "plan.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "plan ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Plan information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/PlanResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PlanSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/plan/findbyunit/{id}": {
+         "get": {
+            "tags": [
+               "Plan"
+            ],
+            "summary": "Find plan by Unit ID",
+            "operationId": "plan.getByUnit",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Unit ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PlanSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/product": {
+         "get": {
+            "tags": [
+               "Product"
+            ],
+            "summary": "Find all products",
+            "operationId": "product.getAll",
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProductCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "post": {
+            "tags": [
+               "Product"
+            ],
+            "summary": "Add new product",
+            "operationId": "product.create",
+            "requestBody": {
+               "description": "Product information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ProductResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProductSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/product/{id}": {
+         "get": {
+            "tags": [
+               "Product"
+            ],
+            "summary": "Find product by ID",
+            "operationId": "product.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "product ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProductSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Product"
+            ],
+            "summary": "Update product by ID",
+            "operationId": "product.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "product ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Product information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ProductResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProductSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/prospect": {
+         "get": {
+            "tags": [
+               "Prospect"
+            ],
+            "summary": "Find all prospects",
+            "operationId": "prospect.getAll",
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProspectCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "post": {
+            "tags": [
+               "Prospect"
+            ],
+            "summary": "Add new prospect",
+            "operationId": "prospect.create",
+            "requestBody": {
+               "description": "Prospect information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ProspectResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProspectSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/prospect/{id}": {
+         "get": {
+            "tags": [
+               "Prospect"
+            ],
+            "summary": "Find prospect by ID",
+            "operationId": "prospect.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "prospect ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProspectSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Prospect"
+            ],
+            "summary": "Update prospect by ID",
+            "operationId": "prospect.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "prospect ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Prospect information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ProspectResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/ProspectSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/promotion": {
+         "get": {
+            "tags": [
+               "Promotion"
+            ],
+            "summary": "Find all promotions",
+            "operationId": "promotion.getAll",
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PromotionCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "post": {
+            "tags": [
+               "Promotion"
+            ],
+            "summary": "Add new promotion",
+            "operationId": "promotion.create",
+            "requestBody": {
+               "description": "Promotion information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/PromotionResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PromotionSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/promotion/{id}": {
+         "get": {
+            "tags": [
+               "Promotion"
+            ],
+            "summary": "Find promotion by ID",
+            "operationId": "promotion.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "promotion ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PromotionSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Promotion"
+            ],
+            "summary": "Update promotion by ID",
+            "operationId": "promotion.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "promotion ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Promotion information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/PromotionResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PromotionSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/promotion/findbycode/{id}": {
+         "get": {
+            "tags": [
+               "Promotion"
+            ],
+            "summary": "Find promotion by code",
+            "operationId": "promotion.getByCode",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "promotion ID",
+                  "required": true,
+                  "schema": {
+                     "type": "string"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/PromotionSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/unit": {
+         "get": {
+            "tags": [
+               "Unit"
+            ],
+            "summary": "Find all units",
+            "operationId": "unit.getAll",
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/UnitCollectionResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "post": {
+            "tags": [
+               "Unit"
+            ],
+            "summary": "Add new unit",
+            "operationId": "unit.create",
+            "requestBody": {
+               "description": "Unit information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/UnitResource"
+                     }
+                  }
+               },
+               "required": true
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/UnitSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      },
+      "/v1/unit/{id}": {
+         "get": {
+            "tags": [
+               "Unit"
+            ],
+            "summary": "Find unit by ID",
+            "operationId": "unit.getById",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "unit ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/UnitSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         },
+         "put": {
+            "tags": [
+               "Unit"
+            ],
+            "summary": "Update unit by ID",
+            "operationId": "unit.update",
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "unit ID",
+                  "required": true,
+                  "schema": {
+                     "type": "integer",
+                     "format": "int64"
+                  }
+               }
+            ],
+            "requestBody": {
+               "description": "Unit information",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/UnitResource"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Response OK",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/UnitSingleResource"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad request"
+               }
+            },
+            "security": [
+               {
+                  "Token": []
+               }
+            ]
+         }
+      }
+   },
+   "components": {
+      "schemas": {
+         "TokenResource": {
+            "type": "object",
+            "properties": {
+               "sucess": {
+                  "type": "boolean"
+               },
+               "accessToken": {
+                  "type": "string"
+               },
+               "token_type": {
+                  "type": "string"
+               }
+            }
+         },
+         "ClassResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "dayofweek": {
+                  "type": "integer",
+                  "enum": [
+                     1,
+                     2,
+                     3,
+                     4,
+                     5,
+                     6,
+                     7
+                  ]
+               },
+               "name": {
+                  "type": "string"
+               },
+               "time": {
+                  "type": "string"
+               },
+               "unit": {
+                  "type": "string"
+               },
+               "capacity": {
+                  "type": "string"
+               },
+               "description": {
+                  "type": "string"
+               },
+               "endtime": {
+                  "type": "string"
+               },
+               "instructorid": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 22
+               },
+               "category": {
+                  "type": "string"
+               },
+               "crossfittechnique": {
+                  "type": "string"
+               },
+               "crossfitwarm": {
+                  "type": "string"
+               },
+               "crossfitwod": {
+                  "type": "string"
+               },
+               "crossfittype": {
+                  "type": "string"
+               }
+            },
+            "required": [
+               "name",
+               "time",
+               "dayofweek"
+            ]
+         },
+         "ClassAttendanceResource": {
+            "type": "object",
+            "properties": {
+               "memberid": {
+                  "type": "integer"
+               },
+               "date": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "class_id": {
+                  "type": "integer"
+               },
+               "deviceId": {
+                  "type": "string"
+               }
+            },
+            "required": [
+               "memberid",
+               "date",
+               "class_id"
+            ]
+         },
+         "ContractResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "methodpayment": {
+                  "type": "string"
+               },
+               "startdate": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "plan": {
+                  "type": "string"
+               },
+               "account": {
+                  "type": "string"
+               },
+               "agency": {
+                  "type": "string"
+               },
+               "bank": {
+                  "type": "string"
+               },
+               "brandcc": {
+                  "type": "string"
+               },
+               "ccvcc": {
+                  "type": "string"
+               },
+               "discount": {
+                  "type": "string"
+               },
+               "numbercc": {
+                  "type": "string"
+               },
+               "promocode": {
+                  "type": "string"
+               },
+               "validcc": {
+                  "type": "string"
+               },
+               "member_id": {
+                  "type": "integer"
+               }
+            },
+            "required": [
+               "startdate",
+               "plan",
+               "member_id",
+               "methodpayment"
+            ]
+         },
+         "MemberResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "name": {
+                  "type": "string"
+               },
+               "cpf": {
+                  "type": "string"
+               },
+               "rg": {
+                  "type": "string",
+                  "minLength": 9,
+                  "maxLength": 9
+               },
+               "gender": {
+                  "type": "string",
+                  "enum": [
+                     "M",
+                     "F",
+                     "J"
+                  ]
+               },
+               "birthday": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "email": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 30
+               },
+               "phonenumber": {
+                  "type": "string",
+                  "pattern": "^[1-9]{2}[1-9][0-9]{8}$}"
+               },
+               "cellphonenumber": {
+                  "type": "string",
+                  "pattern": "^[1-9]{2}[2-9][0-9]{7,8}$"
+               },
+               "address": {
+                  "type": "string"
+               },
+               "complement": {
+                  "type": "string"
+               },
+               "neighborhood": {
+                  "type": "string"
+               },
+               "city": {
+                  "type": "string"
+               },
+               "state": {
+                  "type": "string"
+               },
+               "zipcode": {
+                  "type": "string"
+               },
+               "latitude": {
+                  "type": "number",
+                  "format": "double"
+               },
+               "longitude": {
+                  "type": "number",
+                  "format": "double"
+               },
+               "responsible": {
+                  "type": "string"
+               },
+               "anotation": {
+                  "type": "string"
+               },
+               "creationdate": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "companygroupid": {
+                  "type": "string"
+               },
+               "level": {
+                  "type": "string"
+               },
+               "metadata": {
+                  "type": "object"
+               }
+            },
+            "required": [
+               "name",
+               "rg",
+               "email",
+               "latitude",
+               "longitude",
+               "birthday"
+            ]
+         },
+         "PaymentResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "methodpayment": {
+                  "type": "string"
+               },
+               "amount": {
+                  "type": "number"
+               },
+               "duedate": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "paiddate": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "status": {
+                  "type": "string"
+               },
+               "contract_id": {
+                  "type": "integer"
+               },
+               "checknumber": {
+                  "type": "string"
+               },
+               "checkbank": {
+                  "type": "string"
+               },
+               "manually": {
+                  "type": "boolean"
+               },
+               "entrydate": {
+                  "type": "string",
+                  "format": "date"
+               }
+            }
+         },
+         "PlanResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "name": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 50
+               },
+               "type": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50
+               },
+               "months": {
+                  "type": "string"
+               },
+               "price": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50
+               },
+               "maintenancefee": {
+                  "type": "string"
+               },
+               "registrationfee": {
+                  "type": "string"
+               },
+               "gracemaintenancefee": {
+                  "type": "string"
+               },
+               "graceregistrationfee": {
+                  "type": "string"
+               },
+               "accessfrom": {
+                  "type": "string"
+               },
+               "accessto": {
+                  "type": "string"
+               },
+               "renew": {
+                  "type": "boolean"
+               },
+               "extid": {
+                  "type": "string"
+               },
+               "duration": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50
+               },
+               "installman": {
+                  "type": "string"
+               },
+               "installreg": {
+                  "type": "string"
+               },
+               "nsessions": {
+                  "type": "string"
+               },
+               "status": {
+                  "type": "string"
+               }
+            },
+            "required": [
+               "name",
+               "type",
+               "duration"
+            ]
+         },
+         "ProductResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "allowsellnostock": {
+                  "type": "boolean"
+               },
+               "buyprice": {
+                  "type": "string"
+               },
+               "category": {
+                  "type": "string"
+               },
+               "chartaccountid": {
+                  "type": "string"
+               },
+               "code": {
+                  "type": "string"
+               },
+               "controlstock": {
+                  "type": "boolean"
+               },
+               "minstock": {
+                  "type": "string"
+               },
+               "name": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 50
+               },
+               "price": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 50
+               },
+               "stock": {
+                  "type": "string"
+               },
+               "unit": {
+                  "type": "string"
+               }
+            },
+            "required": [
+               "name",
+               "price",
+               "chartaccountid"
+            ]
+         },
+         "PromotionResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "active": {
+                  "type": "boolean"
+               },
+               "code": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 10
+               },
+               "description": {
+                  "type": "string"
+               },
+               "discount": {
+                  "type": "string"
+               },
+               "discountfee": {
+                  "type": "string"
+               },
+               "max": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 10
+               },
+               "used": {
+                  "type": "string"
+               },
+               "maintancediscountfee": {
+                  "type": "string"
+               },
+               "companygroupid": {
+                  "type": "string"
+               }
+            }
+         },
+         "UnitResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "name": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 50
+               },
+               "address": {
+                  "type": "string"
+               },
+               "city": {
+                  "type": "string"
+               },
+               "neighborhood": {
+                  "type": "string"
+               },
+               "phone": {
+                  "type": "string"
+               },
+               "register": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 50
+               },
+               "state": {
+                  "type": "string"
+               },
+               "zipcode": {
+                  "type": "string"
+               },
+               "company": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 50
+               },
+               "trade": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 50
+               },
+               "extid": {
+                  "type": "string"
+               },
+               "latitude": {
+                  "type": "string"
+               },
+               "longitude": {
+                  "type": "string"
+               }
+            },
+            "required": [
+               "name",
+               "company",
+               "trade",
+               "register"
+            ]
+         },
+         "ClassSingleResource": {
+            "type": "object",
+            "properties": {
+               "class": {
+                  "$ref": "#/components/schemas/ClassResource"
+               }
+            }
+         },
+         "ClassAttendenceSingleResource": {
+            "type": "object",
+            "properties": {
+               "classattendence": {
+                  "$ref": "#/components/schemas/ClassAttendanceResource"
+               }
+            }
+         },
+         "ContractSingleResource": {
+            "type": "object",
+            "properties": {
+               "contract": {
+                  "$ref": "#/components/schemas/ContractResource"
+               }
+            }
+         },
+         "ContractCollectionResource": {
+            "type": "object",
+            "properties": {
+               "contract": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/ContractResource"
+                  }
+               }
+            }
+         },
+         "MemberSingleResource": {
+            "type": "object",
+            "properties": {
+               "member": {
+                  "$ref": "#/components/schemas/MemberResource"
+               }
+            }
+         },
+         "MemberCollectionResource": {
+            "type": "object",
+            "properties": {
+               "member": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/MemberResource"
+                  }
+               }
+            }
+         },
+         "PaymentSingleResource": {
+            "type": "object",
+            "properties": {
+               "payment": {
+                  "$ref": "#/components/schemas/PaymentResource"
+               }
+            }
+         },
+         "PaymentCollectionResource": {
+            "type": "object",
+            "properties": {
+               "payment": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/PaymentResource"
+                  }
+               }
+            }
+         },
+         "PlanSingleResource": {
+            "type": "object",
+            "properties": {
+               "plan": {
+                  "$ref": "#/components/schemas/PlanResource"
+               }
+            }
+         },
+         "PlanCollectionResource": {
+            "type": "object",
+            "properties": {
+               "plan": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/PlanResource"
+                  }
+               }
+            }
+         },
+         "ProductSingleResource": {
+            "type": "object",
+            "properties": {
+               "product": {
+                  "$ref": "#/components/schemas/ProductResource"
+               }
+            }
+         },
+         "ProductCollectionResource": {
+            "type": "object",
+            "properties": {
+               "product": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/ProductResource"
+                  }
+               }
+            }
+         },
+         "ProspectSingleResource": {
+            "type": "object",
+            "properties": {
+               "prospect": {
+                  "$ref": "#/components/schemas/ProspectResource"
+               }
+            }
+         },
+         "ProspectCollectionResource": {
+            "type": "object",
+            "properties": {
+               "prospect": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/ProspectResource"
+                  }
+               }
+            }
+         },
+         "ProspectResource": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "integer"
+               },
+               "name": {
+                  "type": "string"
+               },
+               "cpf": {
+                  "type": "string"
+               },
+               "rg": {
+                  "type": "string",
+                  "minLength": 9,
+                  "maxLength": 9
+               },
+               "gender": {
+                  "type": "string",
+                  "enum": [
+                     "M",
+                     "F",
+                     "J"
+                  ]
+               },
+               "birthday": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "visitdate": {
+                  "type": "string",
+                  "format": "date"
+               },
+               "visittime": {
+                  "type": "string",
+                  "format": "time"
+               },
+               "email": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 30
+               },
+               "phonenumber": {
+                  "type": "string",
+                  "pattern": "^[1-9]{2}[1-9][0-9]{8}$}"
+               },
+               "cellphonenumber": {
+                  "type": "string",
+                  "pattern": "^[1-9]{2}[2-9][0-9]{7,8}$"
+               },
+               "address": {
+                  "type": "string"
+               },
+               "complement": {
+                  "type": "string"
+               },
+               "neighborhood": {
+                  "type": "string"
+               },
+               "city": {
+                  "type": "string"
+               },
+               "state": {
+                  "type": "string"
+               },
+               "zipcode": {
+                  "type": "string"
+               },
+               "responsible": {
+                  "type": "string"
+               },
+               "source": {
+                  "type": "string"
+               },
+               "unit": {
+                  "type": "integer"
+               },
+               "funnelid": {
+                  "type": "integer"
+               }
+            },
+            "required": [
+               "name",
+               "email",
+               "unit"
+            ]
+         },
+         "PromotionSingleResource": {
+            "type": "object",
+            "properties": {
+               "promotion": {
+                  "$ref": "#/components/schemas/PromotionResource"
+               }
+            }
+         },
+         "PromotionCollectionResource": {
+            "type": "object",
+            "properties": {
+               "promotion": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/PromotionResource"
+                  }
+               }
+            }
+         },
+         "UnitSingleResource": {
+            "type": "object",
+            "properties": {
+               "unit": {
+                  "$ref": "#/components/schemas/UnitResource"
+               }
+            }
+         },
+         "UnitCollectionResource": {
+            "type": "object",
+            "properties": {
+               "unit": {
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/components/schemas/UnitResource"
+                  }
+               }
+            }
+         }
+      },
+      "securitySchemes": {
+         "Credential": {
+            "type": "http",
+            "description": "Authentication with ClientID and SecretID to retrive access_token to be able to make api calls",
+            "scheme": "basic"
+         },
+         "Token": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+         }
+      }
+   }
+}
