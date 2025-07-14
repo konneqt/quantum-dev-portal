@@ -1,0 +1,71 @@
+---
+id: aclass-create
+title: "Add new attendee class"
+description: "Add new attendee class"
+sidebar_label: "Add new attendee class"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVlFv2zYQ/ivCPXOW7XYroLc03YZsA1okKfZgGMOZulhsJFIhT3Y8Qf+9OEqu5Vjpw7DHvkl3H4/Hu+87sgXGbYBsBdclhgBrBa4mj2ycvckhA9Rin2lPyAQKPD01FPi9yw+QtZBT0N7UAoesj5EY++B8FUOAAu0sk2UBY12XRkdH+iXIihaCLqhC+eJDTZCB23whzaCg9pIJGwriNfkIYyzTljx0CnI8uIc90eOEWwHZpoJstVBL9Ua9VT+rX9S7dafAYkWjBYG9sVsJx+YVR2MNTzo01qgNHyadZ+WZ8JPNX93R2MC+0ez82dkHgILK2L/IbrmAbKGgwufj33IZ02LaOj+dlvYuhAfDTLqw5qmZTuCI2qOvvg9wEwmOt4mOC0DXs8l4yoWAsSdDB8Z9XYuNSzry65aCa7wm6M4jsG8oGkLtbOhZs5zPL1l6OyCSj3/+f/yMMvlB4x80/g80fuG5M3Zb0pjmnYK3U0x+j3kyDGSImMUl5rPFhgvnzb+Ux70C6cbHTq9auHePZCFbrbv1izbDVZ4nlvYJMpPNiZKe4goq4kJKBbULkeEo7YJ0t0iPkEB+Rz7ELRpfQgYFcx2yNMXazHTpmnx7qGbGpdCpMSRL08Xy3Ww+m88W2Zv5fJ6CZHbM+U7U2Cvp2lNOlg2Wo55ICLg4SMOFIHtlJ3vDRXJdGrJ88yFBmyd3pD3JD7vEE3uzowS1phD+YamP2DeU4KYk+azwkRKsTaKxLONpY1aQwQaD0dKJoawv8zoBCX1Udv/xW7wvIYM//r6PPZLpc3u6aX99xqou6ThA5mfzYnGcAydN9WI8/feqP/2fxH6yndfsm/mbtE+mc0WPox61OrJdSvTS2Stzwu7yyViXI+bBSW2Ecn36y9liNoexrlyT/36okqtPN8nFYT843VRkuX+ydCoSu8LYwKG0r4phejQyPXNal2hiuEjvdtDJCnYLOczxuVWIiLIVtO0GA332ZdeJ+akhqeRqrWCH3gj3okwVFIQ5+SitR5JiX/c32E/3srfAy1jmi9tMlNavuNKaav4udj3S+aePd/fC1eHNV7lc1njcy3sQ95AByLNRVkdpRlsLJdptg1vB9jGF2TKMRoV6IYR4qsGF9jDKsG17RFRW14EajhIFCt2667qvelWzKQ==
+sidebar_class_name: "post api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Add new attendee class"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/class"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Add new attendee class
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Class information","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer"},"dayofweek":{"type":"integer","enum":[1,2,3,4,5,6,7]},"name":{"type":"string"},"time":{"type":"string"},"unit":{"type":"string"},"capacity":{"type":"string"},"description":{"type":"string"},"endtime":{"type":"string"},"instructorid":{"type":"string","minLength":1,"maxLength":22},"category":{"type":"string"},"crossfittechnique":{"type":"string"},"crossfitwarm":{"type":"string"},"crossfitwod":{"type":"string"},"crossfittype":{"type":"string"}},"required":["name","time","dayofweek"],"title":"ClassResource"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"class":{"type":"object","properties":{"id":{"type":"integer"},"dayofweek":{"type":"integer","enum":[1,2,3,4,5,6,7]},"name":{"type":"string"},"time":{"type":"string"},"unit":{"type":"string"},"capacity":{"type":"string"},"description":{"type":"string"},"endtime":{"type":"string"},"instructorid":{"type":"string","minLength":1,"maxLength":22},"category":{"type":"string"},"crossfittechnique":{"type":"string"},"crossfitwarm":{"type":"string"},"crossfitwod":{"type":"string"},"crossfittype":{"type":"string"}},"required":["name","time","dayofweek"],"title":"ClassResource"}},"title":"ClassSingleResource"}}}},"400":{"description":"Bad request"},"401":{"description":"Unauthorized"}}}
+>
+  
+</StatusCodes>
+
+
+      

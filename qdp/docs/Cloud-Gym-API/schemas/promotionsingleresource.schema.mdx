@@ -1,0 +1,33 @@
+---
+id: promotionsingleresource
+title: "PromotionSingleResource"
+description: ""
+sidebar_label: "PromotionSingleResource"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"promotion":{"id":0,"active":true,"code":"string","description":"string","discount":"string","discountfee":"string","max":"string","used":"string","maintancediscountfee":"string","companygroupid":"string"}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"PromotionSingleResource"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"promotion":{"type":"object","properties":{"id":{"type":"integer"},"active":{"type":"boolean"},"code":{"type":"string","minLength":1,"maxLength":10},"description":{"type":"string"},"discount":{"type":"string"},"discountfee":{"type":"string"},"max":{"type":"string","minLength":2,"maxLength":10},"used":{"type":"string"},"maintancediscountfee":{"type":"string"},"companygroupid":{"type":"string"}},"title":"PromotionResource"}},"title":"PromotionSingleResource"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

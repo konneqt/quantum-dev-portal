@@ -1,0 +1,71 @@
+---
+id: promotion-create
+title: "Add new promotion"
+description: "Add new promotion"
+sidebar_label: "Add new promotion"
+hide_title: true
+hide_table_of_contents: true
+api: eJztlk1v2zAMhv+KwbMWO9mAAb71Yxu6DWjRdtghCAZGZh21tuRKctLA0H8fKKe126TrZYcddrNESiKp56XcgcfSQT6HC2tq45XRsBBgGrLIg7MCcmgeTRNpCT2BAEv3LTl/bIot5B0U5KRVTVyeD1slSt8YW8edQIA02pP2vACbplIyGtJbx6s6cHJFNfKX3zYEOZjlLUkPggNoyHpFjq2qGPko7akkC0EASq/WNLItjakINdukKcYW563SJQiolf5OuvQryKcCanx4GmVBPE/r5WK2KydN22f0qvGGDpwc4mFvRDTbj6h1VLyym9IetaS3jpWmblBvS2vaRh3aKwjwylc0vshLcqa1kiCwmS9fWQ7E25bihGuMdv31zLJsH4nLnUdy/u3vgfDE5X9m/m1mDlivlC4rGnMVBHw4hM4xFsmu3cStHMnWKr+FfN7BtbkjDfl8ERYvSg9HRZFo2iQDJQJq8isTW5pxERLkKkG6nqZjN0d2TdbFE1pbQQ4r7xuXpyk2aiIr0xbltp4ok0IQY5c8Taezj5Nskk2m+fssy1LgwB5DvmKweyBPLBWkvcJqVE7eAvbyaP2KPXuRJBvlV8lJpUj7s9MEdZFckbTEA28SS96qNSUoJTn3y3N5eH5JCS4r4s8a7yjBRiUSq8pxtjEqZh+dknzfu6q+jGtwJLRkQew+PsceDzl8/Xkdr4iFfDm8EJ8esG4qetRhNsiO+8ej0Aacn+c/TD8pZ38ukjsSBOtkGPYKGJsPgT/YX/I+kgK/aJwI89HHN5tMJxkMiJ8wHl+2dXJ0cZbsZXNqZFuT9v2bGEQkscZYbY2xuofAPdxVPD34tKlQxZ0iht2O6Tmsp30XHF71FUOfz6Hrlujoh61C4On7liyraSFgjVYxJ1FRAlaEBdkogzvacm594353zeeze9VyHHtNnFXRrziSkhr/R9/FSJcX51fXzNXuv6LuybC44X8O3EAOwH8nvDrKKM51UKEuWyzZt9+TKcSWCzF09ufQxqx2JtTbUYRd13tEFYQAYpdKFBOERQjhNxyOLK8=
+sidebar_class_name: "post api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Add new promotion"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/promotion"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Add new promotion
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Promotion information","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer"},"active":{"type":"boolean"},"code":{"type":"string","minLength":1,"maxLength":10},"description":{"type":"string"},"discount":{"type":"string"},"discountfee":{"type":"string"},"max":{"type":"string","minLength":2,"maxLength":10},"used":{"type":"string"},"maintancediscountfee":{"type":"string"},"companygroupid":{"type":"string"}},"title":"PromotionResource"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"promotion":{"type":"object","properties":{"id":{"type":"integer"},"active":{"type":"boolean"},"code":{"type":"string","minLength":1,"maxLength":10},"description":{"type":"string"},"discount":{"type":"string"},"discountfee":{"type":"string"},"max":{"type":"string","minLength":2,"maxLength":10},"used":{"type":"string"},"maintancediscountfee":{"type":"string"},"companygroupid":{"type":"string"}},"title":"PromotionResource"}},"title":"PromotionSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

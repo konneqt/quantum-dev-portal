@@ -1,0 +1,33 @@
+---
+id: classsingleresource
+title: "ClassSingleResource"
+description: ""
+sidebar_label: "ClassSingleResource"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"class":{"id":0,"dayofweek":1,"name":"string","time":"string","unit":"string","capacity":"string","description":"string","endtime":"string","instructorid":"string","category":"string","crossfittechnique":"string","crossfitwarm":"string","crossfitwod":"string","crossfittype":"string"}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ClassSingleResource"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"class":{"type":"object","properties":{"id":{"type":"integer"},"dayofweek":{"type":"integer","enum":[1,2,3,4,5,6,7]},"name":{"type":"string"},"time":{"type":"string"},"unit":{"type":"string"},"capacity":{"type":"string"},"description":{"type":"string"},"endtime":{"type":"string"},"instructorid":{"type":"string","minLength":1,"maxLength":22},"category":{"type":"string"},"crossfittechnique":{"type":"string"},"crossfitwarm":{"type":"string"},"crossfitwod":{"type":"string"},"crossfittype":{"type":"string"}},"required":["name","time","dayofweek"],"title":"ClassResource"}},"title":"ClassSingleResource"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

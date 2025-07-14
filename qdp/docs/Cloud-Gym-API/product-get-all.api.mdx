@@ -1,0 +1,63 @@
+---
+id: product-get-all
+title: "Find all products"
+description: "Find all products"
+sidebar_label: "Find all products"
+hide_title: true
+hide_table_of_contents: true
+api: eJyFVMFu2zAM/RWDZyN2sg0DfOvSteg2YEXbYYcgGBiZi9XKkivR6QzD/z5QSRo3TbeTZfHx6Yl8Yg+M6wDFAq69K1vFsEzBNeSRtbNXJRTQbAOTNfGZMZCCp9A4GyhA0cMsz+VTUlBeN5IEBdzsEMn3r5CCcpbJssCwaYxWkTu7D4LtIaiKapQVdw1BAW51T4ohlZMb8qy3J+10jIDoPXaQgmaqw/8JdDnCaMu0Jg9DCmiMewpkjHWBnXoYoVbOGUIrqFXbNV4rGkUDe23XElTItHa+Ox2s0DMq5VrLLzSMIK58g9hZ9s78Q1et7XH0kG6xPsEbk76RXXMFxYcUavzz/JcPUraT93yRNnud9raM1mo+ERjES4+t9lSKA6PY/emvyrZMgTUbyd9Z9YaCa70iGITpKDh3xpASo41hQwrvTxn2E5aJSKHAUVYg1XrNHRSLHu7cA1koFsthmR7lXWhbJmhMsjNnkCIRV04ezpqiB1EKBNlmmu0dLPx+Qz5E+tYbKKBibkKRZdjoiTKuLdddPdEugyEdQ4osm84+TvJJPpkW7/I8z0BU7fXeylvaun3uqSTLGs2o8kIBx5c4a7kS5PZdJk+aq2RuNFm+Ok/QlsktKU/ywy7xxF5vKEGlKIRfLLWR/RUluDIkyxofKMFGJwqNkYrEFx5ti0ErMcSupMe6DkBCTx7S3eLC+RoZCvjy8y72R9vfTtKliNtLzCbTSQ4HG8ylhpddnZxdXyWvrnzuVFuT5XhjEdS4wDVGSds3c7K1L0iexTP94awxqCNT7FW/a/sCNtPtHNrP1soFlv2+X2GgH94Mg2w/tiTTY7FMYYNeSymj41KoCEvy0SkP1Em7lKJGTLRB08YxeDxUxRHPLrz8fAcpYCtyDvPjZX0j+36o2m7E3fdbRGzYMEC6ExH7DsNyGIa/Cpwi2g==
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find all products"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/product"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find all products
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"product":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer"},"allowsellnostock":{"type":"boolean"},"buyprice":{"type":"string"},"category":{"type":"string"},"chartaccountid":{"type":"string"},"code":{"type":"string"},"controlstock":{"type":"boolean"},"minstock":{"type":"string"},"name":{"type":"string","minLength":5,"maxLength":50},"price":{"type":"string","minLength":2,"maxLength":50},"stock":{"type":"string"},"unit":{"type":"string"}},"required":["name","price","chartaccountid"],"title":"ProductResource"}}},"title":"ProductCollectionResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

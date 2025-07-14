@@ -1,0 +1,33 @@
+---
+id: unitresource
+title: "UnitResource"
+description: ""
+sidebar_label: "UnitResource"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"id":0,"name":"string","address":"string","city":"string","neighborhood":"string","phone":"string","register":"string","state":"string","zipcode":"string","company":"string","trade":"string","extid":"string","latitude":"string","longitude":"string"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"UnitResource"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string","minLength":5,"maxLength":50},"address":{"type":"string"},"city":{"type":"string"},"neighborhood":{"type":"string"},"phone":{"type":"string"},"register":{"type":"string","minLength":5,"maxLength":50},"state":{"type":"string"},"zipcode":{"type":"string"},"company":{"type":"string","minLength":5,"maxLength":50},"trade":{"type":"string","minLength":5,"maxLength":50},"extid":{"type":"string"},"latitude":{"type":"string"},"longitude":{"type":"string"}},"required":["name","company","trade","register"],"title":"UnitResource"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            
