@@ -61,20 +61,6 @@ const runRebuildDocsScript = async (workingDir = null) => {
     const useYarn = fs.existsSync(path.join(rootDir, 'yarn.lock'));
     const pkgManager = useYarn ? 'yarn' : 'npm run';
 
-
-    // Verifica se docusaurus está instalado
-    const nodeModulesPath = path.join(rootDir, 'node_modules');
-    if (!fs.existsSync(nodeModulesPath)) {
-      docsSpinner.text = "Installing dependencies first...";
-      
-      try {
-        await execCommand('npm install', rootDir);
-      } catch (installError) {
-        docsSpinner.fail("Failed to install dependencies");
-        throw new Error(`Could not install dependencies: ${installError.message}`);
-      }
-    }
-
     // Processa cada arquivo de API
     for (const apiFile of apiFiles) {
       const apiName = path.parse(apiFile).name;

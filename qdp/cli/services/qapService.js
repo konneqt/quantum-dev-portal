@@ -242,7 +242,6 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
       `Successfully processed ${processedCount} API specifications!`
     );
     
-    // Mostra onde os arquivos foram salvos
 
     return true;
   } catch (error) {

@@ -17,7 +17,6 @@ const commandExists = (command) => {
 // Função para executar comandos de forma mais robusta
 const runCommand = async (command, args, options) => {
   return new Promise((resolve, reject) => {
-    console.log(chalk.gray(`Running: ${command} ${args.join(' ')}`));
     
     const child = spawn(command, args, {
       ...options,
@@ -95,7 +94,7 @@ const startServer = async () => {
       );
       
       if (apiFiles.length > 0) {
-        apiFiles.forEach(file => console.log(chalk.white(`   - ${file}`)));
+        console.log(chalk.green(`Installing dependencies for ${apiFiles.length} API files...`));
       } else {
         console.log(chalk.yellow('⚠️  No API files found in local environment.'));
         console.log(chalk.blue('💡 Run "qdp" first to upload and generate documentation.'));
@@ -122,13 +121,10 @@ const startServer = async () => {
         const hasPnpm = await commandExists('pnpm');
         
         if (hasNpm) {
-          installSpinner.text = "Installing with npm...";
           await runCommand('npm', ['install'], { cwd: localQdpPath });
         } else if (hasYarn) {
-          installSpinner.text = "Installing with yarn...";
           await runCommand('yarn', ['install'], { cwd: localQdpPath });
         } else if (hasPnpm) {
-          installSpinner.text = "Installing with pnpm...";
           await runCommand('pnpm', ['install'], { cwd: localQdpPath });
         } else {
           throw new Error('No package manager found (npm, yarn, or pnpm)');

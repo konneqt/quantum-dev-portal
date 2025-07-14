@@ -8,7 +8,6 @@ const config: Config = {
   title: "Quantum API DevPortal",
   tagline: "API DevPortal",
   favicon: "img/favicon.ico",
-
   onBrokenAnchors: "ignore",
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "ignore",
@@ -19,7 +18,6 @@ const config: Config = {
   organizationName: "konneqt", 
   projectName: "quantum-dev-portal",
   deploymentBranch: "main",
-
   
   i18n: {
     defaultLocale: "en",
@@ -103,67 +101,7 @@ const config: Config = {
 
   plugins: [
     ...getOpenApiPlugins(),
-    function (context, options) {
-      return {
-        name: "custom-webpack-config",
-        configureWebpack(config, isServer, utils) {
-          return {
-            resolve: {
-              extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-            },
-            module: {
-              rules: [
-                {
-                  test: /\.(yaml|yml)$/,
-                  use: "yaml-loader",
-                },
-                {
-                  test: /\.(js|jsx|ts|tsx)$/,
-                  exclude: /node_modules/,
-                  use: {
-                    loader: require.resolve('babel-loader'),
-                    options: {
-                      presets: [
-                        require.resolve('@docusaurus/core/lib/babel/preset'),
-                      ],
-                    },
-                  },
-                },
-              ],
-            },
-            ignoreWarnings: [
-              {
-                message: /webpack\.cache\.PackFileCacheStrategy/,
-              },
-              {
-                message: /Serializing big strings/,
-              },
-              {
-                message: /deserialization performance/,
-              },
-            ],
-            infrastructureLogging: {
-              level: 'error',
-            },
-            stats: {
-              warnings: false,
-            },
-            performance: {
-              hints: false,
-            },
-          };
-        },
-      };
-    },
   ],
   
-  webpack: {
-    jsLoader: (isServer) => ({
-      test: /\.m?js$/,
-      resolve: {
-        fullySpecified: false,
-      }
-    }),
-  },
 };
 export default config;

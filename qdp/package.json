@@ -1,6 +1,6 @@
 {
   "name": "qdp",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "main": "./cli/index.js",
   "scripts": {
     "docusaurus": "docusaurus",
@@ -14,14 +14,17 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "install-clean": "npm install --legacy-peer-deps",
-    "qdp": "chmod +x ./cli/index.js && ./cli/index.js",
+    "qdp-init": "chmod +x ./cli/index.js && ./cli/index.js",
     "qdp-publish": "docusaurus deploy",
-    "qdp-build": "docusaurus build",
-    "qdp-start": "npm run install-clean && npm run start"
+    "qdp-start": "npm run install-clean && npm run start",
+    "qdp-build": "node ./cli/build.js",
+  "qdp-deploy": "node ./cli/deploy.js"
   },
   "bin": {
-    "qdp": "./cli/index.js",
-    "qdp-start": "./cli/startServer.js"
+    "qdp-init": "./cli/index.js",
+    "qdp-start": "./cli/startServer.js",
+    "qdp-build": "./cli/build.js",
+    "qdp-deploy": "./cli/deploy.js"
   },
   "resolutions": {
     "@react-types/button": "^3.7.0",
@@ -62,8 +65,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@docusaurus/tsconfig": "3.7.0",
-    "@docusaurus/types": "3.7.0",
+    "@docusaurus/tsconfig": "^3.7.0",
+    "@docusaurus/types": "^3.7.0",
     "@types/node": "^22.14.1",
     "js-yaml": "^4.1.0",
     "raw-loader": "^4.0.2",

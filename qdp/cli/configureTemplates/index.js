@@ -57,7 +57,6 @@ try {
 // Função para executar comandos npm/yarn
 const runInstallCommand = (command, args, workingDir) => {
   return new Promise((resolve, reject) => {
-    console.log(chalk.gray(`Running: ${command} ${args.join(' ')} in ${workingDir}`));
     
     const child = spawn(command, args, {
       cwd: workingDir,
@@ -380,12 +379,13 @@ async function installDependencies(localQdpPath) {
     const hasPnpmLock = await fs.pathExists(path.join(localQdpPath, 'pnpm-lock.yaml'));
     
     if (hasPnpmLock) {
-      installSpinner.text = "Installing with pnpm (no cache)...";
+      installSpinner.text = "Installing templates dependencies";
       await runInstallCommand('pnpm', ['install', '--no-frozen-lockfile'], localQdpPath);
     } else if (hasYarnLock) {
+      installSpinner.text = "Installing templates dependencies";
       await runInstallCommand('yarn', ['install', '--no-lockfile'], localQdpPath);
     } else {
-      installSpinner.text = "Installing with npm (no cache)...";
+      installSpinner.text = "Installing templates dependencies";
       await runInstallCommand('npm', ['install', '--no-package-lock'], localQdpPath);
     }
     
