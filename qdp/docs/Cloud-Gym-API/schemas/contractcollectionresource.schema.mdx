@@ -1,0 +1,33 @@
+---
+id: contractcollectionresource
+title: "ContractCollectionResource"
+description: ""
+sidebar_label: "ContractCollectionResource"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"contract":[{"id":0,"methodpayment":"string","startdate":"2024-07-29","plan":"string","account":"string","agency":"string","bank":"string","brandcc":"string","ccvcc":"string","discount":"string","numbercc":"string","promocode":"string","validcc":"string","member_id":0}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ContractCollectionResource"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"contract":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer"},"methodpayment":{"type":"string"},"startdate":{"type":"string","format":"date"},"plan":{"type":"string"},"account":{"type":"string"},"agency":{"type":"string"},"bank":{"type":"string"},"brandcc":{"type":"string"},"ccvcc":{"type":"string"},"discount":{"type":"string"},"numbercc":{"type":"string"},"promocode":{"type":"string"},"validcc":{"type":"string"},"member_id":{"type":"integer"}},"required":["startdate","plan","member_id","methodpayment"],"title":"ContractResource"}}},"title":"ContractCollectionResource"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

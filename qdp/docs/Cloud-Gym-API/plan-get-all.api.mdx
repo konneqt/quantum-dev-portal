@@ -1,0 +1,63 @@
+---
+id: plan-get-all
+title: "Find all plans"
+description: "Find all plans"
+sidebar_label: "Find all plans"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVdtu1EAM/ZXIz6NNtoCQ8lbKRQUkEBTxUK2Qd+ImQyczYcZZuory78iT0E3b5fqUi4+dMz7HzgCMdYTyEt5bdLBR4DsKyMa78wpK6Cy6VU18ai0oCBQ77yJFKAc4KQq5VBR1MJ1kQAkfZkT27g0o0N4xORYYdp01OhXOv0bBDhB1Qy3KHe87ghL89itpBgVdEBpspi8JiQUKQ8A9KDBMbfxztqkWGOOYagowKnDY0iISORhXg4LWuLfkam6gfKKgxZvbp2JUM/q3WeuHWa133MSHeaOQNfp/KqIcxaHTdEVH8kdRqzaRJzF/hakDavqLWgn3NwVRa4rxKvj2N2H2vyDs6PsisvXeEjoJ0Q3f0fGQVPUToX9voXGR0doWj+QewoHqo2EZg2i8O65qZOT+WCgd81tvAlUydcmEs6sWZ9koYMNWEmUuP1D0fdAEo+QvI2feWtKSs8SMCh4fm85nWGXydYqcmETSfTC8h/JygAt/TQ7Ky824UffyXhpXZWhtJpMYpbHEjZf9UFMaOJSmQr5b52lWpXLYUYipcB8slNAwd7HMc+zMSlvfV/W+XRmfw6iWkDLP1ydPV8WqWK3LR0VR5CB8fjL9KCtjmuuzQBU5NmgXbZYScJ/+ac+NIKf1k3033GRn1pDj8+cZuir7SDqQPLDPAnEwO8omp35h6Yq831KGW0ty2+I1ZdiZTKO10o60yJJjMRot+s/NvM/rACQMFEDNNy99aJGhhNefL5Iyxl2lGZEmToc4Wa1XBRzUP5Mevtq32en78+zBkZ973bfkeLKTrBkfeXb6tPgeinqnwi1zphsWVU0qk4QaZsEvYbcW9ec/R+Mjy8th2GKkT8GOo7z+1lMQh20U7DAYaWJymYKGsKKQPHJNexFKa+rEUDu0fVr19/8a4oVb8716cQEKsBcuh6Vxt7Op+s8fh9svag/DhEhSjSOomURSHMbNOI4/AHtaa7Q=
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find all plans"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/plan"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find all plans
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"plan":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string","minLength":5,"maxLength":50},"type":{"type":"string","minLength":1,"maxLength":50},"months":{"type":"string"},"price":{"type":"string","minLength":1,"maxLength":50},"maintenancefee":{"type":"string"},"registrationfee":{"type":"string"},"gracemaintenancefee":{"type":"string"},"graceregistrationfee":{"type":"string"},"accessfrom":{"type":"string"},"accessto":{"type":"string"},"renew":{"type":"boolean"},"extid":{"type":"string"},"duration":{"type":"string","minLength":1,"maxLength":50},"installman":{"type":"string"},"installreg":{"type":"string"},"nsessions":{"type":"string"},"status":{"type":"string"}},"required":["name","type","duration"],"title":"PlanResource"}}},"title":"PlanCollectionResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

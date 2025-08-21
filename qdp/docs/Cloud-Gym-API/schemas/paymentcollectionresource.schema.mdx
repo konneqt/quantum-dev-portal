@@ -1,0 +1,33 @@
+---
+id: paymentcollectionresource
+title: "PaymentCollectionResource"
+description: ""
+sidebar_label: "PaymentCollectionResource"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"payment":[{"id":0,"methodpayment":"string","amount":0,"duedate":"2024-07-29","paiddate":"2024-07-29","status":"string","contract_id":0,"checknumber":"string","checkbank":"string","manually":true,"entrydate":"2024-07-29"}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"PaymentCollectionResource"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"payment":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer"},"methodpayment":{"type":"string"},"amount":{"type":"number"},"duedate":{"type":"string","format":"date"},"paiddate":{"type":"string","format":"date"},"status":{"type":"string"},"contract_id":{"type":"integer"},"checknumber":{"type":"string"},"checkbank":{"type":"string"},"manually":{"type":"boolean"},"entrydate":{"type":"string","format":"date"}},"title":"PaymentResource"}}},"title":"PaymentCollectionResource"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

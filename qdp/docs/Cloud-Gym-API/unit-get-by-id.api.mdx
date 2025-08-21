@@ -1,0 +1,71 @@
+---
+id: unit-get-by-id
+title: "Find unit by ID"
+description: "Find unit by ID"
+sidebar_label: "Find unit by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVVd9v2zYQ/leEe9oAwrLTdgP0liZr4W5AhyTFHgxjoMmLdI1EquTJiyfofx+OUhynVhHsSRLvB7/77r5TD6zLCMUGvjhi2CrwLQbN5N3aQgGdI16UyO8PawsKWh10g4xBQnpwukEogMREDgpoNVegwGI0gVrJMuXI1tegIOC3jgJaKDh0qCCaChsNRQ98aFMmx1hiAAX3PjSax6Nf3sIwbCU8tt5FjBJxsVzK4+VVN5NH9vl3UGC8Y3QsbrptazKprvxrFN/+/Ha/+4qGpcwgLDCNNwn+173IztQxqImjoyVyIFeCgobcH+hKrqB4p6DRj8ev5aBAWxswxvPAQYEhPswaHFJZ7XyovLezDm3l3QyYQagtKTKG/480sub5nP9Sa7ydtxnftNrNlPHadRz0XMrXwvCRaZ6TWjNx9wOYtXflj6zD6Txvxj4/F/aE9ITarQImriWHiO0Go++CwZTp1HBLrqzxxCwOb+fG/b22mWDAyClLRNOFNB2bHu78AzooNluRzsu4D+RslmS5O4zKbJArGRooMY226LiAfL/KxS3vyQ4g+cP+SftdqKGAirmNRZ7rlham9p0tD82CfA6DOnUp8nx18etiuVguVsWb5XKZg6B6wnsrShxldBXQomPS9QnlkuJsrVx2XInnqOrsH+Iqu6oJHa+vM+1sdosmoHywzwJyoD1m2hiM8W8WbuR8h5ne1SivjX7ATLeUGV3XEabtJNfvdCQj4zBR+j2uZ0fUIW2v8eXD0w779Ndd6g+5ey/hQuJYxMVitVjCc/+vhMOPhya7/HOdnZV87U3XoONUcRK0j9zoBGnaxeetfZHiCJ3xkfO21pTypE71U9s3sF+BGteegoKsTG7lI4up73c64pdQD4Mcf+swyLhtFex1IOEyTYelKO8WintdRzxDcVzN8NPNJKKfs+cfxSzI6XBU117XnXyBggc8jD+hYTsoqFBb2WObfjJcGoMtn4Sc/QtkFI8C+PjbHSjQnTBxZOu7xqbss3D6fvRIkzIMR3Rp4ATgMPwH0MWBjA==
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find unit by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/unit/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find unit by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"unit ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"unit":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string","minLength":5,"maxLength":50},"address":{"type":"string"},"city":{"type":"string"},"neighborhood":{"type":"string"},"phone":{"type":"string"},"register":{"type":"string","minLength":5,"maxLength":50},"state":{"type":"string"},"zipcode":{"type":"string"},"company":{"type":"string","minLength":5,"maxLength":50},"trade":{"type":"string","minLength":5,"maxLength":50},"extid":{"type":"string"},"latitude":{"type":"string"},"longitude":{"type":"string"}},"required":["name","company","trade","register"],"title":"UnitResource"}},"title":"UnitSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

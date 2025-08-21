@@ -1,0 +1,71 @@
+---
+id: aclass-create-attendance
+title: "Add new attendence class"
+description: "Add new attendence class"
+sidebar_label: "Add new attendence class"
+hide_title: true
+hide_table_of_contents: true
+api: eJztlc9u2zAMxl/F4FmNnazAMN/a7g+6HTa0GXYIgoGRuEStLXmSnCww9O4DZSd1mrVPsJssfaTITz9LHQRceygXcFOh91chkFFoJMFSgG3IYdDW3CooASUrJtIRBhoJBTj63ZIP11btoexAkZdONxwIZZ8Xj/JMm1/W1SktCJDWBDKBw7BpKi3TQv7gObYDLzdUI4/CviEowa4eSAYQ0DiuLmjyvFpTvSKn1UipTaA1OYgCFAYarfjgtFmDgL4QKHtBFJA6/PliGtpqSbfqPFWMvQnakWIvj+UMe48yLwUEHSo6OPNk5B152zpJEE/TBddSmvCNNb7vd1YU507fDYrs65f/zr7kbBRw+S/zrlFlA8dpU0+ydTrsoVx0MLePZKBcLONSPIu7UioztMt6wokJTxWBgJrCxvKf01ifjMWwgRLy7TSXpz8F8H5uS86n7VpXQQmbEBpf5jk2eiIr26r1vp5om0MUY0mZ59PZ20kxKSbT8k1RFDlwlYf67/mc+6O8caTIBI3VyGdOAWdNtWHDyp6ZbKfDJrupNJlw+z5Do7J7ko74I9jMUXB6SxlKSd7/DOwVz68ow1VFPKzxkTJsdCaxqtiaRB9vv0KvJSMwWPy8richoSMHYhh8PAD2+cc8nRdzffd0D334g3VT0SnBxQFYmBWzy4vi7cXs3ZigJDiieERQAN9ZnIpPqHdoNplOChgTZ1v1aV9nV99uszM/31vZ1mRCf+tFkYioMfVrMPX3CkcnuY4GBfoT8qZCnRImHroBsQVsp4e+8ORG3zCJ5QK6boWevrsqRp7+3ZJj0pcCtug0H1uiXcCGUJFLVD7Snhvtr5WLOVfB8qrlas6uGIa0j7iSkprwqnY5+lm+fb2f8zEPj0ltFcc43PFDgzsoAfhl4uhEdZrroEKzbnHN2j4nQ4Et23G07BlDqathCc1+VGHX9YoEZYwghlYS2xCXMca/79B3aw==
+sidebar_class_name: "post api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Add new attendence class"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/classattendance"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Add new attendence class
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Classattendance information","content":{"application/json":{"schema":{"type":"object","properties":{"memberid":{"type":"integer"},"date":{"type":"string","format":"date"},"class_id":{"type":"integer"},"deviceId":{"type":"string"}},"required":["memberid","date","class_id"],"title":"ClassAttendanceResource"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"memberid":{"type":"integer"},"date":{"type":"string","format":"date"},"class_id":{"type":"integer"},"deviceId":{"type":"string"}},"required":["memberid","date","class_id"],"title":"ClassAttendanceResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

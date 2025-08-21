@@ -1,0 +1,71 @@
+---
+id: prospect-create
+title: "Add new prospect"
+description: "Add new prospect"
+sidebar_label: "Add new prospect"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV1tv2zYU/ivCQR8ZS3YLpNFbmq5Dug0Nkgx7MLyBlk4kNhKpkpQTV+B/Hw4lS3QsbMMwYC95snhuPrfvE9WB5YWBdA03WpkGMwsbBqpBza1Q8jqHFJpBs8g0covAQOO3Fo39oPI9pB3kaDItGnKAdAwUCfmgdO3jAINMSYvSkj1vmkpkXhF/NeTUgclKrDk92X2DkILafqVsGP19g9oKNKQVeWAjpMUCNTgGktcYaIzVQhakyJqHWbkuTsUMaiF/RlnYEtILBjV/Hk+OQYEyRz3nhrKtqYm/AINPwOAzbByDrdC2zPl+zqNvDaSQU0sdg50wwvrDP7a2Yq7mwNobOAZYc1H9Tbmro3LfJo5BUypJlW3ni264tahp5L+vl2cXm27l/O86ocN798b5/mNV/YtAqzHQOXvv3lAknucajZmfsqqbCuthwU7UEkVRbpUulcrn/YWdGZNjYOzsSByD76LJVD6v02gaJY3YVvN6o1qdzataKez8ij+0UmI1DwDXg1JozGkPPRoOcx9ibhhYYSmhEaK3OCTijgNY3eJURQ+8VZKcYv12sIi+/PTfQfzAN69k8EoGr2Twf5DBqfJOyKLCkC8cg3dzlPCB59FwP/CRDGat9g1dd3CvHlFCut64DXvhd5nnkcSnaEQ/gxptqfwNRBnbr0YJKcS7ZRxYGdQ71MbHb3UFKZTWNiaNY96IRVapNi/29UKoGBwLTdI4Xq7OF8kiWSzTt0mSxEBpHRK+I7rqeeZKY47SCh7ihkLASRWtLcmyp77oSdgyuqoESnv9MeIyj+4w00gHqyKNVosdRjzL0Jg/LDWH5FuM+LZCeqz5I0a8EVHGq8pQtT4rSGHLjchoE4aevsxrMkSuUQMbHj4d+ODzb/d+QETPt9OF7odnTug50GtyYNMJoZ5EpyNx53Q60KJnv4nzYJWs3p0l52erCziitxlFz2QBn/aEFVBEyCBBXi/JZVKNbBFYByQxSY+5IbD2GzydByaYBCMBBI0JcR+4DnCfJD3KkxDUxLh0f6Yx0Hb327VaLBcJTOi8ouX+cV9HlzfX0ckuflRZS/X1N3CicGVszf2uDDOdAd1RjHGpLD7buKm48IE8hroBj2vYLfs38/j9UBJe0zV03ZYb/FVXzpH4W4uaeGDDYMe14L4xa3o5lsj91qw7eERq9FV/lTi7p78n86qlNE6uFYTo3uMyy7Cxf2m7CSjl5svdPW3o8AlT97PT/IkGx58gBaDvIPL2FOBlHVRcFi0vyLaPSQjiLfVh7NULwPmqBhWX+yDDrustPIKdAzaU4okA3MY59ydKNplL
+sidebar_class_name: "post api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Add new prospect"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/prospect"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Add new prospect
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Prospect information","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string"},"cpf":{"type":"string"},"rg":{"type":"string","minLength":9,"maxLength":9},"gender":{"type":"string","enum":["M","F","J"]},"birthday":{"type":"string","format":"date"},"visitdate":{"type":"string","format":"date"},"visittime":{"type":"string","format":"time"},"email":{"type":"string","minLength":2,"maxLength":30},"phonenumber":{"type":"string","pattern":"^[1-9]{2}[1-9][0-9]{8}$}"},"cellphonenumber":{"type":"string","pattern":"^[1-9]{2}[2-9][0-9]{7,8}$"},"address":{"type":"string"},"complement":{"type":"string"},"neighborhood":{"type":"string"},"city":{"type":"string"},"state":{"type":"string"},"zipcode":{"type":"string"},"responsible":{"type":"string"},"source":{"type":"string"},"unit":{"type":"integer"},"funnelid":{"type":"integer"}},"required":["name","email","unit"],"title":"ProspectResource"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"prospect":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string"},"cpf":{"type":"string"},"rg":{"type":"string","minLength":9,"maxLength":9},"gender":{"type":"string","enum":["M","F","J"]},"birthday":{"type":"string","format":"date"},"visitdate":{"type":"string","format":"date"},"visittime":{"type":"string","format":"time"},"email":{"type":"string","minLength":2,"maxLength":30},"phonenumber":{"type":"string","pattern":"^[1-9]{2}[1-9][0-9]{8}$}"},"cellphonenumber":{"type":"string","pattern":"^[1-9]{2}[2-9][0-9]{7,8}$"},"address":{"type":"string"},"complement":{"type":"string"},"neighborhood":{"type":"string"},"city":{"type":"string"},"state":{"type":"string"},"zipcode":{"type":"string"},"responsible":{"type":"string"},"source":{"type":"string"},"unit":{"type":"integer"},"funnelid":{"type":"integer"}},"required":["name","email","unit"],"title":"ProspectResource"}},"title":"ProspectSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      
