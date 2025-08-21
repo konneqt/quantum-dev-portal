@@ -1,0 +1,71 @@
+---
+id: unit-update
+title: "Update unit by ID"
+description: "Update unit by ID"
+sidebar_label: "Update unit by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVkuP4zYM/isGTy2gxsl02wK+zc60xbQFupgHegiCgrG4tnZsySvRmUkN//eClhNnJt4uCrS3vdl8iSK/j1QHjEWAbA0P1jBsFLiGPLJx9kZDBq01vGgbjUygoEGPNTF58ejAYk2QgdGgwFjIoEEuQYGmkHvTSJAxRHJzDQo8fWyNJw0Z+5YUhLykGiHrgPfNEMkyFeRBwXvna+Qo+v4N9P0mulPgt07vxeflKZJ+Ymz0E5GC3Fkmy2KLTVOZfFCkH4I4dOenu+0Hylmu6aUIbCiI1uiZDHs13v6oCeyNLUBBbexvZAsuIftOQY3Px79lrwC19hTCuWOvIDe8n1VYMkW5db50Ts8aNKWzM8n0UrTCBCb/7zMNLE2fi/mXaXKn53W5qxu0M9f43HHscS7k59zomc18TSpkw+0n0qycLT6l7U+Ruo59ni52yPSktBsFbLiiEYa3FFzrc4K+j7FC42yIYLpYLs+xeztaJL//+t/BVmj3BdxfwP3/gful4s7YoqJX2H8zB/e3qJNxlg9RAuWtH9Cx7uDePZKFbL2Rif9qxA9rKBn2yXYfV0pNXApsoGkHcMsCyiDdrVIxSzuje5AT/O6wtFpfQQYlcxOyNMXGLPLKtbrY1wvjUujVqUmWpquLHxbLxXKxyr5dLpcpSF6HjO+Ei5FIV540WTZYnRRdQpztw8uWS7GMvE6eDJfJVWXI8s11glYnd5R7kh92iSf2ZkcJ5jmF8CdLdUS+pQS3FclnjY+UYGOSHKsqwLhW5fgtBpMLIMaivs5rMiT0w9qNHz8dlu8vf9wPHZLZcztt3x+fsW4qOsyP5WFcTLA+DoJJFPk//b+k/SQf2T4JJpJPspG+k+DI2pMDD2SdRCMNJ8FIsEkw8epENtHphGTy1pAKCLBiYy8Wq8USJlZcCa5+3tfJ5bub5AwG1y5va7IcXysy5lzgGoc2jeWcA/yLIMeGMj1z2lRohkgDfruRDGvYrUDFdaAgM1oYXbrAouq6LQZ68FXfi/hjS15ouFGwQ28EYQNntAnyrSF7j1WgsyyOKwu+uh2Hy9fJ9O6bTXIUxqmzw6qVP1DwSPv4puw3vYKSUEvr192ouIpHfXMv7pPj2aYUHkePyzynhv/RdnMySN493AsRxkdmHUHl8UmQiE8xRzfcfOD9IOugQlu0WIhtDCm0wVYacGzSK5YNl5qtQtdFi4G2fX8sysB+qUvf/w2jNvcz
+sidebar_class_name: "put api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update unit by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/v1/unit/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update unit by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"unit ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Unit information","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string","minLength":5,"maxLength":50},"address":{"type":"string"},"city":{"type":"string"},"neighborhood":{"type":"string"},"phone":{"type":"string"},"register":{"type":"string","minLength":5,"maxLength":50},"state":{"type":"string"},"zipcode":{"type":"string"},"company":{"type":"string","minLength":5,"maxLength":50},"trade":{"type":"string","minLength":5,"maxLength":50},"extid":{"type":"string"},"latitude":{"type":"string"},"longitude":{"type":"string"}},"required":["name","company","trade","register"],"title":"UnitResource"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"unit":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string","minLength":5,"maxLength":50},"address":{"type":"string"},"city":{"type":"string"},"neighborhood":{"type":"string"},"phone":{"type":"string"},"register":{"type":"string","minLength":5,"maxLength":50},"state":{"type":"string"},"zipcode":{"type":"string"},"company":{"type":"string","minLength":5,"maxLength":50},"trade":{"type":"string","minLength":5,"maxLength":50},"extid":{"type":"string"},"latitude":{"type":"string"},"longitude":{"type":"string"}},"required":["name","company","trade","register"],"title":"UnitResource"}},"title":"UnitSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

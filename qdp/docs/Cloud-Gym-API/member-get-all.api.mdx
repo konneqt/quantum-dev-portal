@@ -1,0 +1,71 @@
+---
+id: member-get-all
+title: "Find all members"
+description: "Find all members"
+sidebar_label: "Find all members"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVt9v2zYQ/leEQx85W3Y2tNVbli5Fug0b2gx9MNyBli4SG4pUyJMXV+D/Phwl23Kibc6eJJJ3H+/Hd3fsgGTpIVvBr1hv0MFagG3QSVLW3BSQQR33ZyXSpdYgoJFO1kjoWKsDZSCDhxbdDgT4vMJaQtYB7RqEDDw5ZUoIAoyseSN+gjhTj28jQseyq/S7t+vuQiwWYYSXN3cvgbuzrpYEGWAtlR7h7NcvdqiprHmRRwcTCkk4AtooR1Uhd2dgKUNYogMBBfrcqYaTBRn8kCa1fEwc5tYVPmnQJQ4fWvQ0NliWysT0QlgLcOgbazx6xl+mKX9OUT8OEslvP4OA3BpCQywmm0arPELNv3qW7Z7bajdfMSfOpGNekepv6lk1kpPOSXZWEdb+v/VVMRGPg5MT6WKiTO27cipJtTK/oCmpguytgFo+HlZBQImmOLH9oIamrWMtgYBrEPAB1kEcM3sOG3oi/rtJyxOTLtIgehqa9klQJ8roy2rBdbQM8dsX1ZvwKtZUjlr/D6DlAei1eBNeMZIsCofeT2fC1o3GeiDR87pCVVYb6ypri2l9RROhDAI8cQynTr6pJrfF9JmWpKg9ORzcH2fHthsd86OtKV8iP9SX4uXU9dJY6qtx0leH8bCY9GyCPhxcaXals22jpuOncYsTDAsCaiRZSJoo3xA9eWiVw4IJHsssFs+esaNAjoM0Yv9aACniMAyz5iN627ocITD86dmV1Rpzdn0sFQR8P9WifpTFsdMxEzBvXaTJqoNbe48GstWa292p3rUyRSK1Tvp25CHGoGLiQYnU872CDObbxXxoWYzutvvx1zoNGVREjc/mc9moWa5tW5S7eqbsPPbyo0g2ny+Wr2fpLJ0tsos0TeexBe+t/cS9s29vVw4LNKTkOFEM8aznX7ZUsWTfh5O/FFXJlVZo6OZdIk2RfMLcIS/IJg7JqS0mMs/R+z+JI8P7G0zkRiP/1vIeE9moJJda+/30iQNKepUzTYaAPrXrKIjSxUD1P9d7jn74fBuzo8ydZXUOYu/EcraYpXDkwBXH8P2uTi5/v0meufzO5i23j2GICWisp1pGk4YhN5HYE4yD7YSPNG+0VBEopqobkr6C7SISYv8uqqwn3u66jfT4h9Mh8HY/ppkMhfIcxgKyO6k9CrjH3f7NI2ArdctXRlL8gyhPqfMk91V3jmz/RjlP9lCuZ0IfXxNjhTUvnJKx6614CFYo49BcdYPmZZ5jQyOtZ88JRjmU4/ufbkGAbDkzh+w9YVpE378nzNiFruslInVDgL35sQIgrEMIfwNJlLOe
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find all members"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/member"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find all members
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"query","schema":{"type":"string"},"name":"name"},{"in":"query","schema":{"type":"string","pattern":"[0-9]{3,11}"},"name":"cpf"},{"in":"query","schema":{"type":"string","format":"email"},"name":"email"},{"in":"query","schema":{"type":"string"},"name":"phone"},{"in":"query","schema":{"type":"string","format":"date"},"name":"birthday"},{"in":"query","schema":{"type":"integer","description":"50 max records per request"},"name":"pagination"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"member":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string"},"cpf":{"type":"string"},"rg":{"type":"string","minLength":9,"maxLength":9},"gender":{"type":"string","enum":["M","F","J"]},"birthday":{"type":"string","format":"date"},"email":{"type":"string","minLength":2,"maxLength":30},"phonenumber":{"type":"string","pattern":"^[1-9]{2}[1-9][0-9]{8}$}"},"cellphonenumber":{"type":"string","pattern":"^[1-9]{2}[2-9][0-9]{7,8}$"},"address":{"type":"string"},"complement":{"type":"string"},"neighborhood":{"type":"string"},"city":{"type":"string"},"state":{"type":"string"},"zipcode":{"type":"string"},"latitude":{"type":"number","format":"double"},"longitude":{"type":"number","format":"double"},"responsible":{"type":"string"},"anotation":{"type":"string"},"creationdate":{"type":"string","format":"date"},"companygroupid":{"type":"string"},"level":{"type":"string"},"metadata":{"type":"object"}},"required":["name","rg","email","latitude","longitude","birthday"],"title":"MemberResource"}}},"title":"MemberCollectionResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

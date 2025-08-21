@@ -1,0 +1,71 @@
+---
+id: prospect-get-by-id
+title: "Find prospect by ID"
+description: "Find prospect by ID"
+sidebar_label: "Find prospect by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVd9v2zYQ/leEQx82gLNst1hbvaXJUrjbsCLJsAfDGyjxLLGRSJY8efUE/u/DSbLqxAI67Eki77vjd787IFkGyLbw0dvgsCDYCbAOvSRtzUZBBm6ULEqkd8eNAgFOetkgoWfVDoxsEDLQLNKGVSRVIEBhKLx2bOnMTrK5AQEeP7fao4KMfIsCQlFhIyHrgI6ut2YIS/QgYG99I2m4+vEVxLhj9eCsCRhYY71c8ufpc3cjIvntZxBQWENoiGHSuVoXvX/pp8DY7vJ1m3/iYAhm7dCTHl46+fBtpFYzvkQxxmqSBPLalCwo3H723peX1wIabX5BU1IF2VsBjfwynaKAEo1CP6eGpm0427+CgFsQ8AF2UUCuPVVKHuc0puArSch8Djpo6g//GU16zuczdA+IArCRuv6Gu+sn7r5cRgGusoY9y+eddpIIPdfEn9vVD2933Tr23+2SD2/ii9jHH+v6fxhaT4ZeizfxBVuSSnkMYT7LtnE1NmMpXogN6rLKra+sVfP6mmbSFAUEmk1JFPCPdoVV87KxjXRez8uDbX0xL2qNpvkS37fGYD3fAPG887dDN5zyPtrcCSBNTGgaSnc4EmH958J7bcoazyAMejU3Et5JlfDrGKi3FLBofR/QbQcP9hENZNsdj5enerfaqGQaX/lxmGANUsVZghJpKI4KMkgPq/QETTutIvA7/nCala2vIYOKyIUsTaXTi6K2rSqPzULbFKI4h2Rpulq/XiwXy8Uqe7lcLlNgdife9zy1hnFz7VGhIS3P24dNXIzhq5YqRg4TMPlbU5Vc1xoNbW4SaVRyj4VHPpBNPJLXB0xkUWAIfxHHiO9zTGReI/828hET6XRSyLoOME5yfj6XQRdcEGNon/P6CkTp+0k//NyexsKHPx76PGmzt6zOQRycWC9WiyV8rYVrjuH7Y5NcfdwkFy7f2KLllus9ZkLOBmpkT2ncXfMpfmJmok/4hVJXS93b6rPVjenfwmE1rIJhTQjItOKKrmwgFnddLgP+7usY+fpzi57LbyfgIL2WfR9uO1A68L+CbC/rgBdMpnUG392N7fR98nTBzpIdL6U5Ar9Yt3wCAY94HBZ45H1Qoez3x7YbBVdFgY7OVC52KJfl1BDvf3oAAbLliExRe5bk3vosna4bEH3VxDix64uPCcb4L9sN8Bk=
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find prospect by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/prospect/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find prospect by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"prospect ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"prospect":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string"},"cpf":{"type":"string"},"rg":{"type":"string","minLength":9,"maxLength":9},"gender":{"type":"string","enum":["M","F","J"]},"birthday":{"type":"string","format":"date"},"visitdate":{"type":"string","format":"date"},"visittime":{"type":"string","format":"time"},"email":{"type":"string","minLength":2,"maxLength":30},"phonenumber":{"type":"string","pattern":"^[1-9]{2}[1-9][0-9]{8}$}"},"cellphonenumber":{"type":"string","pattern":"^[1-9]{2}[2-9][0-9]{7,8}$"},"address":{"type":"string"},"complement":{"type":"string"},"neighborhood":{"type":"string"},"city":{"type":"string"},"state":{"type":"string"},"zipcode":{"type":"string"},"responsible":{"type":"string"},"source":{"type":"string"},"unit":{"type":"integer"},"funnelid":{"type":"integer"}},"required":["name","email","unit"],"title":"ProspectResource"}},"title":"ProspectSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

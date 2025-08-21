@@ -1,0 +1,71 @@
+---
+id: promotion-update
+title: "Update promotion by ID"
+description: "Update promotion by ID"
+sidebar_label: "Update promotion by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVktv3DYQ/ivCnBpAXWndoAV0c+wkcFqghh/owVgUs9R4xVgiFZJaeyHwvxdDalfyrtxccuihN5Lz4Mzw+2bYg8ONheIBro1utJNawSoF3ZJB3lyVUEC7Fy26tkRHkEKLBhtyZNi2B4UNQQGyhBSkYhN0FaRQkhVGtsHtxE9ydQkpGPrWSUMlFM50lIIVFTUIRQ9u1wZ3ytGGDKTwqE2DLh79+h68X0Vzsu6DLnds8/qqQzaJVNGYz1MQWjlSjg2wbWspgiD7atmqPw1Br7+ScJyw4Zo4SZalspwJ06eAwsktTWRrrWtCxTKhy6nEOiPVBlJopPqD1MZVUCxTaPDlsMv9UQWPjVkurdBdzOhN4SPN3OzDZd+J6Ow0os5S+YY3qRwqQd+7VuimRbXbGN21cs6XT8FJV9P0IW/I6s4IAu9Zbsi2Wtn4HGd5fgqBm0Ej+fP3H/fwBwj/j5H/NkZmpLdSbWo6wtH7Oeh8wDIZ2ktwZUl0Rrpd6HV3+okUFA8rbkKv7e5De0zGPrfexVbXkKt0aKVdAAp3xwKy7TI76Ga9LD3wXWa7b6udqaGAyrnWFlmGrVyIWnflZtcspM7Ap1OVIsuWZ78t8kW+WBa/5HmeAUe4j/2WER6ReWGoJOUk1pO6souTjn3euYo1I1uSZ+mq5KKWpNzVZYKqTG5JGOKN04khZ+SWEhSCrP3bcZ34fE0JrmviZYNPlGArE4F1bWHo+YEEaKXghx/KexzXqEhowkyIi0/7yfDlr7vwVszom3E0fHzBpq1pT8h85F8cOpFxI65f5z8eHyh0ehYgPGEGE2bcRipMxXMMGOXHwJ9wgkcZJ8L4iPGdLZaLHEasXzA8Pu+a5Pz6KjnJ5lKLriHl4jD0KbTaugZDtYcJ/iaC53uMoxeXtTXK4C5gsR/Q/QDbZeyJQ8NMoZAlfy4qbR3L+36Nlu5N7T0ff+vIMMNWKWzRSIZMIEEpLa9LKB6xtnQSyqGzw083w4/iXXL01ZgNdzhEtQO+su54Byk80S7+ZfzKp1ARlmRCJFFwEe/7+Y7NR8OTqcLsjBbnQlDr/lV3NekR1/d3DO/hX9NEgBp85i8TPscYdUg/sDmc9VCj2nS4Yd3oksmAHT/FOGlecyckNVuFvo8agYzeH4oSOM118f4flTeCZw==
+sidebar_class_name: "put api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update promotion by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/v1/promotion/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update promotion by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"promotion ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Promotion information","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer"},"active":{"type":"boolean"},"code":{"type":"string","minLength":1,"maxLength":10},"description":{"type":"string"},"discount":{"type":"string"},"discountfee":{"type":"string"},"max":{"type":"string","minLength":2,"maxLength":10},"used":{"type":"string"},"maintancediscountfee":{"type":"string"},"companygroupid":{"type":"string"}},"title":"PromotionResource"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"promotion":{"type":"object","properties":{"id":{"type":"integer"},"active":{"type":"boolean"},"code":{"type":"string","minLength":1,"maxLength":10},"description":{"type":"string"},"discount":{"type":"string"},"discountfee":{"type":"string"},"max":{"type":"string","minLength":2,"maxLength":10},"used":{"type":"string"},"maintancediscountfee":{"type":"string"},"companygroupid":{"type":"string"}},"title":"PromotionResource"}},"title":"PromotionSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

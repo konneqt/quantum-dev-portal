@@ -1,0 +1,71 @@
+---
+id: contract-get-by-id
+title: "Find contract by ID"
+description: "Find contract by ID"
+sidebar_label: "Find contract by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJyFVU2P0zAQ/SvRnECKmnZBIOW2H4AKB9DuIg5VtZras63ZxA72pBBF+e9onLRkt6k41fF8Pc+8N22BcRsgX8G1s+xRMaxTcBV5ZOPsUkMOarDMtsRXzVJDChV6LInJS2gLFkuCHIyYjIUcKuQdpKApKG8qyTTKkyxvIAVPv2rjSUPOvqYUgtpRiZC3wE0Vs1mmLXlI4dH5Erm/evcWum4t4aFyNlCQiIv5XH6el7sdPJKvXyCNxcmyuGFVFUbF92U/g/i2p9Xd5icplqd66QabvtLhDf/3NHriLV0KJfHO6QqbcoAzuAT2xm7FIzB61sh0ah31Ijp0KVQF2sk0qJSrz5TALVnVTJo2aJ+mDR6tVmrSptT+jEWbcB6GrcsN+TORlXelU05PtKFLYY+FOYemJEn7MD2Bbky91ajZQyvH4S+ntU6BDReS7yCXWwqu9opi4pfGO2O3BY1cxOntFFmvUCcCiwLHTIFU7Q03UV737oks5Ku1EP953EdjdXIU1qbptdWjhhy2FIkpaswh2y+yg2vWGt2B1PH7g4prX0AOO+Yq5FmGlZmpwtV625Qz4zLo0rFLnmWLi/ez+Ww+W+Rv5vN5BoLugPtO9NQL4dqTJssGi9E4JMXJgriseSeevTaT34Z3yXVhyPLyJkGrkztSnuSDXeKJvdlTgkpRCA8sPZL7DSW4KUiOJT5RgpVJFBZFgGHHSPkNBqOEKkNrX+L650jo4w7qDx8P6vv84z7OydhHJ+HSxP4RF7PFbA4jLkgPPzVlcvltmZw8+capWqgVXxxZ7wKXvaKHrTo94mdpjvCZ/nBWFWhirjitdhj/CvaLYQ/GBZZCbrQweucCi7ltNxjouy+6Tq5/1eSFfmvRmjfS08gSbYKcNeSPWAQ6QXJctPDqdtDZ6+T56p8EO1yibSCqu5YvSOGJmv6vpVt3KewINfkIpDdcKkUVj0JOtrvQ8iiITx/uIQWspSPHrr0Ycsw+Cadte4/Imq47oovkE4Bd9xeEFXwM
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find contract by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/contract/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find contract by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"contract ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"contract":{"type":"object","properties":{"id":{"type":"integer"},"methodpayment":{"type":"string"},"startdate":{"type":"string","format":"date"},"plan":{"type":"string"},"account":{"type":"string"},"agency":{"type":"string"},"bank":{"type":"string"},"brandcc":{"type":"string"},"ccvcc":{"type":"string"},"discount":{"type":"string"},"numbercc":{"type":"string"},"promocode":{"type":"string"},"validcc":{"type":"string"},"member_id":{"type":"integer"}},"required":["startdate","plan","member_id","methodpayment"],"title":"ContractResource"}},"title":"ContractSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

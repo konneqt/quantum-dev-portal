@@ -216,7 +216,6 @@ async function downloadTemplateFiles(templateName, localQdpPath) {
     chalk.blue(`📦 Downloading template files from ${templateUrl}...`)
   );
 
-  // MODIFICAÇÃO: Trabalha na pasta local
   for (const folder of foldersToDownload) {
     const localFolderPath = path.join(localQdpPath, folder);
 
@@ -376,14 +375,12 @@ async function downloadBinaryFile(url, localPath) {
   await fs.writeFile(localPath, response.data);
 }
 
-// NOVA FUNÇÃO: Instala dependências automaticamente sem cache
 async function installDependencies(localQdpPath) {
   const { default: ora } = await import("ora");
   
   const installSpinner = ora("Installing template dependencies...").start();
   
   try {
-    // Verifica qual gerenciador de pacotes usar
     const hasYarnLock = await fs.pathExists(path.join(localQdpPath, 'yarn.lock'));
     const hasPnpmLock = await fs.pathExists(path.join(localQdpPath, 'pnpm-lock.yaml'));
     

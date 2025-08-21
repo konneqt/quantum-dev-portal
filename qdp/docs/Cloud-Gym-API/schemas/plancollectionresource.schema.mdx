@@ -1,0 +1,33 @@
+---
+id: plancollectionresource
+title: "PlanCollectionResource"
+description: ""
+sidebar_label: "PlanCollectionResource"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"plan":[{"id":0,"name":"string","type":"string","months":"string","price":"string","maintenancefee":"string","registrationfee":"string","gracemaintenancefee":"string","graceregistrationfee":"string","accessfrom":"string","accessto":"string","renew":true,"extid":"string","duration":"string","installman":"string","installreg":"string","nsessions":"string","status":"string"}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"PlanCollectionResource"}
+>
+</Heading>
+
+
+
+
+
+<Schema
+  schema={{"type":"object","properties":{"plan":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string","minLength":5,"maxLength":50},"type":{"type":"string","minLength":1,"maxLength":50},"months":{"type":"string"},"price":{"type":"string","minLength":1,"maxLength":50},"maintenancefee":{"type":"string"},"registrationfee":{"type":"string"},"gracemaintenancefee":{"type":"string"},"graceregistrationfee":{"type":"string"},"accessfrom":{"type":"string"},"accessto":{"type":"string"},"renew":{"type":"boolean"},"extid":{"type":"string"},"duration":{"type":"string","minLength":1,"maxLength":50},"installman":{"type":"string"},"installreg":{"type":"string"},"nsessions":{"type":"string"},"status":{"type":"string"}},"required":["name","type","duration"],"title":"PlanResource"}}},"title":"PlanCollectionResource"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

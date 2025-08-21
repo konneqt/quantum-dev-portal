@@ -1,0 +1,71 @@
+---
+id: product-get-by-id
+title: "Find product by ID"
+description: "Find product by ID"
+sidebar_label: "Find product by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJyFVd+P2zYM/lcMPq2AETu3bgP8dr1bi2wDVtzdsIcgGBiZZ6snS65EpzUM/+8FZefXJV2fIosfyY/UR2YAxipAsYaP3pWdYtik4FryyNrZVQkFtJNhURG/61clpNCix4aYvDgOYLEhKECLSVvxQK4hhZKC8rqVQMcwyeoeUvD0udOeSijYd5RCUDU1CMUA3LcxmGWqyEMKz843yNPVr29hHDfiHlpnAwXxuMlz+TnP9jAjkr//hBSUs0yWBYZta7SK1WWfgmCHy+xu+4kUS6VeesF6yjSX8GOgLq+UMqaAxrgvgYyxLrBTLyeorXOG0Apq2/Wt14pOrIG9tpUYFTJVzvfXjTV6RqVcZ/mMwwnEld8J7Cx7Z/6HV6Pta+vRfRLBa0N0+otsxTUUv6TQ4NfDVz5K267WeeZ2c+n2fRqd1XzFMJ5Kbj2R3We/aNsmBdZsxH8eigcKrvOKYqBXtkdtK0MnCMG8vabJd1gmwoICx0CBVOc193GIntwLWSjWG9H3ud97bctkPz7bfpqghrh2Mp4VRf3JyBWQ7ZbZjMwGXY4gWfxuP6mdN1BAzdyGIsuw1QtlXFdWfbPQLoMxPYUUWba8+W2RL/LFsvg5z/MMhNue9aMMzST3O08lWdZoTlovIS6WwG3HtSCnAUy+aK6TO6PJ8uo+QVsmj6Q8yQe7xBN7vaMElaIQ/mPpkNxvKcGtITk2+EIJtjpRaEyAeZFE3WLQShQxN/Y1ryOQ0MdFMx3e79fNH/8+xVfS9tmJuzRxKuJmsVzkcBTCnfTwQ98ktx9XyUXJ9051DVmOFQuh1gVuMFKaN+fVBz6LcmDP9JWz1qCOoeJjDfPjr2G3nDZRXFIpFJOWaxdYrMOwxUD/eDOOcv25I9ki600KO/RaOho1Uuog5xKKZzSBLogcdin89DCP1JvkbLlfpTpfou1BEppOviCFF+qn/45xM6ZQE5bkI4/JcKsUtXzicrG/RZOHYfjw+xOkgJ3047jCzl84Rr9KZxgmRJTMOB7YReUJwXH8Bt3IcAI=
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find product by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/product/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find product by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"product ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"product":{"type":"object","properties":{"id":{"type":"integer"},"allowsellnostock":{"type":"boolean"},"buyprice":{"type":"string"},"category":{"type":"string"},"chartaccountid":{"type":"string"},"code":{"type":"string"},"controlstock":{"type":"boolean"},"minstock":{"type":"string"},"name":{"type":"string","minLength":5,"maxLength":50},"price":{"type":"string","minLength":2,"maxLength":50},"stock":{"type":"string"},"unit":{"type":"string"}},"required":["name","price","chartaccountid"],"title":"ProductResource"}},"title":"ProductSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

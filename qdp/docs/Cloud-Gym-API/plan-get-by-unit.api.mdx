@@ -1,0 +1,71 @@
+---
+id: plan-get-by-unit
+title: "Find plan by Unit ID"
+description: "Find plan by Unit ID"
+sidebar_label: "Find plan by Unit ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVdtu3DYQ/RVhnlqAWGmdNAX05thJ4LZAAttBH4xFwaVmJcYUqZCjjQVB/14MJe9qu3Ka9kmXmTOcy5nDHkiWAfIH+GSkhY0A16CXpJ29KSCHxki7KpHedp+tJhDQSC9rJPQM6sHKGiEHXYAAbRkgqQIBBQbldcNxIAfGJjfXIMDj11Z7LCAn36KAoCqsJeQ9UNfESJawRA8Cds7XksZfb17DMGwYHhpnAwZGXGQZP06Pup08ko+/gwDlLKEldpNNY7SKlaVfAvv256e77RdUsUzPfSA9nsRd+HcvXSzUMYipRwdLIK9tCQJqbf9AW1IF+S8Cavl0+MoGMXl/F7U+R9XOUhXOcQMnq9X/iSi5FCutwh0u4AeeSqkDjax5yaf0UuEPxIp+PxJQKoUh7Lyrv2Mm90LCFr/NLFvnDErLJnyikzkeQUU7JvTfW6htIGlMLRewR7PHctHMdA/a2eWpBpLULpmG+bI9jCScWDWrZSOANBkGsgDcYnCtVxjhc8OdtqXBmZkdXi8t4FtZJHwwBopRAqrWa+qiXNy7R7SQP2x4mU9x77UtEl60ZNslR8GokSrHSlTiKD/cVUj365R90522xbZrraa018UAfJ7fP6tT6w3kUBE1IU9T2eiVMq4tyq5eaZfCIOYueZquL35dZatstc5fZVmWAmf5nP8da8W46FceC7SkpZn1nUOcCd9lSxV7jrqTfNNUJVdGo6Wb60TaIrlD5ZE/yCUeyes9JiN1/yLuFf/fYiK3Bvm1lo+YyEYnShoTYNLPSGEZtGJCTC3+Z15HR5Q+6uv48v5ZZX/78z7OS9tdXBpu4ljExWq9yuDIhyvu4YeuTi4/3SRnJV871dZoaeQX644LNFF/ui1eGPVJnEP+hE/Es9YxWBxXP9HgAfZr5gSrs4AjFUBArgvmduUCsV/fb2XAz94MA//+2qJnQm4E7KXX3N3Il0IHfi8g30kT8Cylw3UCP91Ou/XzrIDFjKef0nbAp5mWv0DAI3bjxTlsBgEVygJ9TGI0XCqFDc0gZ/cXk/OwHR/e3YMA2XJbjrJ2OuoYfTGdvh89IneG4ZBdpCAnOAx/A1N5w6Q=
+sidebar_class_name: "get api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Find plan by Unit ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/plan/findbyunit/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Find plan by Unit ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"Unit ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"plan":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string","minLength":5,"maxLength":50},"type":{"type":"string","minLength":1,"maxLength":50},"months":{"type":"string"},"price":{"type":"string","minLength":1,"maxLength":50},"maintenancefee":{"type":"string"},"registrationfee":{"type":"string"},"gracemaintenancefee":{"type":"string"},"graceregistrationfee":{"type":"string"},"accessfrom":{"type":"string"},"accessto":{"type":"string"},"renew":{"type":"boolean"},"extid":{"type":"string"},"duration":{"type":"string","minLength":1,"maxLength":50},"installman":{"type":"string"},"installreg":{"type":"string"},"nsessions":{"type":"string"},"status":{"type":"string"}},"required":["name","type","duration"],"title":"PlanResource"}},"title":"PlanSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      

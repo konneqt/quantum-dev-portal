@@ -1,0 +1,71 @@
+---
+id: member-update
+title: "Update member by ID"
+description: "Update member by ID"
+sidebar_label: "Update member by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJztl0tv4zYQgP+KMNhDCzC27F00G92ySbfItkUXeaAHwy1oaSJxI5FaknLiCvzvxZCyJNtCixa9NSebMyRnNI9PoxYszw0kK/gZqw1qWDNQNWpuhZI3GSRQefmsqTNuERjUXPMKLWo61YLkFUICIgMGQkICNbcFMMjQpFrUdE1/SXRzDQw0fm2ExgwSqxtkYNICKw5JC3ZX+7ukxRw1MHhUuuI2iL57B86tw3E09oPKdnTm0E54iEjIcJKEDFIlLUpLu3ldlyL1ivkXQ0faU/tq8wVTS4+qKRRWoCGtyCZ8dKyLQK8xVguZkyKtHyflOj8VM6iE/AllbgtILhhU/KVfOQY5ygz11DGUTeXTBww+AoNPsHYMNkLbIuO7qRN9UH1CHQOsuCj/xqXlgUtvY8egLpQk65tpx2puLWpKym+rxdnFul06/7uKafHevXE+RliW/+KiZX/ROXvv3tBNPMs0GjOdCVXVJVZdEZyoJYq82ChdKJVNnxd2IpSOgbEUwynNH6JOVTatK7kVtjlQdo8/zo5qNqXPT6lk/k/2azS1kkbQcso8l8qG3ph8Vo1emU0+2UT5UHC53OVaNbWYjl+JW5yoMMegQsszbifaz7kxKlahzXzz7Ct2FMhxkEbVv2ZghaUwdGS4RaManSI454ZIhf5exvEpUG67HdEvP/53JAk0fCXOK3FeifM/Is6x6k7IvMQjJL2botAHnkXd3OPvMZg22lfIqoV79YQSktWapqPDcw9+aIu66WuzCwNYhbagsoO6saHaC0hgvl3Mw8Z5KzIHZEVv92Neo0tIoLC2Nsl8zmsxS0vVZPmumgk1B8fGW5L5fLE8n8WzeLZI3sZxPAfybe/1HWEyEO5KY4bSCj7OFV1xMkFeNragnQG50bOwRXRVCpT25jriMovuMNVIC6sijVaLLUY8TdGY3y1FiOQbjPimRPpb8SeMeC2ilJelgW4MJfMbbkRKldIF9tivYSNy7Tsi/Pm4L9NPv977LNFr4XaYVr9/4cSEPdjjPceHQvf4HpZE7WG1B7Ln7kBbWMbLd2fx+dnyoi/TMcrGpBtZOobgoOqpNto9gtkgPWTYaLcvzGHdEWsQ9KAaRAOf4gP6xEdsGbk5IGVk+oAkh6E5hsbIeGDF6C00IILySF8TlDVqhmBwOVvMYhj6+Yp64YddFV1+volOSvdapQ0FL7hL7zFlbMV9aXUlMN2oB9f0ZWjxxc7rkgt/l++6tmviFWwX3v8O1YnIiEiFMpaUbbvhBh906RyJvzaoCSFrBluuBfcRXrWQCUP/M0geeWnwxI9+CoJvbjtcfhuNv/AmHe2EXO6A7JUNrYDBE+7C96OjMaJA7qt81XaKq2Ds7J6ODwdPxi8iUDhxmaZY27/cux5B8PPDPTVU9zlZhcLU/JkakD8HH5V/dk8sL2uh5DJveE57w5VUKLyhJPSJOuKDf6jJKLRt2OGB41wfFM8tiotzfwJ3DUa9
+sidebar_class_name: "put api-method"
+info_path: Cloud-Gym-API/cloudgym-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update member by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/v1/member/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update member by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","in":"path","description":"member ID","required":true,"schema":{"type":"integer","format":"int64"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"description":"Member information","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string"},"cpf":{"type":"string"},"rg":{"type":"string","minLength":9,"maxLength":9},"gender":{"type":"string","enum":["M","F","J"]},"birthday":{"type":"string","format":"date"},"email":{"type":"string","minLength":2,"maxLength":30},"phonenumber":{"type":"string","pattern":"^[1-9]{2}[1-9][0-9]{8}$}"},"cellphonenumber":{"type":"string","pattern":"^[1-9]{2}[2-9][0-9]{7,8}$"},"address":{"type":"string"},"complement":{"type":"string"},"neighborhood":{"type":"string"},"city":{"type":"string"},"state":{"type":"string"},"zipcode":{"type":"string"},"latitude":{"type":"number","format":"double"},"longitude":{"type":"number","format":"double"},"responsible":{"type":"string"},"anotation":{"type":"string"},"creationdate":{"type":"string","format":"date"},"companygroupid":{"type":"string"},"level":{"type":"string"},"metadata":{"type":"object"}},"required":["name","rg","email","latitude","longitude","birthday"],"title":"MemberResource"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Response OK","content":{"application/json":{"schema":{"type":"object","properties":{"member":{"type":"object","properties":{"id":{"type":"integer"},"name":{"type":"string"},"cpf":{"type":"string"},"rg":{"type":"string","minLength":9,"maxLength":9},"gender":{"type":"string","enum":["M","F","J"]},"birthday":{"type":"string","format":"date"},"email":{"type":"string","minLength":2,"maxLength":30},"phonenumber":{"type":"string","pattern":"^[1-9]{2}[1-9][0-9]{8}$}"},"cellphonenumber":{"type":"string","pattern":"^[1-9]{2}[2-9][0-9]{7,8}$"},"address":{"type":"string"},"complement":{"type":"string"},"neighborhood":{"type":"string"},"city":{"type":"string"},"state":{"type":"string"},"zipcode":{"type":"string"},"latitude":{"type":"number","format":"double"},"longitude":{"type":"number","format":"double"},"responsible":{"type":"string"},"anotation":{"type":"string"},"creationdate":{"type":"string","format":"date"},"companygroupid":{"type":"string"},"level":{"type":"string"},"metadata":{"type":"object"}},"required":["name","rg","email","latitude","longitude","birthday"],"title":"MemberResource"}},"title":"MemberSingleResource"}}}},"400":{"description":"Bad request"}}}
+>
+  
+</StatusCodes>
+
+
+      
