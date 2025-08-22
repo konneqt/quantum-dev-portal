@@ -18,7 +18,7 @@
     "qdp-publish": "docusaurus deploy",
     "qdp-start": "npm run install-clean && npm run start",
     "qdp-build": "node ./cli/build.js",
-  "qdp-deploy": "node ./cli/deploy.js"
+    "qdp-deploy": "node ./cli/deploy.js"
   },
   "bin": {
     "qdp-init": "./cli/index.js",
@@ -46,6 +46,7 @@
     "@docusaurus/core": "^3.7.0",
     "@docusaurus/preset-classic": "^3.7.0",
     "@docusaurus/utils": "^3.7.0",
+    "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@google/generative-ai": "^0.24.0",
     "@mdx-js/react": "^3.1.0",
     "@nestjs/common": "^11.0.20",

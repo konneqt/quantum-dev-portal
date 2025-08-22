@@ -2,8 +2,10 @@ import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import { getOpenApiPlugins } from "./openApiPlugins";
+import searchLocal from "@easyops-cn/docusaurus-search-local";
 
 require("dotenv").config();
+
 const config: Config = {
   title: "Quantum API DevPortal",
   tagline: "API DevPortal",
@@ -14,7 +16,7 @@ const config: Config = {
 
   url: "https://konneqt.github.io",
 
-  baseUrl: "/quantum-dev-portal/",
+  baseUrl: "/",
   organizationName: "konneqt", 
   projectName: "quantum-dev-portal",
   deploymentBranch: "main",
@@ -29,7 +31,6 @@ const config: Config = {
       "classic",
       {
         docs: {
-          routeBasePath: "/", 
           breadcrumbs: true,
           sidebarPath: "./sidebars.ts",
           docItemComponent: "@theme/ApiItem",
@@ -53,14 +54,8 @@ const config: Config = {
         src: "img/just_q_blue.png",
       },
       items: [
-        /*   {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
-          position: "left",
-          label: "Introduction",
-        }, */
         {
-          to: "/quantum-dev-portal/docs/",
+          to: "docs/apis",
           label: "Documentation",
           position: "left",
         },
@@ -91,7 +86,27 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   markdown: {},
-  themes: ["docusaurus-theme-openapi-docs"],
+  themes: [
+    "docusaurus-theme-openapi-docs",
+    [
+      searchLocal,
+      {
+        hashed: true,
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: false,
+        language: ["en"], // Mantém consistente com i18n
+        docsRouteBasePath: "/docs", // Volta para /docs já que removemos routeBasePath
+        searchResultLimits: 8,
+        searchResultContextMaxLength: 50,
+        explicitSearchResultPath: true,
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+        highlightSearchTermsOnTargetPage: true,
+      }
+    ]
+  ],
+  
   stylesheets: [
     {
       href: "https://use.fontawesome.com/releases/v5.11.0/css/all.css",
@@ -104,4 +119,5 @@ const config: Config = {
   ],
   
 };
+
 export default config;
