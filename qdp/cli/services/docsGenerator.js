@@ -8,24 +8,23 @@ const { userFeedback } = require("../utils/feedback");
 const validateOpenAPISpec = require("../../utils/validateOpenApiFile.js");
 const { runRebuildDocsScript } = require("../utils/docsScriptHelper");
 const { resolveQdpRoot } = require("../utils/resolveQdpRoot");
+const {
+  createDynamicTags,
+  createDynamicSummary,
+} = require("../../utils/dynamicApiAnalyzer.js");
 
-// Função auxiliar que garante que a pasta local qdp existe
 const ensureLocalQdpExists = async () => {
   const currentDir = process.cwd();
   const localQdpPath = path.join(currentDir, "qdp");
   const globalQdpPath = resolveQdpRoot();
 
-  // Se o QDP global NÃO estiver dentro de node_modules, assume que veio de repositório (evita cópia)
   if (!globalQdpPath.includes("node_modules")) {
     return globalQdpPath;
   }
 
-  // Se já existir localmente, não precisa copiar
   if (fs.existsSync(localQdpPath)) {
     return localQdpPath;
   }
-
-  const { default: ora } = await import("ora");
 
   try {
     await fs.copy(globalQdpPath, localQdpPath, {
@@ -52,16 +51,13 @@ const ensureLocalQdpExists = async () => {
   return localQdpPath;
 };
 
-
 const generateDocsFromFiles = async () => {
   const { default: ora } = await import("ora");
 
-  // Garante que a pasta local existe
   const localQdpPath = await ensureLocalQdpExists();
 
-  // Agora usa a pasta local para APIs
   const defaultFolder = path.join(localQdpPath, "cli", "apis");
-  
+
   if (!fs.existsSync(defaultFolder)) {
     userFeedback.error("No OpenApis found at the default location.");
     userFeedback.tip(
@@ -69,7 +65,7 @@ const generateDocsFromFiles = async () => {
     );
     return;
   }
-  
+
   const files = fs.readdirSync(defaultFolder);
 
   if (files.length === 0) {
@@ -130,7 +126,14 @@ const generateDocsFromFiles = async () => {
               const operation = apiData.paths[path][method];
 
               if (!operation.summary) {
-                operation.summary = "No summary";
+                operation.summary = createDynamicSummary(path, method);
+                summaryAdded = true;
+              }
+
+              if (!operation.tags || operation.tags.length === 0) {
+                const generatedTags = createDynamicTags(path);
+                console.log(`Path: ${path} -> Tags geradas:`, generatedTags); // Log para debug
+                operation.tags = generatedTags;
                 summaryAdded = true;
               }
             }
@@ -302,7 +305,7 @@ const generateDocsFromURI = async () => {
       // MODIFICAÇÃO: Garante que a pasta local existe e salva lá
       const localQdpPath = await ensureLocalQdpExists();
       const apiFolder = path.join(localQdpPath, "cli", "apis");
-      
+
       if (!fs.existsSync(apiFolder)) {
         fs.mkdirSync(apiFolder, { recursive: true });
         userFeedback.info(`Created new API directory at ${apiFolder}`);
