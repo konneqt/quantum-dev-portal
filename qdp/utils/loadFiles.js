@@ -19,7 +19,7 @@ export function loadAllFilesContent(requireContext) {
       try {
         return yaml.load(data);
       } catch (error) {
-        console.error(`Erro ao parsear YAML no arquivo ${key}:`, error);
+        console.error(`Error parsing YAML in file ${key}:`, error);
         return null;
       }
     }
@@ -38,7 +38,7 @@ export function loadAllFilesContent(requireContext) {
           ? parseYamlContent(data, key)
           : data;
       } catch (error) {
-        console.error(`Erro ao carregar arquivo ${key}:`, error);
+        console.error(`Error loading file${key}:`, error);
         return null;
       }
     })
