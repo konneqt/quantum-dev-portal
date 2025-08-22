@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from '@docusaurus/router';
 
 function Home() {
-  return <Redirect to="/quantum-dev-portal/docs" />;
+  return <Redirect to="/docs/" />;
 }
 
 export default Home;
