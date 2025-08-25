@@ -11,7 +11,7 @@ const config: Config = {
   tagline: "API DevPortal",
   favicon: "img/favicon.ico",
   onBrokenAnchors: "ignore",
-  onBrokenLinks: "ignore",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "ignore",
 
   url: "https://konneqt.github.io",
@@ -34,6 +34,7 @@ const config: Config = {
           breadcrumbs: true,
           sidebarPath: "./sidebars.ts",
           docItemComponent: "@theme/ApiItem",
+          routeBasePath: "docs",
         },
         blog: {
           showReadingTime: false,
@@ -48,14 +49,14 @@ const config: Config = {
   themeConfig: {
     image: "img/just_q_blue.png",
     navbar: {
-      title: "Quantum API-Devportal",
+      title: "Quantum API Devportal",
       logo: {
         alt: "QAP DevPortal",
         src: "img/just_q_blue.png",
       },
       items: [
         {
-          to: "docs/apis",
+          to: "/docs/apis",
           label: "Documentation",
           position: "left",
         },
@@ -70,9 +71,6 @@ const config: Config = {
       defaultMode: 'light',
       disableSwitch: false,
       respectPrefersColorScheme: false,
-    },
-    customSidebar: {
-      defaultDocsPath: '/docs',
     },
     footer: {
       style: "dark",
@@ -95,8 +93,8 @@ const config: Config = {
         indexDocs: true,
         indexBlog: false,
         indexPages: false,
-        language: ["en"], // Mantém consistente com i18n
-        docsRouteBasePath: "/docs", // Volta para /docs já que removemos routeBasePath
+        language: ["en"],
+        docsRouteBasePath: "/docs", 
         searchResultLimits: 8,
         searchResultContextMaxLength: 50,
         explicitSearchResultPath: true,
