@@ -61,7 +61,7 @@ const sidebars: SidebarsConfig = {
         title: 'Quantum Admin APIs',
         description:
           'Find the full documentation for all their APIs here, including details on endpoints, authentication and usage examples.',
-        slug: '/docs/',
+        slug: '/apis/',
       },
       items: kcSideBar, 
     },
