@@ -27,8 +27,6 @@ const requireContext = require.context(
 );
 const allFilesContent = loadAllFilesContent(requireContext);
 
-console.log("Arquivos carregados:", allFilesContent);
-
 const featureList: Feature[] = allFilesContent.map((file: any) => {
   const maxLength = 250;
   const desc = file.description || "No description available...";
@@ -58,6 +56,8 @@ function FeatureComponent({ title, content, link }: Feature) {
 }
 
 export default function HomepageFeatures() {
+
+  const hasApis = requireContext.keys().length > 0;
   return (
     <>
       <h1 className="feature-mainText">Explore our APIs</h1>
@@ -66,9 +66,13 @@ export default function HomepageFeatures() {
         projects forward with innovation and efficiency.
       </p>
       <div className="feature-container">
-        {featureList.map((feature, idx) => (
-          <FeatureComponent key={idx} {...feature} />
-        ))}
+      {hasApis ? (
+          featureList.map((feature, idx) => (
+            <FeatureComponent key={idx} {...feature} />
+          ))
+        ) : (
+          <p className="feature-no-apis">No APIs available.</p>
+        )}
       </div>
     </>
   );
