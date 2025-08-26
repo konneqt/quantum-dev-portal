@@ -49,10 +49,11 @@ const config: Config = {
   themeConfig: {
     image: "img/just_q_blue.png",
     navbar: {
-      title: "Quantum API Devportal",
+      title: "Quantum API DevPortal",
       logo: {
         alt: "QAP DevPortal",
-        src: "img/just_q_blue.png",
+        src: "img/konneqt-black.png",
+        srcDark: "img/konneqt-white.png",
       },
       items: [
         {

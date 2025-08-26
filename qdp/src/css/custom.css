@@ -4,12 +4,7 @@
  * work well for content-centric websites.
  */
 
- @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@100;400;700&display=swap");
- @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
- html,
- body, h1, h2, h3, h4, h5, h6 {
-  font-family: "Onest", "Rubik", "Nunito", sans-serif !important;
- }
+ @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
@@ -22,6 +17,7 @@
   --ifm-color-primary-lighter: #3f3f46;
   --ifm-color-primary-lightest: #52525b;
   --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'Geist', sans-serif;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
   --ifm-badge-background-color: #21a1f1 !important;
   
@@ -67,7 +63,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
   
   /* Additional shadcn dark variables */
-  --background: #09090b;
+  --background: #18181b;
   --foreground: #fafafa;
   --card: #09090b;
   --card-foreground: #fafafa;
@@ -687,9 +683,12 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 
 .feature-content {
   font-size: 16px;
-  color: var(--color-text);
+  color: #52525b;
   line-height: 1.4;
   text-align: justify;
+}
+[data-theme='dark'] .feature-content {
+  color: #a1a1aa;
 }
 
 /* Responsividades */

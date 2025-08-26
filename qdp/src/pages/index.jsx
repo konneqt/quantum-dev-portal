@@ -38,7 +38,7 @@ function Home() {
               </p>
               <div className={clsx("buttonGroup")}>
                 <Link to="/docs/apis" className="primaryButton">
-                  <Translate id="home.getstarted">Documentação →</Translate>
+                  <Translate id="home.getstarted">Get Started →</Translate>
                 </Link>
               </div>
             </div>
