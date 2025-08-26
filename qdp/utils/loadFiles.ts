@@ -29,7 +29,6 @@ export function loadAllFilesContent(requireContext) {
         const data = extractContent(content);
         const parsedData = isYamlFile(key) ? parseYamlContent(data, key) : data;
         
-        // Gera o linkTitle baseado no caminho do arquivo
         const linkTitle = names[index]
           .replaceAll(" ", "")
           .split("/")

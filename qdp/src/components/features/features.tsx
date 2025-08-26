@@ -37,7 +37,6 @@ const featureList: Feature[] = allFilesContent.map((file: any) => {
     desc.length > maxLength ? desc.slice(0, maxLength) + "..." : desc;
 
   return {
-    // Agora usa o linkTitle do arquivo e o slug do título
     link: `/docs/${file.linkTitle}/${file.title.trim().toLowerCase().replaceAll(" ", "-").replaceAll(".", "-")}`,
     title: file.title,
     content: description,
