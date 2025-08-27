@@ -4,84 +4,131 @@
  * work well for content-centric websites.
  */
 
- @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@100;400;700&display=swap");
- @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
- html,
- body, h1, h2, h3, h4, h5, h6 {
-  font-family: "Onest", "Rubik", "Nunito", sans-serif !important;
- }
+ @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #21a1dc;
-  --ifm-color-primary-dark: #106f9b;
-  --ifm-color-primary-darker: #134156;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: rgb(32, 180, 200);
-  --ifm-color-primary-lighter: #21a1dc;
-  --ifm-color-primary-lightest: #51b3e0d5;
+  /* Shadcn colors - light mode */
+  --ifm-color-primary: #18181b;
+  --ifm-color-primary-dark: #09090b;
+  --ifm-color-primary-darker: #000000;
+  --ifm-color-primary-darkest: #000000;
+  --ifm-color-primary-light: #27272a;
+  --ifm-color-primary-lighter: #3f3f46;
+  --ifm-color-primary-lightest: #52525b;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: 'Geist', sans-serif;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
+  --ifm-badge-background-color: #21a1f1 !important;
+  
+  /* Additional shadcn variables */
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #18181b;
+}
+
+.badge--primary {
+  --ifm-badge-background-color: #21a1f1 !important;
+}
+.badge--info {
+  --ifm-badge-background-color: #2253a1 !important;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #21a1dc;
-  --ifm-color-primary-dark: #106f9b;
-  --ifm-color-primary-darker: #134156;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: rgb(32, 180, 200);
-  --ifm-color-primary-lighter: #21a1dc;
-  --ifm-color-primary-lightest: #51b3e0d5;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Shadcn colors - dark mode */
+  --ifm-color-primary: #fafafa;
+  --ifm-color-primary-dark: #e4e4e7;
+  --ifm-color-primary-darker: #d4d4d8;
+  --ifm-color-primary-darkest: #a1a1aa;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #ffffff;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+  
+  /* Additional shadcn dark variables */
+  --background: #18181b;
+  --foreground: #fafafa;
+  --card: #09090b;
+  --card-foreground: #fafafa;
+  --popover: #09090b;
+  --popover-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #18181b;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #d4d4d8;
 }
 
 .footer {
-  background-color: black;
-  color: var(--ifm-footer-color);
+  background-color: var(--background);
+  color: var(--muted-foreground);
   padding: var(--ifm-footer-padding-vertical) var(--ifm-footer-padding-horizontal);
+  border-top: 1px solid var(--border);
 }
 
 /* Sidebar Method labels
 https://docusaurus-openapi.tryingpan.dev/customization/styling
 */
 
-
-
 .markdown h1 {
   font-size: 1.5rem; 
   font-weight: 600;
   white-space: normal !important; 
-
+  color: var(--foreground);
 }
 
 .markdown h2.anchor {
   font-size: 1.3rem;
   font-weight: 500;
+  color: var(--foreground);
 }
 
 .markdown h3 {
   font-size: 1rem;
   font-weight: 300;
+  color: var(--foreground);
 }
-
 
 .markdown p {
   font-size: 1rem; 
   line-height: 1.6; 
+  color: var(--muted-foreground);
 }
 
-
 .menu__link--active {
-  color: inherit !important;
- 
+  color: var(--primary) !important;
 }
 
 .menu__link--active:not(.menu__link--sublist) {
-  border-right: 4px solid var(--ifm-color-primary) !important;
+  border-right: 4px solid var(--primary) !important;
   padding-right: 8px !important;
+  background-color: var(--accent) !important;
 }
-
 
 .menu__list-item {
   white-space: normal !important; 
@@ -91,8 +138,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
   line-height: 1.2;
   justify-content: start;
   font-weight: 400;
-
-
+  color: var(--muted-foreground);
 }
 
 .api-method > .menu__link,
@@ -120,40 +166,717 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 
 .get > .menu__link::before {
   content: "get";
-  background-color: var(--ifm-color-primary);
+  background-color: #21a1f1;
 }
 
 .post > .menu__link::before {
   content: "post";
-  background-color: var(--openapi-code-green);
+  background-color: #22c55e;
 }
 
 .delete > .menu__link::before {
   content: "del";
-  background-color: var(--openapi-code-red);
+  background-color: var(--destructive);
 }
 
 .put > .menu__link::before {
   content: "put";
-  background-color: var(--openapi-code-blue);
+  background-color: #2253a1;
 }
 
 .patch > .menu__link::before {
   content: "patch";
-  background-color: var(--openapi-code-orange);
+  background-color: #f97316;
 }
 
 .head > .menu__link::before {
   content: "head";
-  background-color: var(--ifm-color-secondary-darkest);
+  background-color: var(--muted-foreground);
 }
 
 .event > .menu__link::before {
   content: "event";
-  background-color: var(--ifm-color-secondary-darkest);
+  background-color: var(--muted-foreground);
 }
 
 .schema > .menu__link::before {
   content: "schema";
-  background-color: var(--ifm-color-secondary-darkest);
+  background-color: var(--muted-foreground);
+}
+
+/* homepage css */
+
+/* stylelint-disable docusaurus/copyright-header */
+
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+ :global(.navbar) {
+  box-shadow: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.heroTitle {
+  justify-content: start;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: var(--foreground);
+}
+
+@media screen and (max-width: 767px) {
+  .whiteboardCol {
+    --ifm-col-width: calc(1 / 12 * 100%) !important;
+  }
+  .heroTitle {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .whiteboardCol {
+    --ifm-col-width: calc(2 / 12 * 100%) !important;
+  }
+}
+
+.chaosCategory {
+  mask-image: linear-gradient(to top, transparent 1%, #fff 60%, #000 100%);
+}
+
+/* Estilização geral */
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.main {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--background);
+}
+
+.meshBackground {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Esconde a mesh em telas menores */
+@media (max-width: 1024px) {
+  .meshBackground {
+    display: none;
+  }
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 2rem;
+  min-height: 80vh;
+  background-color: var(--background);
+}
+
+.heroContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 1rem 2rem;
+    margin-top: -3rem;
+  }
+  .heroContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 24px;
+}
+
+@media (min-width: 1024px) {
+  .textContainer {
+    padding: 0 2rem 0 0;
+  }
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  padding-left: 48px;
+}
+
+/* Imagem com efeito 3D */
+.heroImage {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    75px 75px 75px -25px rgba(0, 0, 0, 0.1);
+  transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(5deg) rotateY(-5deg);
+  transition: 0.3s ease-in-out transform;
+  object-fit: contain;
+}
+
+.heroImage:hover {
+  transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(0deg) rotateY(0deg);
+  border-color: var(--ring);
+}
+
+[data-theme='dark'] .heroImage {
+  border: 2px solid var(--border);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    75px 75px 75px -25px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .heroImage:hover {
+  border-color: var(--ring);
+}
+
+[data-theme='dark'] .openapi-explorer__request-btn {
+  color: #18181b
+}
+
+/* Esconde a imagem em telas menores */
+@media (max-width: 1024px) {
+  .imageContainer {
+    display: none;
+  }
+}
+
+/* Título principal */
+.heroTitle {
+  font-size: 6rem;
+  line-height: 1.2;
+  margin-bottom: 0;
+  text-align: left;
+  color: var(--foreground);
+}
+
+@media (min-width: 1280px) {
+  .heroTitle {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .heroTitle {
+    font-size: 4.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+}
+
+/* Destaque no título */
+.highlight {
+  font-weight: bold;
+  background: linear-gradient(90deg, var(--primary), var(--muted-foreground));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Tema escuro */
+[data-theme="dark"] .highlight {
+  background: linear-gradient(90deg, var(--primary), var(--muted-foreground));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Parágrafo de descrição */
+.description {
+  margin-top: 16px;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 16px;
+  backdrop-filter: blur(5px);
+  color: var(--muted-foreground);
+  text-align: left;
+  padding: 8px;
+  line-height: 1.6;
+  max-width: 570px;
+}
+
+@media (max-width: 768px) {
+  .description {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .description {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .description {
+    font-size: 1.4rem;
+  }
+}
+
+/* Botões */
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .buttonGroup {
+    justify-content: center;
+    gap: 8px;
+  }
+}
+
+/* Ajuste para telas mobile */
+@media screen and (max-width: 768px) {
+  .primaryButton,
+  .secondaryButton {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Para telas ainda menores */
+@media screen and (max-width: 480px) {
+  .buttonGroup {
+    gap: 6px;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.primaryButton {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, background-color 0.2s;
+  border: 1px solid var(--border);
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px);
+  background-color: var(--primary);
+  opacity: 0.9;
+  text-decoration: none;
+  color: var(--primary-foreground);
+}
+
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s;
+  border: 1px solid var(--border);
+}
+
+.secondaryButton:hover {
+  transform: translateY(-3px);
+  text-decoration: none;
+  color: var(--secondary-foreground);
+  background-color: var(--accent);
+}
+
+/* Ícone */
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Animações de rolagem */
+.scrollToDisplay {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.scrollToDisplayX {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.bgBlue {
+  color: var(--primary);
+}
+
+.bgYellow {
+  color: var(--muted-foreground);
+}
+
+/* Features Styles */
+
+/* Container principal */
+.feature-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 4rem;
+  margin-bottom: 128px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.feature-mainText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  line-height: 1.3;
+  margin-bottom: 3rem;
+  font-size: 1.8rem;
+  color: #18181b;
+}
+
+[data-theme='dark'] .feature-mainText {
+  color: #fafafa;
+}
+
+.feature-subtitle {
+  display: inline;
+  font-weight: bold;
+  background: linear-gradient(90deg, #203b79, #f6a113);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-theme='dark'] .feature-subtitle {
+  background: linear-gradient(90deg, #ffffff, #f6a113);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline;
+  font-weight: bold;
+}
+
+/* Card de cada feature */
+.feature-card {
+  background: transparent;
+  border: 1px solid #e0dcdc; 
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  max-width: 350px;
+  min-height: 220px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  box-shadow: 0px 4px 10px rgba(26, 25, 25, 0.199);
+  transform: translateY(-5px);
+}
+
+/* Header do card */
+.feature-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* adiciona espaço entre os elementos */
+  gap: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.clickable-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none !important; 
+  color: inherit !important;
+}
+
+
+/* Ícone do card */
+.feature-icon {
+  color: #0a0a0a;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+[data-theme='dark'] .feature-icon {
+  color: #fafafa;
+  background-color: #18181b;
+}
+
+/* Título */
+.feature-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.2;
+  color: #18181b
+}
+[data-theme='dark'] .feature-title {
+  color: #fafafa;
+}
+
+.feature-description {
+  font-size: 1.1rem;
+  color: #71717a;
+  max-width: 800px;
+  line-height: 1.6;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feature-content {
+  font-size: 16px;
+  color: #52525b;
+  line-height: 1.4;
+  text-align: justify;
+}
+[data-theme='dark'] .feature-content {
+  color: #a1a1aa;
+}
+
+/* Responsividades */
+
+/* Mobile pequeno (320px - 480px) */
+@media (max-width: 480px) {
+  .feature-container {
+    gap: 16px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 64px;
+  }
+  
+  .feature-mainText {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+
+  .feature-description {
+      font-size: 1rem;
+      max-width: 100%;
+      padding: 0 1rem;
+    }
+  
+  .feature-card {
+    width: 100%;
+    max-width: none;
+    padding: 16px;
+    min-height: 200px;
+  }
+  
+  .feature-icon {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+  }
+  
+  .feature-title {
+    font-size: 15px;
+  }
+  
+  .feature-content {
+    font-size: 13px;
+  }
+}
+
+/* Mobile médio (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .feature-container {
+    gap: 20px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 80px;
+  }
+  
+  .feature-mainText {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .feature-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    min-height: 240px;
+  }
+  
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .feature-title {
+    font-size: 17px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .feature-container {
+    gap: 24px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 96px;
+  }
+  
+  .feature-mainText {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .feature-card {
+    width: calc(50% - 12px);
+    max-width: 380px;
+    padding: 22px;
+    min-height: 260px;
+  }
+  
+  .feature-icon {
+    width: 46px;
+    height: 46px;
+  }
+  
+  .feature-title {
+    font-size: 18px;
+  }
+}
+
+/* Desktop pequeno (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .feature-container {
+    gap: 26px;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 112px;
+  }
+  
+  .feature-mainText {
+    font-size: 2.8rem;
+  }
+  
+  .feature-card {
+    width: calc(33.333% - 18px);
+    max-width: 360px;
+    padding: 24px;
+    min-height: 270px;
+  }
+  
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Desktop médio (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .feature-container {
+    gap: 28px;
+    margin-left: 8rem;
+    margin-right: 8rem;
+    margin-bottom: 120px;
+  }
+  
+  .feature-mainText {
+    font-size: 3rem;
+  }
+  
+  .feature-card {
+    width: calc(33.333% - 19px);
+    max-width: 380px;
+    padding: 24px;
+    min-height: 280px;
+  }
+}
+
+/* Desktop grande (1400px+) */
+@media (min-width: 1400px) {
+  .feature-container {
+    gap: 30px;
+    margin-left: 20rem;
+    margin-right: 20rem;
+    margin-bottom: 128px;
+  }
+  
+  .feature-mainText {
+    font-size: 3rem;
+  }
+  
+  .feature-card {
+    width: 400px;
+    max-width: 400px;
+    padding: 24px;
+    height: 280px;
+  }
+  
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.feature-no-apis {
+  font-size: 18px;        
+  color: #6b7280;          
+  text-align: center;     
+  padding: 20px 20px;         
+  font-weight: 500;        
+  background-color: #f9fafb; 
+  border-radius: 8px;      
 }

@@ -1,0 +1,80 @@
+import { IconArrowRight } from "@tabler/icons-react";
+import React from "react";
+import { Link } from "react-router-dom";
+import { loadAllFilesContent } from "../../../utils/loadFiles";
+
+interface Feature {
+  title: string;
+  content: string;
+  link: string;
+}
+
+declare var require: {
+  context(
+    path: string,
+    recursive?: boolean,
+    regExp?: RegExp
+  ): {
+    keys(): string[];
+    <T = any>(id: string): T;
+  };
+};
+
+const requireContext = require.context(
+  "../../../cli/apis",
+  false,
+  /\.(json|ya?ml)$/
+);
+const allFilesContent = loadAllFilesContent(requireContext);
+
+const featureList: Feature[] = allFilesContent.map((file: any) => {
+
+  const description = file?.info?.description
+  ? file.info.description.length > 250
+    ? file.info.description.slice(0, 250) + "..."
+    : file.info.description
+  : "No description";
+
+  return {
+    link: `/docs/${file.linkTitle}/${file.title.trim().toLowerCase().replaceAll(" ", "-").replaceAll(".", "-")}`,
+    title: file.title,
+    content: description,
+  };
+});
+
+function FeatureComponent({ title, content, link }: Feature) {
+  return (
+    <Link className="feature-card clickable-card" to={link}>
+      <div className="feature-header">
+        <h3 className="feature-title">{title}</h3>
+        <div className="feature-icon">
+          <IconArrowRight size={40} stroke={1.5} />
+        </div>
+      </div>
+      <p className="feature-content">{content}</p>
+    </Link>
+  );
+}
+
+export default function HomepageFeatures() {
+
+  const hasApis = requireContext.keys().length > 0;
+  return (
+    <>
+      <h1 className="feature-mainText">Explore our APIs</h1>
+      <p className="feature-description">
+        Discover how our APIs can transform your development and drive your
+        projects forward with innovation and efficiency.
+      </p>
+      <div className="feature-container">
+      {hasApis ? (
+          featureList.map((feature, idx) => (
+            <FeatureComponent key={idx} {...feature} />
+          ))
+        ) : (
+          <p className="feature-no-apis">No APIs available.</p>
+        )}
+      </div>
+    </>
+  );
+}

@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
 const apiDir = path.resolve(__dirname, "./cli/apis");
 
@@ -19,7 +18,6 @@ export function getOpenApiPlugins() {
     );
 
   
-  // Cria um objeto de configuração com todas as APIs
   const apiConfig = {};
   
   apiFiles.forEach(file => {
@@ -37,13 +35,10 @@ export function getOpenApiPlugins() {
     };
   });
   
-  // Retorna um único plugin com todas as APIs configuradas
   return [
     [
       "docusaurus-plugin-openapi-docs",
       {
-        // Note que o ID é passado como a segunda propriedade
-        // na configuração do plugin, não dentro das opções
         docsPluginId: "classic",
         config: apiConfig,
       },
