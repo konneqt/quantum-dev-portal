@@ -28,11 +28,12 @@ const requireContext = require.context(
 const allFilesContent = loadAllFilesContent(requireContext);
 
 const featureList: Feature[] = allFilesContent.map((file: any) => {
-  const maxLength = 250;
-  const desc = file.description || "No description available...";
 
-  const description =
-    desc.length > maxLength ? desc.slice(0, maxLength) + "..." : desc;
+  const description = file?.info?.description
+  ? file.info.description.length > 250
+    ? file.info.description.slice(0, 250) + "..."
+    : file.info.description
+  : "No description";
 
   return {
     link: `/docs/${file.linkTitle}/${file.title.trim().toLowerCase().replaceAll(" ", "-").replaceAll(".", "-")}`,
