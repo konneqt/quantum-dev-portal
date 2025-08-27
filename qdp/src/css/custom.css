@@ -718,7 +718,7 @@
     width: 100%;
     max-width: none;
     padding: 16px;
-    min-height: 200px;
+    min-height: 180px;
   }
   
   .feature-icon {
@@ -754,7 +754,7 @@
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    min-height: 240px;
+    min-height: 200px;
   }
   
   .feature-icon {
@@ -785,7 +785,7 @@
     width: calc(50% - 12px);
     max-width: 380px;
     padding: 22px;
-    min-height: 260px;
+    min-height: 220px;
   }
   
   .feature-icon {
@@ -815,7 +815,7 @@
     width: calc(33.333% - 18px);
     max-width: 360px;
     padding: 24px;
-    min-height: 270px;
+    min-height: 220px;
   }
   
   .feature-icon {
@@ -841,7 +841,7 @@
     width: calc(33.333% - 19px);
     max-width: 380px;
     padding: 24px;
-    min-height: 280px;
+    min-height: 220px;
   }
 }
 
@@ -862,7 +862,7 @@
     width: 400px;
     max-width: 400px;
     padding: 24px;
-    height: 280px;
+    min-height: 220px;
   }
   
   .feature-icon {
