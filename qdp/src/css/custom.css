@@ -91,9 +91,9 @@
   border-top: 1px solid var(--border);
 }
 
-/* Sidebar Method labels
-https://docusaurus-openapi.tryingpan.dev/customization/styling
-*/
+.menu__link {
+  text-transform: capitalize;
+}
 
 .markdown h1 {
   font-size: 1.5rem; 
