@@ -3,6 +3,8 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import { getOpenApiPlugins } from "./openApiPlugins";
 import searchLocal from "@easyops-cn/docusaurus-search-local";
+import stylesConfig from '../styles.config.json';
+
 
 require("dotenv").config();
 
@@ -49,11 +51,11 @@ const config: Config = {
   themeConfig: {
     image: "img/just_q_blue.png",
     navbar: {
-      title: "Quantum API DevPortal",
+      title: stylesConfig.companyName,
       logo: {
         alt: "QAP DevPortal",
-        src: "img/konneqt-black.png",
-        srcDark: "img/konneqt-white.png",
+        src: stylesConfig.logoUrl,
+        srcDark: stylesConfig.logoUrlDark,
       },
       items: [
         {

@@ -91,9 +91,9 @@
   border-top: 1px solid var(--border);
 }
 
-/* Sidebar Method labels
-https://docusaurus-openapi.tryingpan.dev/customization/styling
-*/
+.menu__link {
+  text-transform: capitalize;
+}
 
 .markdown h1 {
   font-size: 1.5rem; 
@@ -222,7 +222,14 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
   justify-content: start;
   background-clip: text;
   -webkit-background-clip: text;
-  color: var(--foreground);
+  font-size: 4rem;
+  line-height: 1.2;
+  margin-bottom: 0;
+  text-align: left;
+  color: var(--primary-color);
+}
+[data-theme='dark'] .heroTitle {
+  color: var(--primary-color-dark);
 }
 
 @media screen and (max-width: 767px) {
@@ -367,51 +374,6 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
   }
 }
 
-/* Título principal */
-.heroTitle {
-  font-size: 6rem;
-  line-height: 1.2;
-  margin-bottom: 0;
-  text-align: left;
-  color: var(--foreground);
-}
-
-@media (min-width: 1280px) {
-  .heroTitle {
-    font-size: 4rem;
-  }
-}
-
-@media (min-width: 1600px) {
-  .heroTitle {
-    font-size: 4.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .heroTitle {
-    text-align: center;
-    font-size: 2.5rem;
-  }
-}
-
-/* Destaque no título */
-.highlight {
-  font-weight: bold;
-  background: linear-gradient(90deg, var(--primary), var(--muted-foreground));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Tema escuro */
-[data-theme="dark"] .highlight {
-  background: linear-gradient(90deg, var(--primary), var(--muted-foreground));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /* Parágrafo de descrição */
 .description {
   margin-top: 16px;
@@ -419,7 +381,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
   font-weight: 400;
   border-radius: 16px;
   backdrop-filter: blur(5px);
-  color: var(--muted-foreground);
+  color: var(--text-color);
   text-align: left;
   padding: 8px;
   line-height: 1.6;
@@ -515,7 +477,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
   align-items: center;
   gap: 8px;
   background-color: var(--secondary);
-  color: var(--secondary-foreground);
+  color: var(--secondary-color);
   padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
@@ -548,13 +510,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
   transform: translateY(100px);
 }
 
-.bgBlue {
-  color: var(--primary);
-}
 
-.bgYellow {
-  color: var(--muted-foreground);
-}
 
 /* Features Styles */
 
@@ -579,11 +535,11 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
   line-height: 1.3;
   margin-bottom: 3rem;
   font-size: 1.8rem;
-  color: #18181b;
+  color: var(--primary-color);
 }
 
 [data-theme='dark'] .feature-mainText {
-  color: #fafafa;
+  color: var(--primary-color-dark);
 }
 
 .feature-subtitle {
@@ -663,10 +619,10 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 .feature-title {
   font-size: 18px;
   font-weight: bold;
-  color: var(--color-text);
+  color: var(--primary-color);
   margin: 0;
   line-height: 1.2;
-  color: #18181b
+  color: var(--primary-color)
 }
 [data-theme='dark'] .feature-title {
   color: #fafafa;
@@ -674,7 +630,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 
 .feature-description {
   font-size: 1.1rem;
-  color: #71717a;
+  color: var(--text-color);
   max-width: 800px;
   line-height: 1.6;
   margin: 0 auto;
@@ -683,7 +639,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
 
 .feature-content {
   font-size: 16px;
-  color: #52525b;
+  color: var(--text-color);
   line-height: 1.4;
   text-align: justify;
 }
@@ -718,7 +674,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
     width: 100%;
     max-width: none;
     padding: 16px;
-    min-height: 200px;
+    min-height: 180px;
   }
   
   .feature-icon {
@@ -754,7 +710,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    min-height: 240px;
+    min-height: 200px;
   }
   
   .feature-icon {
@@ -785,7 +741,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
     width: calc(50% - 12px);
     max-width: 380px;
     padding: 22px;
-    min-height: 260px;
+    min-height: 220px;
   }
   
   .feature-icon {
@@ -815,7 +771,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
     width: calc(33.333% - 18px);
     max-width: 360px;
     padding: 24px;
-    min-height: 270px;
+    min-height: 220px;
   }
   
   .feature-icon {
@@ -841,7 +797,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
     width: calc(33.333% - 19px);
     max-width: 380px;
     padding: 24px;
-    min-height: 280px;
+    min-height: 220px;
   }
 }
 
@@ -862,7 +818,7 @@ https://docusaurus-openapi.tryingpan.dev/customization/styling
     width: 400px;
     max-width: 400px;
     padding: 24px;
-    height: 280px;
+    min-height: 220px;
   }
   
   .feature-icon {
