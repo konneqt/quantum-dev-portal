@@ -7,9 +7,6 @@ const { loadEnv, saveEnv, isTokenValid } = require("../utils/env");
 const { userFeedback } = require("../utils/feedback");
 const { generateDocsFromFiles } = require("./docsGenerator");
 
-// Importa a função auxiliar do arquivo de upload
-const { ensureLocalQdpExists } = require("./openApiUploader");
-
 const configureAccessInfo = async () => {
   const {
     apiURI,
@@ -95,7 +92,6 @@ const generateAccessToken = async (
   oauthURL
 ) => {
   const { default: ora } = await import("ora");
-  // Create a spinner for token generation
   const tokenSpinner = ora({
     text: "Generating access token...",
     spinner: "dots",
@@ -128,15 +124,10 @@ const generateAccessToken = async (
   }
 };
 
-// MODIFICAÇÃO: Agora salva na pasta local
 const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
   const { default: ora } = await import("ora");
-  
-  // Garante que a pasta local existe
-  const localQdpPath = await ensureLocalQdpExists();
-  const apiFolder = path.join(localQdpPath, "cli", "apis");
-  
-  // Create a spinner for API fetching
+  const apiFolder = path.join(process.cwd(), "cli", "apis");
+
   const fetchSpinner = ora({
     text: `Fetching API specs from QAP for ${companyName}...`,
     spinner: "dots",
@@ -159,14 +150,12 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
 
     fetchSpinner.succeed("API specifications successfully retrieved!");
 
-    // MODIFICAÇÃO: Usa pasta local em vez da global
     if (!fs.existsSync(apiFolder)) {
       fs.mkdirSync(apiFolder, { recursive: true });
     }
 
     const apiSpecs = apiResponse.data.apiInformations;
 
-    // Create a spinner for processing the specs
     const processSpinner = ora({
       text: `Processing ${apiSpecs.length} API specifications...`,
       spinner: "line",
@@ -241,16 +230,13 @@ const fetchAndSaveApiSpecs = async (apiURI, companyName, token) => {
     processSpinner.succeed(
       `Successfully processed ${processedCount} API specifications!`
     );
-    
 
     return true;
   } catch (error) {
-    // Make sure to fail the spinner if there's an error
     if (fetchSpinner && fetchSpinner.isSpinning) {
       fetchSpinner.fail("Error fetching OpenAPI specs");
     }
 
-    // Display the specific error message from the API if available
     if (error.response && error.response.data && error.response.data.message) {
       console.error(chalk.red(`${error.response.data.message}`));
     } else {
@@ -308,5 +294,5 @@ module.exports = {
   cleanAccessInfo,
   useConfiguredAccessInfo,
   generateAccessToken,
-  fetchAndSaveApiSpecs
+  fetchAndSaveApiSpecs,
 };

@@ -7,24 +7,20 @@ const path = require("path");
 const { spawn } = require('child_process');
 const { resolveQdpRoot } = require("../utils/resolveQdpRoot");
 
-// Importa a função auxiliar do arquivo de upload (se disponível)
 let ensureLocalQdpExists;
 let setupSpinner; 
 try {
   ensureLocalQdpExists = require("./openApiUploader").ensureLocalQdpExists;
 } catch (error) {
-  // Se não conseguir importar, define uma versão local
   ensureLocalQdpExists = async () => {
     const currentDir = process.cwd();
     const localQdpPath = path.join(currentDir, "qdp");
     const globalQdpPath = resolveQdpRoot();
   
-    // Se o QDP global NÃO estiver dentro de node_modules, assume que veio de repositório (evita cópia)
     if (!globalQdpPath.includes("node_modules")) {
       return globalQdpPath;
     }
   
-    // Se já existir localmente, não precisa copiar
     if (fs.existsSync(localQdpPath)) {
       return localQdpPath;
     }
@@ -63,7 +59,6 @@ try {
   };
 }
 
-// Função para executar comandos npm/yarn
 const runInstallCommand = (command, args, workingDir) => {
   return new Promise((resolve, reject) => {
     
@@ -88,7 +83,6 @@ const runInstallCommand = (command, args, workingDir) => {
 };
 
 const configureTemplates = async () => {
-  // Garante que a pasta local existe
   const localQdpPath = await ensureLocalQdpExists();
   
   const templates = listTemplatesModule.templates;
@@ -164,13 +158,11 @@ async function getCurrentTemplateInfo(localQdpPath) {
     );
   }
 
-  // Valor padrão se o arquivo não existir ou não puder ser lido
   const defaultInfo = {
     name: "default",
     installed: null,
   };
 
-  // Criar o arquivo com valor padrão
   await fs.writeJson(templateInfoPath, defaultInfo, { spaces: 2 });
 
   return defaultInfo;
@@ -198,7 +190,7 @@ async function downloadTemplateFiles(templateName, localQdpPath) {
     templateName.toLowerCase() === "chaos-mesh"
   ) {
     foldersToDownload = ["static", "src"];
-    filesToDownload = ["package.json", "docusaurus.config.ts", "sidebars.ts"];
+    filesToDownload = ["package.json", "docusaurus.config.ts", "sidebars.ts", "styles.config.json"];
     templateDir = "chaos-mesh";
   } else if (templateName.toLowerCase() === "homarr") {
     foldersToDownload = ["static", "src"];
@@ -313,7 +305,6 @@ async function downloadFile(fileUrl, localPath) {
   }
 }
 
-// MODIFICAÇÃO: Agora trabalha na pasta local
 async function mergePackageJson(packageJsonUrl, localQdpPath) {
   try {
     console.log(

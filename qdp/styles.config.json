@@ -1,0 +1,14 @@
+{
+    "logoUrl": "/img/konneqt-black.png",
+    "logoUrlDark": "/img/konneqt-white.png",
+    "companyName": "Quantum API DevPortal",
+    "colors": {
+        "--primary-color": "blue",
+        "--primary-color-dark": "#f4f4f5",
+        "--secondary-color": "#f4f4f5",
+        "--text-color":"#71717a"
+    },
+    "heroUrl": "/img/authorization1.png",
+    "heroUrlDark": "/img/authDark.png"
+}
+

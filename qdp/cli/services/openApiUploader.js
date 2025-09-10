@@ -5,57 +5,12 @@ const chalk = require("chalk");
 const { userFeedback } = require("../utils/feedback");
 const validateOpenAPISpec = require("../../utils/validateOpenApiFile.js");
 const { generateDocsFromFiles } = require("./docsGenerator");
-const { resolveQdpRoot } = require("../utils/resolveQdpRoot");
-
-const ensureLocalQdpExists = async () => {
-  const currentDir = process.cwd();
-  const localQdpPath = path.join(currentDir, "qdp");
-  const globalQdpPath = resolveQdpRoot();
-
-  // Se não veio de node_modules, usa direto o global (ex: clone do repositório)
-  if (!globalQdpPath.includes("node_modules")) {
-    return globalQdpPath;
-  }
-
-  // Se já existir localmente, retorna
-  if (fs.existsSync(localQdpPath)) {
-    return localQdpPath;
-  }
-
-  const { default: ora } = await import("ora");
-
-  try {
-    await fs.copy(globalQdpPath, localQdpPath, {
-      filter: (src) => {
-        const relativePath = path.relative(globalQdpPath, src);
-        return (
-          !relativePath.startsWith("node_modules") &&
-          !relativePath.startsWith(".git") &&
-          !relativePath.startsWith("build") &&
-          !relativePath.startsWith(".next")
-        );
-      },
-    });
-
-    const necessaryDirs = ["cli/apis", "docs", "src/pages"];
-    for (const dir of necessaryDirs) {
-      await fs.ensureDir(path.join(localQdpPath, dir));
-    }
-  } catch (error) {
-    userFeedback.error("Failed to setup local environment");
-    throw error;
-  }
-
-  return localQdpPath;
-};
-
 
 const uploadOpenAPIFiles = async () => {
   const { default: ora } = await import("ora");
   const { default: chalk } = await import("chalk");
 
-  const localQdpPath = await ensureLocalQdpExists();
-  const targetDir = path.join(localQdpPath, "cli", "apis");
+  const targetDir = path.join(process.cwd(), "cli", "apis");
 
   const { uploadMethod } = await inquirer.prompt([
     {
@@ -237,5 +192,4 @@ const processFiles = async (files, targetDir) => {
 module.exports = {
   uploadOpenAPIFiles,
   processFiles,
-  ensureLocalQdpExists,
 };

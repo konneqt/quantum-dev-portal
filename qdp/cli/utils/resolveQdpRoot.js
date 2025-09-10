@@ -3,7 +3,7 @@ const fs = require("fs-extra");
 
 const resolveQdpRoot = () => {
   try {
-    return path.dirname(require.resolve("qdp/package.json"));
+    return path.dirname(require.resolve("@RaianeCoimbra/qdp/package.json"));
   } catch {
     // Tenta subir até encontrar o package.json com qdp
     let dir = __dirname;
@@ -15,7 +15,7 @@ const resolveQdpRoot = () => {
 
       if (fs.existsSync(pkgPath)) {
         const pkg = fs.readJsonSync(pkgPath);
-        if (pkg.name === "qdp" || (pkg.dependencies && pkg.dependencies.qdp)) {
+        if (pkg.name === "@RaianeCoimbra/qdp" || (pkg.dependencies && pkg.dependencies["@RaianeCoimbra/qdp"])) {
           return potentialRoot;
         }
       }

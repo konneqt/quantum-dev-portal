@@ -4,7 +4,7 @@ const { spawn, exec } = require('child_process');
 const path = require('path');
 const fs = require('fs-extra');
 const chalk = require('chalk');
-const { resolveQdpRoot } = require("../utils/resolveQdpRoot");
+const { resolveQdpRoot } = require("./utils/resolveQdpRoot");
 
 // Função para verificar se um comando existe
 const commandExists = (command) => {

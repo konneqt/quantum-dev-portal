@@ -1,6 +1,6 @@
 {
-  "name": "qdp",
-  "version": "0.0.1",
+  "name": "@RaianeCoimbra/qdp",
+  "version": "1.0.0",
   "main": "./cli/index.js",
   "scripts": {
     "docusaurus": "docusaurus",
@@ -76,9 +76,9 @@
     "typescript": "^5.7.3",
     "yaml-loader": "^0.8.1"
   },
-  "repository": {
+ "repository": {
     "type": "git",
-    "url": "https://github.com/konneqt/quantum-dev-portal"
+    "url": "git+https://github.com/konneqt/quantum-dev-portal.git"
   },
   "homepage": "https://konneqt.github.io/qdp-documentation/",
   "bugs": {
@@ -109,6 +109,6 @@
   },
   "private": false,
   "publishConfig": {
-    "access": "public"
+    "@RaianeCoimbra:registry": "https://npm.pkg.github.com"
   }
 }

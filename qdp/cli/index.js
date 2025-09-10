@@ -1,15 +1,27 @@
 #!/usr/bin/env node
 
-const { init, askMenuOptions, askQapOptions, askTemplateOptions } = require('./utils/ui');
-const { handleHelp } = require('./utils/feedback');
-const { uploadOpenAPIFiles } = require('./services/openApiUploader');
-const { generateDocsFromFiles, generateDocsFromURI } = require('./services/docsGenerator');
-const { configureAccessInfo, cleanAccessInfo, useConfiguredAccessInfo } = require('./services/qapService');
-const templates = require('./configureTemplates/listTemplates');
-const configureTemplates = require('./configureTemplates/index');
-const chalk = require('chalk');
+const fs = require("fs-extra");
+const path = require("path");
+const chalk = require("chalk");
+const { init, askMenuOptions, askQapOptions, askTemplateOptions } = require("./utils/ui");
+const { handleHelp } = require("./utils/feedback");
+const { uploadOpenAPIFiles } = require("./services/openApiUploader");
+const { generateDocsFromFiles, generateDocsFromURI } = require("./services/docsGenerator");
+const { configureAccessInfo, cleanAccessInfo, useConfiguredAccessInfo } = require("./services/qapService");
+const templates = require("./configureTemplates/listTemplates");
+const configureTemplates = require("./configureTemplates/index");
+const { copyLocalQDP } = require("./utils/copyLocalQdp");
 
-// Função principal do QAP
+// Função para garantir que existe o Docusaurus configurado
+const ensureDocusaurusConfig = async () => {
+  const configPath = path.join(process.cwd(), "docusaurus.config.ts");
+
+  if (!fs.existsSync(configPath)) {
+    console.log(chalk.yellow("⚠️ Nenhum docusaurus.config.ts encontrado. Copiando estrutura local do QDP..."));
+    await copyLocalQDP();
+  }
+};
+
 const generateDocsFromQAP = async () => {
   try {
     init();
@@ -32,7 +44,7 @@ const generateDocsFromQAP = async () => {
         console.log(chalk.red("Invalid option selected."));
     }
   } catch (error) {
-    console.error(chalk.red("An error occurred"));
+    console.error(chalk.red("An error occurred", error));
   }
 };
 
@@ -55,16 +67,15 @@ const handleTemplate = async () => {
         console.log(chalk.red("Invalid option selected."));
     }
   } catch (error) {
-    console.error(
-      chalk.red("An error occurred when configuring the template"),
-      error
-    );
+    console.error(chalk.red("An error occurred when configuring the template"), error);
   }
 };
 
 const run = async () => {
   try {
     init();
+    await ensureDocusaurusConfig(); // <-- garante logo no começo
+
     const { option } = await askMenuOptions();
 
     switch (option) {
@@ -93,10 +104,10 @@ const run = async () => {
         console.log(chalk.red("Invalid option selected."));
     }
   } catch (error) {
-    if (error.response && error.response.data && error.response.data.message) {
+    if (error.response?.data?.message) {
       console.error(chalk.red(`${error.response.data.message}`));
     } else {
-      console.error(chalk.red("An error ocurred", error));
+      console.error(chalk.red("An error occurred", error));
     }
   }
 };
