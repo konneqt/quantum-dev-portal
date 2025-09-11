@@ -3,7 +3,7 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import { getOpenApiPlugins } from "./openApiPlugins";
 import searchLocal from "@easyops-cn/docusaurus-search-local";
-import stylesConfig from '../styles.config.json';
+import stylesConfig from './styles.config.json';
 
 
 require("dotenv").config();

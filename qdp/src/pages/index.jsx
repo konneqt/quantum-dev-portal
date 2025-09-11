@@ -8,7 +8,7 @@ import { clsx } from "clsx";
 import React, { useEffect, useState } from "react";
 import HomepageFeatures from "../components/features/features";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import styleConfig from '../../../styles.config.json';
+import styleConfig from '../../styles.config.json';
 
 const description =
   "Explore detailed documentation, integration guides, and testing tools designed to simplify and accelerate your connection to our solutions. Everything you need to build, integrate, and innovate—all in one place.";
